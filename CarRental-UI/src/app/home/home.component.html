@@ -1,12 +1,12 @@
-<div id="wrapper">
+<div id="wrapper" class="mb-4">
   <div id="content-wrapper" class="d-flex flex-column">
     <div id="content">
       <app-nav></app-nav>
       <div class="container">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+          <img src="https://localhost:44330/images/res_car.png" alt="" class="img-responsive">
         </div>
-        <div class="row">
+        <div class="row mb-4">
        
          
          
@@ -22,22 +22,24 @@
                           <form class="user">
                             <div class="form-group row">
                               <div class="col-sm-3 mb-3 mb-sm-0">
-                                  <select class="browser-default custom-select">
-                                      <option selected>Open this select menu</option>
-                                      <option value="1">One</option>
-                                      <option value="2">Two</option>
-                                      <option value="3">Three</option>
+                                <label for=""> Where to pick</label>
+                                  <select class="browser-default custom-select" >
+                                      <option selected>-- Please Select --</option>
+                                      <option *ngFor="let item of locations" value="1">{{item.streetAddress}}, {{item.zipCode}}, {{item.city}}, {{item.country}}</option>
                                     </select>
                               </div>
                               <div class="col-sm-3">
 
-                                  <form class="form-inline">
+                                  <form class="">
                                       <div class="form-group">
+                                <label for=""> Pickup Date</label>
+
                                         <div class="input-group">
+
                                           <input class="form-control" placeholder="yyyy-mm-dd"
                                                  name="dp" ngbDatepicker #d="ngbDatepicker">
                                           <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
                                           </div>
                                         </div>
                                       </div>
@@ -45,19 +47,24 @@
                                 
                               </div>
                               <div class="col-sm-3">
-                                  <form class="form-inline">
+                                  <form class="">
                                       <div class="form-group">
+                                          <label for=""> Return Date</label>
                                         <div class="input-group">
+                               
+
                                           <input class="form-control" placeholder="yyyy-mm-dd"
                                                  name="dp" ngbDatepicker #r="ngbDatepicker">
                                           <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary calendar" (click)="r.toggle()" type="button"></button>
+                                            <button class="btn btn-outline-secondary calendar" (click)="r.toggle()" type="button"><i class="fa fa-calendar"></i> </button>
                                           </div>
                                         </div>
                                       </div>
                                     </form>
                                 </div>
                                 <div class="col-sm-3">
+                                <label for=""></label>
+
                                     <button href="login.html" class="btn btn-primary btn-user btn-block">
                                         Search
                                       </button>
@@ -73,8 +80,45 @@
           </div>
         </div>
 
+        <div class="row brands mt-4 mb-4">
+            <div class="col-md-12">
+                <h1 class="h1-header">Best Brands At Lowest Prices!</h1>
+                <p class="paragraph-n">CarRental offers you the best possible rates from top international and major local car rental companies across 45,000 rental stations!</p>
+                <p class="paragraph-n">We at CarRental.com go the extra mile to give you the best, carefree car rental experience!</p>
+    
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item"><img class="list-brands-img" title="Alamo" alt="Alamo" src="https://www.carflexi.com/content/img/shared/brands/logo-alamo.png"></li>
+                    <li class="list-group-item"><img class="list-brands-img" title="Avis" alt="Avis" src="https://www.carflexi.com/content/img/shared/brands/logo-avis.png"></li>
+                    <li class="list-group-item"><img class="list-brands-img" title="Budget" alt="Budget" src="https://www.carflexi.com/content/img/shared/brands/logo-budget.png"></li>
+                    <li class="list-group-item"><img class="list-brands-img" title="Dollar" alt="Dollar" src="https://www.carflexi.com/content/img/shared/brands/logo-dollar.png"></li>
+                    <li class="list-group-item"><img class="list-brands-img" title="Enterprise" alt="Enterprise" src="https://www.carflexi.com/content/img/shared/brands/logo-enterprise.png"></li>
+                    <li class="list-group-item"><img class="list-brands-img" title="Europcar" alt="Europcar" src="https://www.carflexi.com/content/img/shared/brands/logo-europcar.png"></li>
+                    <li class="list-group-item"><img class="list-brands-img" title="Hertz" alt="Hertz" src="https://www.carflexi.com/content/img/shared/brands/logo-hertz.png"></li>
+                    <li class="list-group-item"><img class="list-brands-img" title="National" alt="National" src="https://www.carflexi.com/content/img/shared/brands/logo-national.png"></li>
+                    <li class="list-group-item"><img class="list-brands-img" title="Sixt" alt="Sixt" src="https://www.carflexi.com/content/img/shared/brands/logo-sixt.png"></li>
+                    <li class="list-group-item"><img class="list-brands-img" title="Thrifty" alt="Thrifty" src="https://www.carflexi.com/content/img/shared/brands/logo-thrifty.png"></li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="row more-info mt-4">
+            <div class="col-md-4">
+                <h1 class="h1-header">Save Even More</h1>
+                <p class="paragraph-n">51% Of Our Customers have saved more than 53% on their recent car rental with us. #1 Online Car Rental Booking Site. Our market experience guarantees value for money deals.</p>
+            </div>
+            <div class="col-md-4">
+                <h1 class="h1-header">Price Promise</h1>
+                <p class="paragraph-n">We are committed every day in finding the best possible deal for your car rental. No Hidden Charges. Rates as low as possible. We offer you average saving per booking of 35%!</p>
+            </div>
+            <div class="col-md-4">
+                <h1 class="h1-header">Quality & Expertise</h1>
+                <p class="paragraph-n">Top Cars - Top Brands - Top Service. We work with top-rated international and leading local car rental companies in 45,000 rental stations. We constantly assess our suppliers based on users' scores.</p>
+            </div>
+        </div>
+
 
       </div>
+
   <app-footer></app-footer>
     <!-- End of Footer -->
 

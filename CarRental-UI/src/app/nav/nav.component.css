@@ -1,0 +1,8 @@
+.bg-primary {
+background-color: #1cc88a!important;
+}
+
+.navbar-nav > li >a {
+    color:#fff !important;
+    font-weight: 600;
+}
