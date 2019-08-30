@@ -1,0 +1,114 @@
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<div id="wrapper">
+<app-admin-nav></app-admin-nav>
+<div id="content-wrapper" class="d-flex flex-column">
+
+  <!-- Main Content -->
+  <div id="content">
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+      <!-- Page Heading -->
+      <h1 class="h3 mb-2 text-gray-800 mt-4">Car List</h1>
+      <p class="mb-4">This is list of cars in database that Admin can manage(add new, edit, delete) them.</p>
+
+      <!-- DataTales Example -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Cars</h6>
+
+            <a class="btn btn-primary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">Add Car</span>
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Id</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 265px;">Car Number</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 419px;">PickUp Location</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 196px;">Return Location</th>
+                                       
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 196px;">PickUp Date</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 196px;">Return Date</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 196px;">Costumer</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 196px;">Costumer Email</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 196px;">Phone Number</th>
+                                        </tr>
+                                        </thead>
+
+                                <tbody>
+
+                                  
+                                        <tr role="row" class="odd" *ngFor="let booking of bookings">
+                                           
+                                            <td>{{booking.id}}</td>
+                                            <td>{{booking.car.carNumber}}</td>
+                                            <td>{{booking.pickUpLocation}}</td>
+                                            <td>{{booking.returnLocation}}</td>
+                                            <td>{{booking.pickUpDate}}</td>
+                                            <td>{{booking.returnDate}}</td>
+                                            <td>{{booking.user.firstName}} {{booking.user.lastName}}</td>
+                                            <td>{{booking.user.email}}</td>
+                                            <td>{{booking.user.phoneNumber}}</td>
+
+                                            <td>
+                                                <a class="btn btn-danger btn-icon-split delete-car">
+                                                    <span class="icon">
+                                                        <i class="fas fa-trash" style="color:#ffffff"></i>
+                                                    </span>
+
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+  </div>
+  <!-- End of Main Content -->
+
+  <!-- Footer -->
+  <footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+      <div class="copyright text-center my-auto">
+        <span>Copyright © Your Website 2019</span>
+      </div>
+    </div>
+  </footer>
+  <!-- End of Footer -->
+
+</div>
+</div>
+
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#dataTable').DataTable();
+    
+});
+</script> -->

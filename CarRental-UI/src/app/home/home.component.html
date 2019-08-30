@@ -1,0 +1,98 @@
+<div id="wrapper">
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <app-nav></app-nav>
+      <div class="container">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        </div>
+        <div class="row">
+       
+         
+         
+          <div class="col-xl-12 col-md-12 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col-lg-12">
+                        <div class="p-5">
+                          <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Search for a Car</h1>
+                          </div>
+                          <form class="user">
+                            <div class="form-group row">
+                              <div class="col-sm-3 mb-3 mb-sm-0">
+                                  <select class="browser-default custom-select">
+                                      <option selected>Open this select menu</option>
+                                      <option value="1">One</option>
+                                      <option value="2">Two</option>
+                                      <option value="3">Three</option>
+                                    </select>
+                              </div>
+                              <div class="col-sm-3">
+
+                                  <form class="form-inline">
+                                      <div class="form-group">
+                                        <div class="input-group">
+                                          <input class="form-control" placeholder="yyyy-mm-dd"
+                                                 name="dp" ngbDatepicker #d="ngbDatepicker">
+                                          <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                
+                              </div>
+                              <div class="col-sm-3">
+                                  <form class="form-inline">
+                                      <div class="form-group">
+                                        <div class="input-group">
+                                          <input class="form-control" placeholder="yyyy-mm-dd"
+                                                 name="dp" ngbDatepicker #r="ngbDatepicker">
+                                          <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary calendar" (click)="r.toggle()" type="button"></button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button href="login.html" class="btn btn-primary btn-user btn-block">
+                                        Search
+                                      </button>
+                                  </div>
+                            </div>
+                          </form>
+                      
+                        </div>
+                      </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+  <app-footer></app-footer>
+    <!-- End of Footer -->
+
+  </div>
+ </div>
+
+
+<script src="../node_modules/startbootstrap-sb-admin-2/vendor/jquery/jquery.min.js"></script>
+<script src="../node_modules/startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="../node_modules/startbootstrap-sb-admin-2/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="../node_modules/startbootstrap-sb-admin-2/js/sb-admin-2.min.js"></script>
+
+  <script src="../node_modules/startbootstrap-sb-admin-2/vendor/chart.js/Chart.min.js"></script>
+
+  
+  <script src="../node_modules/startbootstrap-sb-admin-2/js/demo/chart-area-demo.js"></script>
+  <script src="../node_modules/startbootstrap-sb-admin-2/js/demo/chart-pie-demo.js"></script> 

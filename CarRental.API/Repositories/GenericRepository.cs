@@ -65,6 +65,11 @@ namespace CarRental.API.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
         public void Update(T entity)
         {
             _context.Update(entity);
