@@ -77,6 +77,7 @@ namespace CarRental.API
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IBookingService, BookingService>();
             services.AddScoped<ICarUploadService, CarUploadService>();
+            services.AddScoped<ITransmisionTypeService, TransmisionTypeService>();
 
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {

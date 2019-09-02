@@ -39,6 +39,7 @@ namespace CarRental.API.Areas.Admin.Controllers
             {
                 model.Add(new LocationDto
                 {
+                    Id = locations[i].Id,
                  StreetAddress = locations[i].StreetAddress,
                  Country = locations[i].Country,
                  City =locations[i].City,

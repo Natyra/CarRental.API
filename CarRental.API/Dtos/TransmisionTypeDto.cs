@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace CarRental.API.Dtos
 {
-    public class ModelDto
+    public class TransmisionTypeDto
     {
         public int Id { get; set; }
-        public int? BrandId { get; set; }
         public string Name { get; set; }
     }
 }

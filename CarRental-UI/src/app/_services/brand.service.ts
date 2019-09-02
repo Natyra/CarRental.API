@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Brand } from '../_models/Brand';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ModelList } from '../_models/ModelList';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,11 @@ baseUrl = environment.apiUrl;
 constructor(private http: HttpClient) { }
 
 
-getLocations(): Observable<Brand[]> {
+getBrands(): Observable<Brand[]> {
 return this.http.get<Brand[]>(this.baseUrl + 'admin/brand');
+}
+
+getModelsByBrandId(brandId: number): Observable<ModelList[]> {
+return this.http.get<ModelList[]>(this.baseUrl + 'admin/brand/models/' + brandId);
 }
 }

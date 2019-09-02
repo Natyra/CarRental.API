@@ -16,7 +16,7 @@ brands: Brand[];
   }
 
   loadBrands() {
-this.brandService.getLocations().subscribe((brands: Brand[]) => {
+this.brandService.getBrands().subscribe((brands: Brand[]) => {
   this.brands = brands;
 }, error => {
 console.log(error);

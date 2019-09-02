@@ -4,7 +4,7 @@
 
   <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" [routerLink]="['/home']">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" [routerLink]="['/']">
       <div class="sidebar-brand-icon rotate-n-15">
         <i class="fa fa-laugh-wink"></i>
       </div>
@@ -14,7 +14,7 @@
     <hr class="sidebar-divider my-0">
 
     <li class="nav-item active">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
     </li>
@@ -36,27 +36,27 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+      <a class="nav-link collapsed"  [routerLink]="['/bookings']" routerLinkActive="router-link-active">
         <i class="fas fa-fw fa-folder"></i>
         <span>Bookings</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="charts.html">
+      <a class="nav-link" [routerLink]="['/locations']" routerLinkActive="router-link-active">
         <i class="fas fa-fw fa-location-arrow"></i>
         <span>Locations</span></a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="tables.html">
+      <a class="nav-link"  [routerLink]="['/brands']" routerLinkActive="router-link-active">
         <i class="fas fa-fw fa-table"></i>
         <span>Brands and Models</span></a>
     </li>
 
     
     <li class="nav-item">
-      <a class="nav-link" href="tables.html">
+      <a class="nav-link"  [routerLink]="['/fuel']" routerLinkActive="router-link-active">
         <i class="fas fa-fw fa-oil-can"></i>
         <span>Fuel Types</span></a>
     </li>

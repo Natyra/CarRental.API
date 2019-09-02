@@ -1,6 +1,5 @@
 ﻿using CarRental.API.Interfaces;
 using CarRental.API.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,35 +8,35 @@ using System.Threading.Tasks;
 
 namespace CarRental.API.Services
 {
-    public class BrandService:IBrandService
+    public class TransmisionTypeService : ITransmisionTypeService
     {
-        private IGenericRepository<Brand> _genericRepository;
-        private IAppLogger<BrandService> _logger;
+        private IGenericRepository<TransmisionType> _genericRepository;
+        private IAppLogger<TransmisionTypeService> _logger;
         private dbCarRentalContext _context;
 
-        public BrandService(IGenericRepository<Brand> genericRepository, IAppLogger<BrandService> logger,dbCarRentalContext context)
+        public TransmisionTypeService(IGenericRepository<TransmisionType> genericRepository, IAppLogger<TransmisionTypeService> logger, dbCarRentalContext context)
         {
             _genericRepository = genericRepository;
             _logger = logger;
             _context = context;
         }
-        public async Task<string> GetBrandNameAsync(int brandId)
+        public async Task<string> TransmisionTypeNameAsync(int transmisionTypeId)
         {
             try
             {
-                var brand = await _genericRepository.GetById(brandId);
+                var transmisionType = await _genericRepository.GetById(transmisionTypeId);
 
-                return brand.Name;
+                return transmisionType.Name;
             }
             catch (Exception ex)
             {
 
-                Logger(ex, "Get brand name faild");
+                Logger(ex, "Get Transmision Type name faild");
                 return "";
             }
         }
 
-        public async Task<IEnumerable<Brand>> GetBrandsAsync()
+        public async Task<IEnumerable<TransmisionType>> GetTransmisionTypesAsync()
         {
             try
             {
@@ -46,79 +45,65 @@ namespace CarRental.API.Services
             }
             catch (Exception ex)
             {
-                Logger(ex, "Geting brands from db faild");
+                Logger(ex, "Geting Transmision Type from db faild");
                 return null;
             }
         }
 
-        public async Task AddBrandAsync(Brand brand)
+        public async Task AddTransmisionTypeAsync(TransmisionType transmisionType)
         {
 
             try
             {
-                await _genericRepository.Add(brand);
+                await _genericRepository.Add(transmisionType);
 
                 await _genericRepository.SaveChangesAsync();
             }
             catch (Exception ex)
             {
 
-                Logger(ex, "Add brand to db faild");
+                Logger(ex, "Add Transmision Type to db faild");
             }
         }
 
-        public async Task UpdateBrandAsync(Brand brand)
+        public async Task UpdateTransmisionTypeAsync(TransmisionType transmisionType)
         {
             try
             {
-                _genericRepository.Update(brand);
+                _genericRepository.Update(transmisionType);
                 await _genericRepository.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                Logger(ex, "Update brand to db faild");
+                Logger(ex, "Update Transmision Type to db faild");
 
             }
         }
 
-        public async Task DeleteBrandAsync(Brand brand)
+        public async Task DeleteTransmisionTypeAsync(TransmisionType transmisionType)
         {
             try
             {
-                _genericRepository.Remove(brand);
+                _genericRepository.Remove(transmisionType);
                 await _genericRepository.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Logger(ex, "Delete brand from db faild");
+                Logger(ex, "Delete Transmision Type from db faild");
 
             }
         }
-        public async Task<Brand> GetBrandByIdAsync(int id)
+        public async Task<TransmisionType> GetTransmisionTypeByIdAsync(int id)
         {
             try
             {
-                var brand = await _genericRepository.GetById(id);
-                return brand;
+                var transmisionType = await _genericRepository.GetById(id);
+                return transmisionType;
             }
             catch (Exception ex)
             {
 
-                Logger(ex, "Get Car by id faild");
-                return null;
-            }
-        }
-
-        public async Task<IEnumerable<Model>> GetModelsByBrandId(int brandId)
-        {
-            try
-            {
-                var models = await _context.Model.Where(x => x.BrandId == brandId).ToListAsync();
-                return models;
-            }
-            catch (Exception ex)
-            {
-                Logger(ex, "Error geting models by brandId");
+                Logger(ex, "Get Transmision Type by id faild");
                 return null;
             }
         }

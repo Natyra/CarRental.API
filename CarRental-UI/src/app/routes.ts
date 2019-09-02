@@ -7,15 +7,39 @@ import { BookingListComponent } from './admin/bookings/booking-list/booking-list
 import { LocationsListComponent } from './admin/locations/locations-list/locations-list.component';
 import { BrandsListComponent } from './admin/brands/brands-list/brands-list.component';
 import { CarFleetComponent } from './car-fleet/car-fleet.component';
+import { AuthGuard } from './_guards/auth.guard';
+import { LoginComponent } from './login/login.component';
+import { CarAddComponent } from './admin/cars/car-add/car-add.component';
+import { FueltypesListComponent } from './admin/fueltypes/fueltypes-list/fueltypes-list.component';
 
 
 export const appRoutes: Routes = [
  { path: '', component: HomeComponent},
- { path: 'admin', component: AdminNavComponent},
- { path: 'cars', component: CarsListComponent},
- { path: 'users', component: UserListComponent},
- { path: 'bookings', component: BookingListComponent},
- { path: 'lotacions', component: LocationsListComponent},
- { path: 'brands', component: BrandsListComponent},
- { path: 'car-fleet', component: CarFleetComponent}
+ { path: 'login', component: LoginComponent},
+ {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+        { path: 'admin', component: AdminNavComponent},
+        { path: 'cars', component: CarsListComponent},
+        {path: 'cars/add', component: CarAddComponent},
+        { path: 'users', component: UserListComponent },
+        { path: 'bookings', component: BookingListComponent},
+        { path: 'lotacions', component: LocationsListComponent},
+        { path: 'brands', component: BrandsListComponent},
+        { path: 'fuel', component: FueltypesListComponent},
+
+        { path: 'car-fleet', component: CarFleetComponent}
+    ]
+ },
+ { path: '**', redirectTo: '', pathMatch: 'full'},
+
+//  { path: 'admin', component: AdminNavComponent},
+//  { path: 'cars', component: CarsListComponent},
+//  { path: 'users', component: UserListComponent},
+//  { path: 'bookings', component: BookingListComponent},
+//  { path: 'lotacions', component: LocationsListComponent},
+//  { path: 'brands', component: BrandsListComponent},
+//  { path: 'car-fleet', component: CarFleetComponent}
 ];

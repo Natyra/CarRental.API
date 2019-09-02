@@ -33,19 +33,25 @@
             </a>
           
           </li>
-          <li class="nav-item">
-              <a class="nav-link text-gray-800" [routerLink]="['/admin']">
-               Admin
+          <li class="nav-item" *ngIf="loggedIn()">
+              <a class="nav-link text-gray-800" [routerLink]="['/cars']">
+                Administrimi
               </a>
             
             </li>
         </ul>
-        <!-- Topbar Search -->
-
-
-        <!-- Topbar Navbar -->
+       
+        <div *ngIf="loggedIn()" ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>  Welcome {{authService.decodedToken?.unique_name}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem>Edit Profile</button>
+              <a (click)="logout()" ngbDropdownItem> Log out</a>        
+            </div>
+          </div> 
       </div>
       </nav>
+
+    
 
 <script src="../node_modules/startbootstrap-sb-admin-2/vendor/jquery/jquery.min.js"></script>
 <script src="../node_modules/startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

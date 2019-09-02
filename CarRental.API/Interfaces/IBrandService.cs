@@ -14,5 +14,6 @@ namespace CarRental.API.Interfaces
         Task UpdateBrandAsync(Brand brand);
         Task DeleteBrandAsync(Brand brand);
         Task<Brand> GetBrandByIdAsync(int id);
+        Task<IEnumerable<Model>> GetModelsByBrandId(int brandId);
     }
 }

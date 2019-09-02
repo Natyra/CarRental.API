@@ -111,5 +111,29 @@ namespace CarRental.API.Controllers
             });
         
         }
+
+        [HttpGet("models/{id}")]
+        public async Task<IActionResult> GetModelsByBrandId(int id)
+        {
+            var model = new List<ModelDto>();
+
+            var modelsByBrand = await _brandService.GetModelsByBrandId(id);
+            var modelsToReturn = modelsByBrand.ToList();
+
+            if (modelsByBrand == null)
+                return BadRequest();
+
+            for (int i = 0; i < modelsToReturn.Count(); i++)
+            {
+                model.Add(new ModelDto
+                {
+                    Id = modelsToReturn[i].Id,
+                     Name = modelsToReturn[i].Name,
+                     BrandId = modelsToReturn[i].BrandId
+                });
+            }
+
+            return Ok(model);
+        }
     }
 }

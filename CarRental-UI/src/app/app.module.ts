@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { appRoutes } from './routes';
-import { HttpClientModule } from '@angular/common/http';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
+import { appRoutes } from './routes';
+import {NgbModule, NgbDropdown} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
@@ -24,7 +26,14 @@ import { LocationService } from './_services/location.service';
 import { FueltypeService } from './_services/fueltype.service';
 import { FooterComponent } from './footer/footer.component';
 import { CarFleetComponent } from './car-fleet/car-fleet.component';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './_services/auth.service';
+import { AlertifyService } from './_services/alertify.service';
+import { CarAddComponent } from './admin/cars/car-add/car-add.component';
 
+export function tokenGetter() {
+   return localStorage.getItem('token');
+}
 
 @NgModule({
    declarations: [
@@ -39,14 +48,25 @@ import { CarFleetComponent } from './car-fleet/car-fleet.component';
       LocationsListComponent,
       FueltypesListComponent,
       FooterComponent,
-      CarFleetComponent
+      CarFleetComponent,
+      LoginComponent,
+      CarAddComponent
    ],
    imports: [
       BrowserModule,
       NgbModule,
-      HttpClientModule,
       AppRoutingModule,
-      RouterModule.forRoot(appRoutes)
+      HttpClientModule,
+      FormsModule,
+      ReactiveFormsModule,
+      RouterModule.forRoot(appRoutes),
+      JwtModule.forRoot({
+         config: {
+            tokenGetter: tokenGetter,
+            whitelistedDomains: ['localhost:5000'],
+            blacklistedRoutes: ['localhost:5000/api/auth']
+         }
+      })
    ],
    providers: [
       CarService,
@@ -54,7 +74,9 @@ import { CarFleetComponent } from './car-fleet/car-fleet.component';
       BookingService,
       BrandService,
       LocationService,
-      FueltypeService
+      FueltypeService,
+      AuthService,
+      AlertifyService
    ],
    bootstrap: [
       AppComponent

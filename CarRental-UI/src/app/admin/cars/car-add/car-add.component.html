@@ -1,0 +1,230 @@
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<div id="wrapper">
+<app-admin-nav></app-admin-nav>
+<div id="content-wrapper" class="d-flex flex-column">
+
+  <!-- Main Content -->
+  <div id="content">
+<br>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+      
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Add Car</h6>
+            </div>
+            <div class="card-body">
+                <div class="col-lg-12">
+                    <div class="p-5">
+                        <form [formGroup]="addCarForm" (submit)="addCar()">
+                            <div class="form-group row">
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <label class="col-sm-12 label-nopadding">Car Number</label>
+                                    <input type="text" 
+                                    [ngClass]="{'is-invalid':addCarForm.get('carNumber').errors && addCarForm.get('carNumber').touched}"
+                                    class="form-control form-control-user input-width" 
+                                    formControlName="carNumber">
+                                    <div class="invalid-feedback">Car Number is required</div>
+                                </div>
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <label class="col-sm-12" style="padding-left:0px;padding-right:0px;">Car Brand</label>
+
+                                    <select formControlName="brandId" class="browser-default custom-select" 
+                                    [ngClass]="{'is-invalid':addCarForm.get('brandId').errors && addCarForm.get('brandId').touched}" (change)="getModelsByBrandId($event.target.value)">
+                                        <option selected>-- Please Select --</option>
+                                        <option *ngFor="let item of brands" value="{{item.id}}">{{item.name}}</option>
+                                      </select>
+                                      <div class="invalid-feedback">Brand is required</div>
+                                </div>
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <label class="col-sm-12 label-nopadding">Car Model</label>
+                                    <select formControlName="modelId" class="browser-default custom-select" 
+                                    [ngClass]="{'is-invalid':addCarForm.get('modelId').errors && addCarForm.get('modelId').touched}">
+                                        <option selected>-- Please Select --</option>
+                                        <option *ngFor="let item of models" value="{{item.id}}">{{item.name}}</option>
+                                      </select>
+                                      <div class="invalid-feedback">Model is required</div>
+                                        
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <label class="col-sm-12 label-nopadding">Fuel Type</label>
+                                    <select formControlName="fuelTypeId" class="browser-default custom-select" 
+                                    [ngClass]="{'is-invalid':addCarForm.get('fuelTypeId').errors && addCarForm.get('fuelTypeId').touched}">
+                                        <option selected>-- Please Select --</option>
+                                        <option *ngFor="let item of fuelTypes" value="{{item.id}}">{{item.name}}</option>
+                                      </select>
+                                      <div class="invalid-feedback">Fuel Type is required</div>
+
+                                </div>
+
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <label class="col-sm-12 label-nopadding">Transmision Type</label>
+
+                                    <select formControlName="transmisionTypeId" class="browser-default custom-select" [ngClass]="{'is-invalid':addCarForm.get('transmisionTypeId').errors && addCarForm.get('transmisionTypeId').touched}">
+                                        <option selected>-- Please Select --</option>
+                                        <option *ngFor="let item of transmisionTypes" value="{{item.id}}">{{item.name}}</option>
+                                      </select>
+                                      <div class="invalid-feedback">Transmision Type is required</div>
+
+                                </div>
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <label class="col-sm-12 label-nopadding">Car Location</label>
+
+                                    <select formControlName="carLocationId" class="browser-default custom-select" 
+                                    [ngClass]="{'is-invalid':addCarForm.get('carLocationId').errors && addCarForm.get('carLocationId').touched}">
+                                        <option selected>-- Please Select --</option>
+                                        <option *ngFor="let item of locations" value="{{item.id}}">{{item.streetAddress}}, {{item.zipCode}}, {{item.city}}, {{item.country}}</option>
+                                      </select>
+                                      <div class="invalid-feedback">Car Location is required</div>
+
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <label class="col-sm-12 label-nopadding">Model Year</label>
+                                    <input formControlName="modelYear" type="text" class="form-control form-control-user input-width" [ngClass]="{'is-invalid':addCarForm.get('modelYear').errors && addCarForm.get('modelYear').touched}">
+                                    <div class="invalid-feedback">Model Year is required</div>
+
+                                </div>
+
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <label class="col-md-12 label-nopadding">Number Of Doors</label>
+
+                                    <input formControlName="numberOfDoors" type="text" class="form-control form-control-user input-width" [ngClass]="{'is-invalid':addCarForm.get('numberOfDoors').errors && addCarForm.get('numberOfDoors').touched}">
+                                    <div class="invalid-feedback">Number O fDoors is required</div>
+
+                                </div>
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <label class="col-md-12 label-nopadding">Car Capacity</label>
+
+                                    <input formControlName="carCapacity" type="text" class="form-control form-control-user input-width" [ngClass]="{'is-invalid':addCarForm.get('carCapacity').errors && addCarForm.get('carCapacity').touched}">
+                                    <div class="invalid-feedback">Car Capacity is required</div>
+
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <label class="col-md-12 label-nopadding">Car Color</label>
+                                    <input formControlName="carColor" type="text" class="form-control form-control-user input-width" [ngClass]="{'is-invalid':addCarForm.get('carColor').errors && addCarForm.get('carColor').touched}">
+                                    <div class="invalid-feedback">Car Color is required</div>
+
+                                </div>
+
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <label class="col-md-12 label-nopadding">Price For Day</label>
+
+                                    <input formControlName="priceForDay" type="text" class="form-control form-control-user input-width" data-val="true" data-val-number="The field PriceForDay must be a number." [ngClass]="{'is-invalid':addCarForm.get('priceForDay').errors && addCarForm.get('priceForDay').touched}">
+                                    <div class="invalid-feedback">Price ForDay is required</div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group row">
+                                <div class="col-sm-12 mb-12 mb-sm-0">
+                                    <label class="col-md-12 label-nopadding">Description</label>
+
+                                    <textarea formControlName="description" type="text" class="form-control form-control-user" ></textarea>
+                                </div>
+                            </div>
+                            <p>Form value: {{addCarForm.value | json}}</p>
+                            <p>Form status: {{addCarForm.status | json}}</p>
+
+
+                            <!-- <div class="form-group row">
+                                <div class="col-sm-4 mb-4 mb-sm-0">
+                                    <label class="col-md-12 label-nopadding">Image</label>
+                                    <div class="col-sm-12">
+                                        <div class="">
+
+                                            <div class="file-input file-input-ajax-new"><div class="file-preview ">
+    <button type="button" class="close fileinput-remove" aria-label="Close">
+  <span aria-hidden="true">×</span>
+</button>    <div class=" file-drop-zone"><div class="file-drop-zone-title">Drag &amp; drop files here …</div>
+    <div class="file-preview-thumbnails">
+    </div>
+    <div class="clearfix"></div>    <div class="file-preview-status text-center text-success"></div>
+    <div class="kv-fileinput-error file-error-message" style="display: none;"></div>
+    </div>
+</div>
+<div class="kv-upload-progress kv-hidden" style="display: none;"><div class="progress">
+    <div class="progress-bar bg-success progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
+        0%
+     </div>
+</div></div><div class="clearfix"></div>
+<div class="input-group file-caption-main">
+  <div class="file-caption form-control kv-fileinput-caption" tabindex="500">
+  <span class="file-caption-icon"></span>
+  <input class="file-caption-name" onkeydown="return false;" onpaste="return false;" placeholder="Select file...">
+</div>
+<div class="input-group-btn input-group-append">
+      <button type="button" tabindex="500" title="Clear all unprocessed files" class="btn btn-default btn-secondary fileinput-remove fileinput-remove-button"><i class="glyphicon glyphicon-trash"></i>  <span class="hidden-xs">Remove</span></button>
+      
+      
+      
+      <div tabindex="500" class="btn btn-primary btn-file"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;  <span class="hidden-xs">Browse …</span><input id="Image" type="file" accept="image/*" class="file" data-preview-file-type="text" data-show-upload="false" data-show-cancel="false" data-show-caption="true" data-show-remove="true" ata-msg-placeholder="Upload Image" name="Image"></div>
+    </div>
+</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div> -->
+
+                            <div class="form-group row">
+                                <button type="button" class="btn btn-secondary btn-icon-split" (click)="cancel()" style="margin-left:40px; margin-right:20px;">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-arrow-left"></i>
+                                    </span>
+                                    <span class="text ext-white-50">Cancel</span>
+                                </button>
+                                <button type="submit" [disabled]="!addCarForm.valid" class="btn btn-success btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                    <span class="text">Save</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+
+  </div>
+  <!-- End of Main Content -->
+
+  <!-- Footer -->
+  <footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+      <div class="copyright text-center my-auto">
+        <span>Copyright © Your Website 2019</span>
+      </div>
+    </div>
+  </footer>
+  <!-- End of Footer -->
+
+</div>
+</div>
+
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#dataTable').DataTable();
+    
+});
+</script> -->
