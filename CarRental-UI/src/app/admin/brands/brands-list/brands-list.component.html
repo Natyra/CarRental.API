@@ -18,12 +18,11 @@
       <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Locations</h6>
-
-            <a class="btn btn-primary btn-icon-split">
+            <a class="btn btn-primary btn-icon-split" [routerLink]="['/brands/add']" routerLinkActive="router-link-active" >
                 <span class="icon text-white-50">
                     <i class="fas fa-plus"></i>
                 </span>
-                <span class="text">Add Location</span>
+                <span class="text">Add Brand</span>
             </a>
         </div>
         <div class="card-body">
@@ -49,6 +48,13 @@
                                             <td>{{brand.name}}</td>
 
                                             <td>
+                                                
+                                                        <a class="btn btn-warning btn-icon-split" title="Edit Model" [routerLink]="['/brands/add/', brand.id]" routerLinkActive="router-link-active">
+                                                            <span class="icon">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </span>
+    
+                                                        </a>
                                                 <a class="btn btn-danger btn-icon-split delete-car">
                                                     <span class="icon">
                                                         <i class="fas fa-trash" style="color:#ffffff"></i>

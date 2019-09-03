@@ -14,6 +14,7 @@ namespace CarRental.API.Areas.Admin
     
     [Route("api/admin/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     //[Authorize(Roles = "Admin")]
     public class CarController : Controller
     {
@@ -55,6 +56,7 @@ namespace CarRental.API.Areas.Admin
                 var carUpload = await _carUploadService.GetCarUploadByCarIdAsync(cars[i].Id);
                 model.Add(new CarForListDto
                 {
+                    Id = cars[i].Id,
                     CarNumber = cars[i].CarNumber,
                     BrandName = await _brandService.GetBrandNameAsync((int)cars[i].BrandId),
                     ModelYear = cars[i].ModelYear,
@@ -72,6 +74,33 @@ namespace CarRental.API.Areas.Admin
             }
 
             return Ok(model);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCarById(int id)
+        {
+            var model = new CarForAddDto();
+            var car = await _carService.GetCarByIdAsync(id);
+
+            if (car == null)
+                return BadRequest("Car not found");
+
+            model.Id = car.Id;
+            model.CarNumber = car.CarNumber;
+            model.BrandId = car.BrandId;
+            model.ModelYear = car.ModelYear;
+            model.ModelId = car.ModelId;
+            model.FuelTypeId = car.FuelTypeId;
+            model.TransmisionTypeId = car.TransmisionTypeId;
+            model.NumberOfDoors = car.NumberOfDoors;
+            model.CarCapacity = car.CarCapacity;
+            model.CarColor = car.CarColor;
+            model.PriceForDay = car.PriceForDay;
+            model.CarLocationId = car.CarLocationId;
+            model.Description = car.Description;
+
+            return Ok(model);
+
         }
 
         [HttpPost("add")]
@@ -120,7 +149,7 @@ namespace CarRental.API.Areas.Admin
         }
 
         [HttpPut("edit/{id}")]
-        public async Task<IActionResult> EditCar(int id, [FromForm]CarForEditDto model)
+        public async Task<IActionResult> EditCar(int id, CarForEditDto model)
         {
             if (!ModelState.IsValid)
             {

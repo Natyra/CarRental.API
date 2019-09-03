@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Location } from '../_models/Location';
 import { environment } from 'src/environments/environment';
@@ -10,9 +10,19 @@ import { environment } from 'src/environments/environment';
 })
 export class LocationService {
 baseUrl = environment.apiUrl;
+
+token = localStorage.getItem('token');
+headersObj = new HttpHeaders().set('Authorization', 'Bearer ' + this.token);
+httpOptions = {
+  headers: this.headersObj
+};
 constructor(private http: HttpClient) { }
 
 getLocations(): Observable<Location[]> {
-  return this.http.get<Location[]>(this.baseUrl + 'admin/location');
+  return this.http.get<Location[]>(this.baseUrl + 'admin/location', this.httpOptions);
+}
+
+addLocation(model: Location) {
+  return this.http.post(this.baseUrl + 'admin/location/add', model, this.httpOptions);
 }
 }

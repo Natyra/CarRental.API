@@ -12,6 +12,7 @@ namespace CarRental.API.Areas.Admin.Controllers
 {
     [Route("api/admin/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     //[Authorize(Roles = "Admin")]
     public class LocationController : Controller
     {
@@ -51,7 +52,7 @@ namespace CarRental.API.Areas.Admin.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddLocation([FromForm]LocationDto model)
+        public async Task<IActionResult> AddLocation(LocationDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -77,7 +78,7 @@ namespace CarRental.API.Areas.Admin.Controllers
         }
 
         [HttpPut("edit/{id}")]
-        public async Task<IActionResult> EditLocation(int id, [FromForm]LocationDto model)
+        public async Task<IActionResult> EditLocation(int id, LocationDto model)
         {
             if (!ModelState.IsValid)
             {

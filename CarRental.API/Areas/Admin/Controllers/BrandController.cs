@@ -12,9 +12,12 @@ namespace CarRental.API.Controllers
 {
     [Route("api/admin/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     //[Authorize(Roles = "Admin")]
+
     public class BrandController : Controller
     {
+
         private IBrandService _brandService;
         private IGenericRepository<Brand> _genericRepository;
 
@@ -23,10 +26,16 @@ namespace CarRental.API.Controllers
             _brandService = brandService;
             _genericRepository = genericRepository;
         }
-  
+
         [HttpGet]
         public async Task<IActionResult> GetBrands()
         {
+            //if (!User.Identity.IsAuthenticated)
+            //    return Unauthorized();
+
+            //if (!User.IsInRole("Admin"))
+            //    return Unauthorized();
+
             var model = new List<BrandDto>();
             var brandsAsync = await _brandService.GetBrandsAsync();
             var brands = brandsAsync.ToList();
@@ -46,8 +55,22 @@ namespace CarRental.API.Controllers
             return Ok(model);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBrandById(int id)
+        {
+            var model = new BrandDto();
+            var brand = await _brandService.GetBrandByIdAsync(id);
+            if (brand == null)
+                return BadRequest("No brand founded");
+
+            model.Id = brand.Id;
+            model.Name = brand.Name;
+
+            return Ok(model);
+        }
+
         [HttpPost("add")]
-        public async Task<IActionResult> AddBrand([FromForm]BrandDto model)
+        public async Task<IActionResult> AddBrand(BrandDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -70,7 +93,7 @@ namespace CarRental.API.Controllers
         }
 
         [HttpPut("edit/{id}")]
-        public async Task<IActionResult> EditBrand(int id, [FromForm]BrandDto model)
+        public async Task<IActionResult> EditBrand(int id, BrandDto model)
         {
             if (!ModelState.IsValid)
             {

@@ -13,6 +13,7 @@ namespace CarRental.API.Areas.Admin.Controllers
 
     [Route("api/admin/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     //[Authorize(Roles = "Admin")]
     public class ModelController : Controller
     {

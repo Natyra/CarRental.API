@@ -11,8 +11,9 @@ import { TransmisiontypeService } from 'src/app/_services/transmisiontype.servic
 import { TransmisionType } from 'src/app/_models/TransmisionType';
 import { LocationService } from 'src/app/_services/location.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ModelList } from 'src/app/_models/ModelList';
+import { Car } from 'src/app/_models/car';
 
 @Component({
   selector: 'app-car-add',
@@ -29,31 +30,34 @@ fuelTypes: FuelType[];
 transmisionTypes: TransmisionType[];
 locations: Location[];
 models: ModelList[];
-  constructor(private carService: CarService, private alertify: AlertifyService, 
-    private brandService: BrandService, private fuelTypeService: FueltypeService, 
-    private transmisionTypeService: TransmisiontypeService, private locationService: LocationService,
-    private fb: FormBuilder, private router: Router) { }
+
+carNumber = '';
+brandId = 0;
+modelId = 0;
+modelYear = '';
+fuelTypeId = 0;
+transmisionTypeId = 0;
+numberOfDoors = 0;
+carCapacity = 0;
+carColor = '';
+priceForDay = 0;
+carLocationId = 0;
+description = '';
+
+id = +this.route.snapshot.paramMap.get('id');
+
+constructor(private carService: CarService, private alertify: AlertifyService, private brandService: BrandService, private fuelTypeService: FueltypeService, private transmisionTypeService: TransmisiontypeService, private locationService: LocationService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    if (this.id !== 0) {
+    this.getCarById();
+    }
     this.createAddCarForm();
     this.getBrands();
     this.getFuelTypes();
     this.getTransmisionTypes();
     this.getLocations();
-    // this.addCarForm = new FormGroup({
-    //   carNumber: new FormControl('', Validators.required),
-    //   brandId: new FormControl('', Validators.required),
-    //   modelId: new FormControl('', Validators.required),
-    //   modelYear:  new FormControl('', Validators.required),
-    //   fuelTypeId:  new FormControl('', Validators.required),
-    //   transmisionTypeId:  new FormControl('', Validators.required),
-    //   numberOfDoors:  new FormControl('', Validators.required),
-    //   carCapacity:  new FormControl('', Validators.required),
-    //   carColor:  new FormControl('', Validators.required),
-    //   priceForDay:  new FormControl('', Validators.required),
-    //   carLocationId:  new FormControl('', Validators.required),
-    //   description:  new FormControl(),
-    // });
+
   }
 
 createAddCarForm() {
@@ -73,9 +77,47 @@ createAddCarForm() {
   });
 }
 
+getCarById() {
+  this.carService.getCarById(this.id).subscribe((car: CarAdd) => {
+    this.model = car;
+    this.getModelsByBrandId(car.brandId);
+    this.carNumber = car.carNumber;
+    this.brandId = car.brandId;
+    this.modelId = car.modelId;
+    this.modelYear = car.modelYear;
+    this.fuelTypeId = car.fuelTypeId;
+    this.transmisionTypeId = car.transmisionTypeId;
+    this.numberOfDoors = car.numberOfDoors;
+    this.carCapacity = car.carCapacity;
+    this.carColor = car.carColor;
+    this.priceForDay = car.priceForDay;
+    this.carLocationId =  car.carLocationId;
+    this.description = car.description;
+
+    this.addCarForm = this.fb.group({
+      carNumber: [car.carNumber, Validators.required],
+      brandId: [car.brandId, Validators.required],
+      modelId: [car.modelId, Validators.required],
+      modelYear: [car.modelYear, Validators.required],
+      fuelTypeId: [car.fuelTypeId, Validators.required],
+      transmisionTypeId: [car.transmisionTypeId, Validators.required],
+      numberOfDoors: [car.numberOfDoors, Validators.required],
+      carCapacity: [car.carCapacity, Validators.required],
+      carColor: [car.carColor, Validators.required],
+      priceForDay: [car.priceForDay, Validators.required],
+      carLocationId: [car.carLocationId, Validators.required],
+      description: [car.description],
+    });
+
+  }, error => {
+    this.alertify.error(error);
+  });
+}
+
 addCar() {
   if (this.addCarForm.valid) {
     this.model = Object.assign({}, this.addCarForm.value);
+    if (this.id === 0) {
     this.carService.addCar(this.model).subscribe(() => {
       this.alertify.success('Car added successfully');
     }, error => {
@@ -83,8 +125,18 @@ addCar() {
     }, () => {
       this.router.navigate(['/cars']);
     });
+  } else {
+    this.carService.editCar(this.model, this.id).subscribe((result: any) => {
+      this.alertify.success(result.message);
+    }, error => {
+      this.alertify.error(error);
+    }, () => {
+      this.router.navigate(['/cars']);
+    });
+  }
   }
 }
+
 
 cancel() {
   this.cancelAddCar.emit(false);
