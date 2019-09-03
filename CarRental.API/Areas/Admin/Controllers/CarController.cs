@@ -43,6 +43,11 @@ namespace CarRental.API.Areas.Admin
         [HttpGet()]
         public async Task<IActionResult> GetCars()
         {
+            //if (!User.Identity.IsAuthenticated)
+            //    return Unauthorized();
+            //if (!User.IsInRole("Admin"))
+            //    return Unauthorized();
+
             var model = new List<CarForListDto>();
             var carsAsync = await _carService.GetCarsAsync();
             var cars = carsAsync.ToList();
@@ -85,7 +90,7 @@ namespace CarRental.API.Areas.Admin
 
             if (!ModelState.IsValid)
             {
-                return BadRequest("Something want wrong while adding car");
+                return BadRequest("Something went wrong while adding the car");
             }
 
             var car = new Car
@@ -124,7 +129,7 @@ namespace CarRental.API.Areas.Admin
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest("Something want wrong while editing car");
+                return BadRequest("Something went wrong while editing the car");
             }
 
             var carToEdit = await _carService.GetCarByIdAsync(id);
@@ -178,6 +183,13 @@ namespace CarRental.API.Areas.Admin
             });
 
         }
-    
+
+        //[HttpGet("getSearchResult")]
+        //public Task<IActionResult> GetSearchResult()
+        //{
+
+
+        //}
+
     }
 }
