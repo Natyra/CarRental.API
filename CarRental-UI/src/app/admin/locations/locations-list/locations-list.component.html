@@ -54,13 +54,13 @@
                                             <td>{{location.country}}</td>
 
                                             <td>
-                                                <a class="btn btn-warning btn-icon-split" title="Edit Model" [routerLink]="['/location/add/', location.id]" routerLinkActive="router-link-active">
+                                                <a class="btn btn-warning btn-icon-split" title="Edit Model" [routerLink]="['/locations/add/', location.id]" routerLinkActive="router-link-active">
                                                     <span class="icon">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </span>
 
                                                 </a>
-                                                <button type="button" class="btn btn-danger btn-icon-split" (click)="openModal(template)">  <span class="icon">
+                                                <button type="button" class="btn btn-danger btn-icon-split ml-2" (click)="openModal(template)">  <span class="icon">
                                                     <i class="fas fa-trash" style="color:#ffffff"></i>
                                                 </span></button>
                                                 <ng-template #template>

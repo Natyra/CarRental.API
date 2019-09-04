@@ -13,6 +13,7 @@ import { CarAddComponent } from './admin/cars/car-add/car-add.component';
 import { FueltypesListComponent } from './admin/fueltypes/fueltypes-list/fueltypes-list.component';
 import { LocationAddComponent } from './admin/locations/location-add/location-add.component';
 import { BrandAddComponent } from './admin/brands/brand-add/brand-add.component';
+import { FueltypesAddComponent } from './admin/fueltypes/fueltypes-add/fueltypes-add.component';
 
 
 export const appRoutes: Routes = [
@@ -36,7 +37,8 @@ export const appRoutes: Routes = [
         { path: 'brands/add', component: BrandAddComponent},
         { path: 'brands/add/:id', component: BrandAddComponent},
         { path: 'fuel', component: FueltypesListComponent},
-
+        { path: 'fuel/add', component: FueltypesAddComponent},
+        { path: 'fuel/add/:id', component: FueltypesAddComponent},
         { path: 'car-fleet', component: CarFleetComponent}
     ]
  },

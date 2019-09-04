@@ -21,4 +21,20 @@ constructor(private http: HttpClient) { }
 getFuelTypes(): Observable<FuelType[]> {
   return this.http.get<FuelType[]>(this.baseUrl + 'admin/fueltype', this.httpOptions);
 }
+
+getFuelTypeById(id: number): Observable<FuelType> {
+  return this.http.get<FuelType>(this.baseUrl + 'admin/fueltype/' + id, this.httpOptions);
+}
+
+addFuelType(model: FuelType) {
+  return this.http.post(this.baseUrl + 'admin/fueltype/add', model, this.httpOptions);
+}
+
+editFuelType(id: number, model: FuelType) {
+  return this.http.put(this.baseUrl + 'admin/fueltype/edit/' + id, model, this.httpOptions);
+}
+
+deleteFuelType(id: number) {
+  return this.http.delete(this.baseUrl + 'admin/fueltype/delete/' + id, this.httpOptions);
+}
 }
