@@ -12,7 +12,7 @@ namespace CarRental.API.Services
     {
         private IGenericRepository<AspNetUsers> _genericRepository;
         private IAppLogger<UserService> _logger;
-        private dbCarRentalContext _context;
+        private readonly dbCarRentalContext _context;
 
         public UserService(IGenericRepository<AspNetUsers> genericRepository, IAppLogger<UserService> logger, dbCarRentalContext context)
         {

@@ -5847,3 +5847,299 @@ WHERE [e].[Id] = @__get_Item_0" (0723d8ff)
 2019-09-04T10:42:27.7085491+02:00 0HLPH2BHEF0HR:00000004 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Dtos.BookingForListDto, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
 2019-09-04T10:42:27.7089745+02:00 0HLPH2BHEF0HR:00000004 [INF] Executed action "CarRental.API.Areas.Admin.Controllers.BookingController.GetBookings (CarRental.API)" in 14.374ms (afa2e885)
 2019-09-04T10:42:27.7090518+02:00 0HLPH2BHEF0HR:00000004 [INF] Request finished in 14.8779ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-04T12:20:01.0320345+02:00 0HLPH45OS8MT7:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/values   (ca22a1cb)
+2019-09-04T12:20:01.5600647+02:00 0HLPH45OS8MT7:00000001 [INF] Route matched with "{action = \"GetValues\", controller = \"Values\", page = \"\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult GetValues()" on controller "CarRental.API.Controllers.ValuesController" ("CarRental.API"). (122b2fdf)
+2019-09-04T12:20:01.5760656+02:00 0HLPH45OS8MT7:00000001 [INF] Executing action method "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-04T12:20:01.5860662+02:00 0HLPH45OS8MT7:00000001 [INF] Executed action method "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1.2122ms. (50a9e262)
+2019-09-04T12:20:01.5990670+02:00 0HLPH45OS8MT7:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Controllers.ValuesController+KeyValue, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-09-04T12:20:01.7890778+02:00 0HLPH45OS8MT7:00000001 [INF] Executed action "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)" in 224.6734ms (afa2e885)
+2019-09-04T12:20:01.8080789+02:00 0HLPH45OS8MT7:00000001 [INF] Request finished in 784.0133ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-04T12:20:01.8650822+02:00 0HLPH45OS8MT7:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:59834/favicon.ico   (ca22a1cb)
+2019-09-04T12:20:01.8690824+02:00 0HLPH45OS8MT7:00000002 [INF] Request finished in 3.8786ms 404  (791a596a)
+2019-09-04T12:20:07.2393896+02:00 0HLPH45OS8MT7:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/booking/GetBookingDetails/2013   (ca22a1cb)
+2019-09-04T12:20:07.3113937+02:00 0HLPH45OS8MT7:00000003 [INF] Route matched with "{action = \"GetBookingDetails\", controller = \"Booking\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookingDetails(Int32)" on controller "CarRental.API.Controllers.BookingController" ("CarRental.API"). (122b2fdf)
+2019-09-04T12:20:07.5744087+02:00 0HLPH45OS8MT7:00000003 [INF] Authorization failed. (b15dd539)
+2019-09-04T12:20:07.5754088+02:00 0HLPH45OS8MT7:00000003 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2019-09-04T12:20:07.5994102+02:00 0HLPH45OS8MT7:00000003 [INF] Executing ChallengeResult with authentication schemes (["Bearer"]). (f3dca807)
+2019-09-04T12:20:07.6174112+02:00 0HLPH45OS8MT7:00000003 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2019-09-04T12:20:07.6174112+02:00 0HLPH45OS8MT7:00000003 [INF] Executed action "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)" in 305.3973ms (afa2e885)
+2019-09-04T12:20:07.6174112+02:00 0HLPH45OS8MT7:00000003 [INF] Request finished in 378.5077ms 401  (791a596a)
+2019-09-04T12:23:17.7562865+02:00 0HLPH45OS8MT8:00000001 [INF] Request starting HTTP/1.1 POST http://localhost:59834/api/auth application/json 55 (ca22a1cb)
+2019-09-04T12:23:17.7612868+02:00 0HLPH45OS8MT8:00000001 [INF] Route matched with "{action = \"Index\", controller = \"Auth\", page = \"\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "CarRental.API.Controllers.AuthController" ("CarRental.API"). (122b2fdf)
+2019-09-04T12:23:17.9742990+02:00 0HLPH45OS8MT8:00000001 [INF] Executing action method "CarRental.API.Controllers.AuthController.Index (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-04T12:23:17.9752990+02:00 0HLPH45OS8MT8:00000001 [INF] Executed action method "CarRental.API.Controllers.AuthController.Index (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.ViewResult" in 0.4594ms. (50a9e262)
+2019-09-04T12:23:17.9892998+02:00 0HLPH45OS8MT8:00000001 [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2019-09-04T12:23:17.9902999+02:00 0HLPH45OS8MT8:00000001 [ERR] The view '"Index"' was not found. Searched locations: ["/Views/Auth/Index.cshtml", "/Views/Shared/Index.cshtml", "/Pages/Shared/Index.cshtml"] (9bb2756c)
+2019-09-04T12:23:17.9913000+02:00 0HLPH45OS8MT8:00000001 [INF] Executed action "CarRental.API.Controllers.AuthController.Index (CarRental.API)" in 229.928ms (afa2e885)
+2019-09-04T12:23:18.0753048+02:00 0HLPH45OS8MT8:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The view 'Index' was not found. The following locations were searched:
+/Views/Auth/Index.cshtml
+/Views/Shared/Index.cshtml
+/Pages/Shared/Index.cshtml
+   at Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult.EnsureSuccessful(IEnumerable`1 originalLocations)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-09-04T12:23:18.1233075+02:00 0HLPH45OS8MT8:00000001 [INF] Request finished in 367.2445ms 500 text/html; charset=utf-8 (791a596a)
+2019-09-04T12:23:18.1333081+02:00  [INF] Connection id ""0HLPH45OS8MT8"", Request id ""0HLPH45OS8MT8:00000001"": the application completed without reading the entire request body. (54ac9468)
+2019-09-04T12:23:45.3888670+02:00 0HLPH45OS8MT8:00000002 [INF] Request starting HTTP/1.1 POST http://localhost:59834/api/auth/login application/json 55 (ca22a1cb)
+2019-09-04T12:23:45.4108683+02:00 0HLPH45OS8MT8:00000002 [INF] Route matched with "{action = \"Login\", controller = \"Auth\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CarRental.API.Dtos.UserForLoginDto)" on controller "CarRental.API.Controllers.AuthController" ("CarRental.API"). (122b2fdf)
+2019-09-04T12:23:45.4688716+02:00 0HLPH45OS8MT8:00000002 [INF] Executing action method "CarRental.API.Controllers.AuthController.Login (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-04T12:23:45.9669001+02:00 0HLPH45OS8MT8:00000002 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-04T12:23:46.5059309+02:00 0HLPH45OS8MT8:00000002 [INF] Executed DbCommand ("139"ms) [Parameters=["@__ToLower_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[AccessFailedCount], [x].[ConcurrencyStamp], [x].[Email], [x].[EmailConfirmed], [x].[FirstName], [x].[LastName], [x].[LockoutEnabled], [x].[LockoutEnd], [x].[NormalizedEmail], [x].[NormalizedUserName], [x].[PasswordHash], [x].[PhoneNumber], [x].[PhoneNumberConfirmed], [x].[SecurityStamp], [x].[TwoFactorEnabled], [x].[UserName]
+FROM [AspNetUsers] AS [x]
+WHERE LOWER([x].[UserName]) = @__ToLower_0" (0723d8ff)
+2019-09-04T12:23:46.6269378+02:00 0HLPH45OS8MT8:00000002 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"ApplicationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-04T12:23:46.6979419+02:00 0HLPH45OS8MT8:00000002 [INF] Executed DbCommand ("6"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Email], [u].[EmailConfirmed], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName]
+FROM [AspNetUsers] AS [u]
+WHERE [u].[NormalizedUserName] = @__normalizedUserName_0" (0723d8ff)
+2019-09-04T12:23:46.8479505+02:00 0HLPH45OS8MT8:00000002 [INF] Executed DbCommand ("13"ms) [Parameters=["@__user_Id_0='?' (Size = 450)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [uc].[Id], [uc].[ClaimType], [uc].[ClaimValue], [uc].[UserId]
+FROM [AspNetUserClaims] AS [uc]
+WHERE [uc].[UserId] = @__user_Id_0" (0723d8ff)
+2019-09-04T12:23:46.9069538+02:00 0HLPH45OS8MT8:00000002 [INF] Executed DbCommand ("15"ms) [Parameters=["@__userId_0='?' (Size = 450)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [role].[Name]
+FROM [AspNetUserRoles] AS [userRole]
+INNER JOIN [AspNetRoles] AS [role] ON [userRole].[RoleId] = [role].[Id]
+WHERE [userRole].[UserId] = @__userId_0" (0723d8ff)
+2019-09-04T12:23:46.9259549+02:00 0HLPH45OS8MT8:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[Id], [r].[ConcurrencyStamp], [r].[Name], [r].[NormalizedName]
+FROM [AspNetRoles] AS [r]
+WHERE [r].[NormalizedName] = @__normalizedName_0" (0723d8ff)
+2019-09-04T12:23:46.9599569+02:00 0HLPH45OS8MT8:00000002 [INF] Executed DbCommand ("9"ms) [Parameters=["@__role_Id_0='?' (Size = 450)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [rc].[ClaimType], [rc].[ClaimValue]
+FROM [AspNetRoleClaims] AS [rc]
+WHERE [rc].[RoleId] = @__role_Id_0" (0723d8ff)
+2019-09-04T12:23:46.9789580+02:00 0HLPH45OS8MT8:00000002 [INF] AuthenticationScheme: "Identity.Application" signed in. (c66dd7e7)
+2019-09-04T12:23:46.9969590+02:00 0HLPH45OS8MT8:00000002 [INF] Executed action method "CarRental.API.Controllers.AuthController.Login (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1527.7182ms. (50a9e262)
+2019-09-04T12:23:47.0059595+02:00 0HLPH45OS8MT8:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-09-04T12:23:47.0119598+02:00 0HLPH45OS8MT8:00000002 [INF] Executed action "CarRental.API.Controllers.AuthController.Login (CarRental.API)" in 1601.0382ms (afa2e885)
+2019-09-04T12:23:47.0209604+02:00 0HLPH45OS8MT8:00000002 [INF] Request finished in 1631.795ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-04T12:24:12.8004349+02:00 0HLPH45OS8MT8:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/booking/GetBookingDetails/2013   (ca22a1cb)
+2019-09-04T12:24:12.8174358+02:00 0HLPH45OS8MT8:00000003 [INF] Route matched with "{action = \"GetBookingDetails\", controller = \"Booking\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookingDetails(Int32)" on controller "CarRental.API.Controllers.BookingController" ("CarRental.API"). (122b2fdf)
+2019-09-04T12:24:12.8324367+02:00 0HLPH45OS8MT8:00000003 [INF] Successfully validated the token. (60169667)
+2019-09-04T12:24:12.8354369+02:00 0HLPH45OS8MT8:00000003 [INF] Authorization was successful. (0d575a54)
+2019-09-04T12:24:12.8414372+02:00 0HLPH45OS8MT8:00000003 [INF] Executing action method "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-04T12:24:12.8504377+02:00 0HLPH45OS8MT8:00000003 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-04T12:24:13.0784508+02:00 0HLPH45OS8MT8:00000003 [INF] Executed DbCommand ("30"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[CreateByUserId], [x].[CreateOnDate], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[PreBookingId], [x].[UserId], [x.User].[Id], [x.User].[AccessFailedCount], [x.User].[ConcurrencyStamp], [x.User].[Email], [x.User].[EmailConfirmed], [x.User].[FirstName], [x.User].[LastName], [x.User].[LockoutEnabled], [x.User].[LockoutEnd], [x.User].[NormalizedEmail], [x.User].[NormalizedUserName], [x.User].[PasswordHash], [x.User].[PhoneNumber], [x.User].[PhoneNumberConfirmed], [x.User].[SecurityStamp], [x.User].[TwoFactorEnabled], [x.User].[UserName], [x.Car].[Id], [x.Car].[BrandId], [x.Car].[CarCapacity], [x.Car].[CarColor], [x.Car].[CarLocationId], [x.Car].[CarNumber], [x.Car].[CreateByUserId], [x.Car].[CreateOnDate], [x.Car].[Description], [x.Car].[FuelTypeId], [x.Car].[IsDeleted], [x.Car].[LastModifiedByUserId], [x.Car].[LastModifiedOnDate], [x.Car].[ModelId], [x.Car].[ModelYear], [x.Car].[NumberOfDoors], [x.Car].[PriceForDay], [x.Car].[TransmisionTypeId], [x.Car.Model].[Id], [x.Car.Model].[BrandId], [x.Car.Model].[Name], [x.Car.Brand].[Id], [x.Car.Brand].[Name]
+FROM [Booking] AS [x]
+LEFT JOIN [AspNetUsers] AS [x.User] ON [x].[UserId] = [x.User].[Id]
+LEFT JOIN [Car] AS [x.Car] ON [x].[CarId] = [x.Car].[Id]
+LEFT JOIN [Model] AS [x.Car.Model] ON [x.Car].[ModelId] = [x.Car.Model].[Id]
+LEFT JOIN [Brand] AS [x.Car.Brand] ON [x.Car].[BrandId] = [x.Car.Brand].[Id]
+WHERE [x].[IsDeleted] = 0" (0723d8ff)
+2019-09-04T12:24:13.2254592+02:00 0HLPH45OS8MT8:00000003 [INF] Executed action "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)" in 407.3252ms (afa2e885)
+2019-09-04T12:24:13.2594611+02:00 0HLPH45OS8MT8:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at CarRental.API.Controllers.BookingController.GetBookingDetails(Int32 id) in C:\Users\User\Desktop\CarRental\CarRental.API\Controllers\BookingController.cs:line 52
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-09-04T12:24:13.2714618+02:00 0HLPH45OS8MT8:00000003 [INF] Request finished in 470.5631ms 500 text/html; charset=utf-8 (791a596a)
+2019-09-04T12:27:52.6680106+02:00 0HLPH4A5F0BMS:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/booking/GetBookingDetails/2013   (ca22a1cb)
+2019-09-04T12:27:52.9840286+02:00 0HLPH4A5F0BMS:00000001 [INF] Route matched with "{action = \"GetBookingDetails\", controller = \"Booking\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookingDetails(Int32)" on controller "CarRental.API.Controllers.BookingController" ("CarRental.API"). (122b2fdf)
+2019-09-04T12:27:53.0520325+02:00 0HLPH4A5F0BMS:00000001 [INF] Successfully validated the token. (60169667)
+2019-09-04T12:27:53.0600330+02:00 0HLPH4A5F0BMS:00000001 [INF] Authorization was successful. (0d575a54)
+2019-09-04T12:27:53.1020354+02:00 0HLPH4A5F0BMS:00000001 [INF] Executing action method "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-04T12:27:53.4400547+02:00 0HLPH4A5F0BMS:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-04T12:27:53.7430721+02:00 0HLPH4A5F0BMS:00000001 [INF] Executed DbCommand ("17"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[CreateByUserId], [x].[CreateOnDate], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[PreBookingId], [x].[UserId], [x.User].[Id], [x.User].[AccessFailedCount], [x.User].[ConcurrencyStamp], [x.User].[Email], [x.User].[EmailConfirmed], [x.User].[FirstName], [x.User].[LastName], [x.User].[LockoutEnabled], [x.User].[LockoutEnd], [x.User].[NormalizedEmail], [x.User].[NormalizedUserName], [x.User].[PasswordHash], [x.User].[PhoneNumber], [x.User].[PhoneNumberConfirmed], [x.User].[SecurityStamp], [x.User].[TwoFactorEnabled], [x.User].[UserName], [x.Car].[Id], [x.Car].[BrandId], [x.Car].[CarCapacity], [x.Car].[CarColor], [x.Car].[CarLocationId], [x.Car].[CarNumber], [x.Car].[CreateByUserId], [x.Car].[CreateOnDate], [x.Car].[Description], [x.Car].[FuelTypeId], [x.Car].[IsDeleted], [x.Car].[LastModifiedByUserId], [x.Car].[LastModifiedOnDate], [x.Car].[ModelId], [x.Car].[ModelYear], [x.Car].[NumberOfDoors], [x.Car].[PriceForDay], [x.Car].[TransmisionTypeId], [x.Car.Model].[Id], [x.Car.Model].[BrandId], [x.Car.Model].[Name], [x.Car.Brand].[Id], [x.Car.Brand].[Name]
+FROM [Booking] AS [x]
+LEFT JOIN [AspNetUsers] AS [x.User] ON [x].[UserId] = [x.User].[Id]
+LEFT JOIN [Car] AS [x.Car] ON [x].[CarId] = [x.Car].[Id]
+LEFT JOIN [Model] AS [x.Car.Model] ON [x.Car].[ModelId] = [x.Car.Model].[Id]
+LEFT JOIN [Brand] AS [x.Car.Brand] ON [x.Car].[BrandId] = [x.Car.Brand].[Id]
+WHERE ([x].[IsDeleted] = 0) AND ([x].[Id] = @__id_0)" (0723d8ff)
+2019-09-04T12:27:53.9650847+02:00 0HLPH4A5F0BMS:00000001 [INF] Executed action "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)" in 976.5839ms (afa2e885)
+2019-09-04T12:27:54.0030869+02:00 0HLPH4A5F0BMS:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at CarRental.API.Controllers.BookingController.GetBookingDetails(Int32 id) in C:\Users\User\Desktop\CarRental\CarRental.API\Controllers\BookingController.cs:line 52
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-09-04T12:27:54.0580901+02:00 0HLPH4A5F0BMS:00000001 [INF] Request finished in 1395.978ms 500 text/html; charset=utf-8 (791a596a)
+2019-09-04T12:28:06.4647997+02:00 0HLPH4A9I845B:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/values   (ca22a1cb)
+2019-09-04T12:28:06.7708172+02:00 0HLPH4A9I845B:00000001 [INF] Route matched with "{action = \"GetValues\", controller = \"Values\", page = \"\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult GetValues()" on controller "CarRental.API.Controllers.ValuesController" ("CarRental.API"). (122b2fdf)
+2019-09-04T12:28:06.7898183+02:00 0HLPH4A9I845B:00000001 [INF] Executing action method "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-04T12:28:06.7968187+02:00 0HLPH4A9I845B:00000001 [INF] Executed action method "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1.2493ms. (50a9e262)
+2019-09-04T12:28:06.8068193+02:00 0HLPH4A9I845B:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Controllers.ValuesController+KeyValue, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-09-04T12:28:06.8878239+02:00 0HLPH4A9I845B:00000001 [INF] Executed action "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)" in 109.108ms (afa2e885)
+2019-09-04T12:28:06.8978245+02:00 0HLPH4A9I845B:00000001 [INF] Request finished in 443.148ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-04T12:28:09.4099681+02:00 0HLPH4A9I845B:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/booking/GetBookingDetails/2013   (ca22a1cb)
+2019-09-04T12:28:09.5609768+02:00 0HLPH4A9I845B:00000002 [INF] Route matched with "{action = \"GetBookingDetails\", controller = \"Booking\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookingDetails(Int32)" on controller "CarRental.API.Controllers.BookingController" ("CarRental.API"). (122b2fdf)
+2019-09-04T12:28:09.5919786+02:00 0HLPH4A9I845B:00000002 [INF] Successfully validated the token. (60169667)
+2019-09-04T12:28:09.5989790+02:00 0HLPH4A9I845B:00000002 [INF] Authorization was successful. (0d575a54)
+2019-09-04T12:28:09.6359811+02:00 0HLPH4A9I845B:00000002 [INF] Executing action method "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-04T12:28:09.9840010+02:00 0HLPH4A9I845B:00000002 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-04T12:28:10.2960188+02:00 0HLPH4A9I845B:00000002 [INF] Executed DbCommand ("14"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[CreateByUserId], [x].[CreateOnDate], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[PreBookingId], [x].[UserId], [x.User].[Id], [x.User].[AccessFailedCount], [x.User].[ConcurrencyStamp], [x.User].[Email], [x.User].[EmailConfirmed], [x.User].[FirstName], [x.User].[LastName], [x.User].[LockoutEnabled], [x.User].[LockoutEnd], [x.User].[NormalizedEmail], [x.User].[NormalizedUserName], [x.User].[PasswordHash], [x.User].[PhoneNumber], [x.User].[PhoneNumberConfirmed], [x.User].[SecurityStamp], [x.User].[TwoFactorEnabled], [x.User].[UserName], [x.Car].[Id], [x.Car].[BrandId], [x.Car].[CarCapacity], [x.Car].[CarColor], [x.Car].[CarLocationId], [x.Car].[CarNumber], [x.Car].[CreateByUserId], [x.Car].[CreateOnDate], [x.Car].[Description], [x.Car].[FuelTypeId], [x.Car].[IsDeleted], [x.Car].[LastModifiedByUserId], [x.Car].[LastModifiedOnDate], [x.Car].[ModelId], [x.Car].[ModelYear], [x.Car].[NumberOfDoors], [x.Car].[PriceForDay], [x.Car].[TransmisionTypeId], [x.Car.Model].[Id], [x.Car.Model].[BrandId], [x.Car.Model].[Name], [x.Car.Brand].[Id], [x.Car.Brand].[Name]
+FROM [Booking] AS [x]
+LEFT JOIN [AspNetUsers] AS [x.User] ON [x].[UserId] = [x.User].[Id]
+LEFT JOIN [Car] AS [x.Car] ON [x].[CarId] = [x.Car].[Id]
+LEFT JOIN [Model] AS [x.Car.Model] ON [x.Car].[ModelId] = [x.Car.Model].[Id]
+LEFT JOIN [Brand] AS [x.Car.Brand] ON [x.Car].[BrandId] = [x.Car.Brand].[Id]
+WHERE ([x].[IsDeleted] = 0) AND ([x].[Id] = @__id_0)" (0723d8ff)
+2019-09-04T12:28:10.5130312+02:00 0HLPH4A9I845B:00000002 [INF] Executed action "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)" in 951.7334ms (afa2e885)
+2019-09-04T12:28:10.5550336+02:00 0HLPH4A9I845B:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at CarRental.API.Controllers.BookingController.GetBookingDetails(Int32 id) in C:\Users\User\Desktop\CarRental\CarRental.API\Controllers\BookingController.cs:line 52
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-09-04T12:28:10.5990362+02:00 0HLPH4A9I845B:00000002 [INF] Request finished in 1189.2209ms 500 text/html; charset=utf-8 (791a596a)
+2019-09-04T12:28:51.2483612+02:00 0HLPH4AMTEUJ1:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/values   (ca22a1cb)
+2019-09-04T12:28:51.5473783+02:00 0HLPH4AMTEUJ1:00000001 [INF] Route matched with "{action = \"GetValues\", controller = \"Values\", page = \"\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult GetValues()" on controller "CarRental.API.Controllers.ValuesController" ("CarRental.API"). (122b2fdf)
+2019-09-04T12:28:51.5643792+02:00 0HLPH4AMTEUJ1:00000001 [INF] Executing action method "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-04T12:28:51.5703796+02:00 0HLPH4AMTEUJ1:00000001 [INF] Executed action method "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.8044ms. (50a9e262)
+2019-09-04T12:28:51.5833803+02:00 0HLPH4AMTEUJ1:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Controllers.ValuesController+KeyValue, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-09-04T12:28:51.6683852+02:00 0HLPH4AMTEUJ1:00000001 [INF] Executed action "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)" in 115.5871ms (afa2e885)
+2019-09-04T12:28:51.6773857+02:00 0HLPH4AMTEUJ1:00000001 [INF] Request finished in 435.9138ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-04T12:29:08.6523566+02:00 0HLPH4AMTEUJ1:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/booking/GetBookingDetails/2013   (ca22a1cb)
+2019-09-04T12:29:08.7663631+02:00 0HLPH4AMTEUJ1:00000002 [INF] Route matched with "{action = \"GetBookingDetails\", controller = \"Booking\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookingDetails(Int32)" on controller "CarRental.API.Controllers.BookingController" ("CarRental.API"). (122b2fdf)
+2019-09-04T12:29:08.7913646+02:00 0HLPH4AMTEUJ1:00000002 [INF] Successfully validated the token. (60169667)
+2019-09-04T12:29:08.7973649+02:00 0HLPH4AMTEUJ1:00000002 [INF] Authorization was successful. (0d575a54)
+2019-09-04T12:29:08.8243665+02:00 0HLPH4AMTEUJ1:00000002 [INF] Executing action method "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-04T12:29:09.1143830+02:00 0HLPH4AMTEUJ1:00000002 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-04T12:29:09.3883987+02:00 0HLPH4AMTEUJ1:00000002 [INF] Executed DbCommand ("11"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[CreateByUserId], [x].[CreateOnDate], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[PreBookingId], [x].[UserId], [x.User].[Id], [x.User].[AccessFailedCount], [x.User].[ConcurrencyStamp], [x.User].[Email], [x.User].[EmailConfirmed], [x.User].[FirstName], [x.User].[LastName], [x.User].[LockoutEnabled], [x.User].[LockoutEnd], [x.User].[NormalizedEmail], [x.User].[NormalizedUserName], [x.User].[PasswordHash], [x.User].[PhoneNumber], [x.User].[PhoneNumberConfirmed], [x.User].[SecurityStamp], [x.User].[TwoFactorEnabled], [x.User].[UserName], [x.Car].[Id], [x.Car].[BrandId], [x.Car].[CarCapacity], [x.Car].[CarColor], [x.Car].[CarLocationId], [x.Car].[CarNumber], [x.Car].[CreateByUserId], [x.Car].[CreateOnDate], [x.Car].[Description], [x.Car].[FuelTypeId], [x.Car].[IsDeleted], [x.Car].[LastModifiedByUserId], [x.Car].[LastModifiedOnDate], [x.Car].[ModelId], [x.Car].[ModelYear], [x.Car].[NumberOfDoors], [x.Car].[PriceForDay], [x.Car].[TransmisionTypeId], [x.Car.Model].[Id], [x.Car.Model].[BrandId], [x.Car.Model].[Name], [x.Car.Brand].[Id], [x.Car.Brand].[Name]
+FROM [Booking] AS [x]
+LEFT JOIN [AspNetUsers] AS [x.User] ON [x].[UserId] = [x.User].[Id]
+LEFT JOIN [Car] AS [x.Car] ON [x].[CarId] = [x.Car].[Id]
+LEFT JOIN [Model] AS [x.Car.Model] ON [x.Car].[ModelId] = [x.Car.Model].[Id]
+LEFT JOIN [Brand] AS [x.Car.Brand] ON [x.Car].[BrandId] = [x.Car.Brand].[Id]
+WHERE ([x].[IsDeleted] = 0) AND ([x].[Id] = @__id_0)" (0723d8ff)
+2019-09-04T12:29:09.5564083+02:00 0HLPH4AMTEUJ1:00000002 [INF] Executed action "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)" in 790.0301ms (afa2e885)
+2019-09-04T12:29:09.5914103+02:00 0HLPH4AMTEUJ1:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at CarRental.API.Controllers.BookingController.GetBookingDetails(Int32 id) in C:\Users\User\Desktop\CarRental\CarRental.API\Controllers\BookingController.cs:line 52
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2019-09-04T12:29:09.6254123+02:00 0HLPH4AMTEUJ1:00000002 [INF] Request finished in 973.3546ms 500 text/html; charset=utf-8 (791a596a)
+2019-09-04T12:29:36.3919432+02:00 0HLPH4B4B1OPM:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost:59834/  0 (ca22a1cb)
+2019-09-04T12:29:36.3919432+02:00 0HLPH4B4B1OPN:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/values   (ca22a1cb)
+2019-09-04T12:29:36.4999494+02:00 0HLPH4B4B1OPM:00000001 [INF] Request finished in 115.1181ms 200  (791a596a)
+2019-09-04T12:29:36.8219678+02:00 0HLPH4B4B1OPN:00000001 [INF] Route matched with "{action = \"GetValues\", controller = \"Values\", page = \"\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult GetValues()" on controller "CarRental.API.Controllers.ValuesController" ("CarRental.API"). (122b2fdf)
+2019-09-04T12:29:36.8369687+02:00 0HLPH4B4B1OPN:00000001 [INF] Executing action method "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-04T12:29:36.8479693+02:00 0HLPH4B4B1OPN:00000001 [INF] Executed action method "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1.5272ms. (50a9e262)
+2019-09-04T12:29:36.8649703+02:00 0HLPH4B4B1OPN:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Controllers.ValuesController+KeyValue, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-09-04T12:29:37.1729879+02:00 0HLPH4B4B1OPN:00000001 [INF] Executed action "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)" in 322.1105ms (afa2e885)
+2019-09-04T12:29:37.3169961+02:00 0HLPH4B4B1OPN:00000001 [INF] Request finished in 806.9739ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-04T12:29:37.3809998+02:00 0HLPH4B4B1OPM:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:59834/favicon.ico   (ca22a1cb)
+2019-09-04T12:29:37.4130016+02:00 0HLPH4B4B1OPM:00000002 [INF] Request finished in 22.4612ms 404  (791a596a)
+2019-09-04T12:29:42.2122761+02:00 0HLPH4B4B1OPN:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/booking/GetBookingDetails/2013   (ca22a1cb)
+2019-09-04T12:29:42.6323002+02:00 0HLPH4B4B1OPN:00000002 [INF] Route matched with "{action = \"GetBookingDetails\", controller = \"Booking\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookingDetails(Int32)" on controller "CarRental.API.Controllers.BookingController" ("CarRental.API"). (122b2fdf)
+2019-09-04T12:29:42.7783085+02:00 0HLPH4B4B1OPN:00000002 [INF] Successfully validated the token. (60169667)
+2019-09-04T12:29:42.7913093+02:00 0HLPH4B4B1OPN:00000002 [INF] Authorization was successful. (0d575a54)
+2019-09-04T12:29:42.8353118+02:00 0HLPH4B4B1OPN:00000002 [INF] Executing action method "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-04T12:29:43.3853432+02:00 0HLPH4B4B1OPN:00000002 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-04T12:29:44.6204139+02:00 0HLPH4B4B1OPN:00000002 [INF] Executed DbCommand ("37"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[CreateByUserId], [x].[CreateOnDate], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[PreBookingId], [x].[UserId], [x.User].[Id], [x.User].[AccessFailedCount], [x.User].[ConcurrencyStamp], [x.User].[Email], [x.User].[EmailConfirmed], [x.User].[FirstName], [x.User].[LastName], [x.User].[LockoutEnabled], [x.User].[LockoutEnd], [x.User].[NormalizedEmail], [x.User].[NormalizedUserName], [x.User].[PasswordHash], [x.User].[PhoneNumber], [x.User].[PhoneNumberConfirmed], [x.User].[SecurityStamp], [x.User].[TwoFactorEnabled], [x.User].[UserName], [x.Car].[Id], [x.Car].[BrandId], [x.Car].[CarCapacity], [x.Car].[CarColor], [x.Car].[CarLocationId], [x.Car].[CarNumber], [x.Car].[CreateByUserId], [x.Car].[CreateOnDate], [x.Car].[Description], [x.Car].[FuelTypeId], [x.Car].[IsDeleted], [x.Car].[LastModifiedByUserId], [x.Car].[LastModifiedOnDate], [x.Car].[ModelId], [x.Car].[ModelYear], [x.Car].[NumberOfDoors], [x.Car].[PriceForDay], [x.Car].[TransmisionTypeId], [x.Car.Model].[Id], [x.Car.Model].[BrandId], [x.Car.Model].[Name], [x.Car.Brand].[Id], [x.Car.Brand].[Name]
+FROM [Booking] AS [x]
+LEFT JOIN [AspNetUsers] AS [x.User] ON [x].[UserId] = [x.User].[Id]
+LEFT JOIN [Car] AS [x.Car] ON [x].[CarId] = [x.Car].[Id]
+LEFT JOIN [Model] AS [x.Car.Model] ON [x.Car].[ModelId] = [x.Car.Model].[Id]
+LEFT JOIN [Brand] AS [x.Car.Brand] ON [x.Car].[BrandId] = [x.Car.Brand].[Id]
+WHERE ([x].[IsDeleted] = 0) AND ([x].[Id] = @__id_0)" (0723d8ff)
+2019-09-04T12:30:50.7201946+02:00 0HLPH4BQB1TD5:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/values   (ca22a1cb)
+2019-09-04T12:30:50.7201946+02:00 0HLPH4BQB1TD6:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost:59834/  0 (ca22a1cb)
+2019-09-04T12:30:50.9112055+02:00 0HLPH4BQB1TD6:00000001 [INF] Request finished in 328.2316ms 200  (791a596a)
+2019-09-04T12:30:51.6902500+02:00 0HLPH4BQB1TD5:00000001 [INF] Route matched with "{action = \"GetValues\", controller = \"Values\", page = \"\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult GetValues()" on controller "CarRental.API.Controllers.ValuesController" ("CarRental.API"). (122b2fdf)
+2019-09-04T12:30:51.7252520+02:00 0HLPH4BQB1TD5:00000001 [INF] Executing action method "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-04T12:30:51.7432531+02:00 0HLPH4BQB1TD5:00000001 [INF] Executed action method "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 3.8916ms. (50a9e262)
+2019-09-04T12:30:51.7692546+02:00 0HLPH4BQB1TD5:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Controllers.ValuesController+KeyValue, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-09-04T12:30:52.4732948+02:00 0HLPH4BQB1TD5:00000001 [INF] Executed action "CarRental.API.Controllers.ValuesController.GetValues (CarRental.API)" in 599.3219ms (afa2e885)
+2019-09-04T12:30:52.8013136+02:00 0HLPH4BQB1TD5:00000001 [INF] Request finished in 1921.5599ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-04T12:30:52.9463219+02:00 0HLPH4BQB1TD6:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:59834/favicon.ico   (ca22a1cb)
+2019-09-04T12:30:53.0103256+02:00 0HLPH4BQB1TD6:00000002 [INF] Request finished in 175.0229ms 404  (791a596a)
+2019-09-04T12:31:02.2498540+02:00 0HLPH4BQB1TD5:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/booking/GetBookingDetails/2013   (ca22a1cb)
+2019-09-04T12:31:02.6828788+02:00 0HLPH4BQB1TD5:00000002 [INF] Route matched with "{action = \"GetBookingDetails\", controller = \"Booking\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookingDetails(Int32)" on controller "CarRental.API.Controllers.BookingController" ("CarRental.API"). (122b2fdf)
+2019-09-04T12:31:03.0539000+02:00 0HLPH4BQB1TD5:00000002 [INF] Successfully validated the token. (60169667)
+2019-09-04T12:31:03.0739012+02:00 0HLPH4BQB1TD5:00000002 [INF] Authorization was successful. (0d575a54)
+2019-09-04T12:31:03.1259041+02:00 0HLPH4BQB1TD5:00000002 [INF] Executing action method "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-04T12:31:03.8169437+02:00 0HLPH4BQB1TD5:00000002 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-04T12:31:05.6700496+02:00 0HLPH4BQB1TD5:00000002 [INF] Executed DbCommand ("46"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[CreateByUserId], [x].[CreateOnDate], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[PreBookingId], [x].[UserId], [x.PreBooking].[Id], [x.PreBooking].[AgeOfUser], [x.PreBooking].[CreateByUserId], [x.PreBooking].[CreateOnDate], [x.PreBooking].[IsDeleted], [x.PreBooking].[LastModifiedByUserId], [x.PreBooking].[LastModifiedOnDate], [x.PreBooking].[PickDate], [x.PreBooking].[PickLocationId], [x.PreBooking].[ReturnDate], [x.PreBooking].[ReturnLocationId], [x.User].[Id], [x.User].[AccessFailedCount], [x.User].[ConcurrencyStamp], [x.User].[Email], [x.User].[EmailConfirmed], [x.User].[FirstName], [x.User].[LastName], [x.User].[LockoutEnabled], [x.User].[LockoutEnd], [x.User].[NormalizedEmail], [x.User].[NormalizedUserName], [x.User].[PasswordHash], [x.User].[PhoneNumber], [x.User].[PhoneNumberConfirmed], [x.User].[SecurityStamp], [x.User].[TwoFactorEnabled], [x.User].[UserName], [x.Car].[Id], [x.Car].[BrandId], [x.Car].[CarCapacity], [x.Car].[CarColor], [x.Car].[CarLocationId], [x.Car].[CarNumber], [x.Car].[CreateByUserId], [x.Car].[CreateOnDate], [x.Car].[Description], [x.Car].[FuelTypeId], [x.Car].[IsDeleted], [x.Car].[LastModifiedByUserId], [x.Car].[LastModifiedOnDate], [x.Car].[ModelId], [x.Car].[ModelYear], [x.Car].[NumberOfDoors], [x.Car].[PriceForDay], [x.Car].[TransmisionTypeId], [x.Car.Model].[Id], [x.Car.Model].[BrandId], [x.Car.Model].[Name], [x.Car.Brand].[Id], [x.Car.Brand].[Name]
+FROM [Booking] AS [x]
+LEFT JOIN [PreBooking] AS [x.PreBooking] ON [x].[PreBookingId] = [x.PreBooking].[Id]
+LEFT JOIN [AspNetUsers] AS [x.User] ON [x].[UserId] = [x.User].[Id]
+LEFT JOIN [Car] AS [x.Car] ON [x].[CarId] = [x.Car].[Id]
+LEFT JOIN [Model] AS [x.Car.Model] ON [x.Car].[ModelId] = [x.Car.Model].[Id]
+LEFT JOIN [Brand] AS [x.Car.Brand] ON [x.Car].[BrandId] = [x.Car.Brand].[Id]
+WHERE ([x].[IsDeleted] = 0) AND ([x].[Id] = @__id_0)" (0723d8ff)
+2019-09-04T12:31:43.9472390+02:00 0HLPH4BQB1TD5:00000002 [INF] Executed DbCommand ("20"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[Id], [e].[City], [e].[Country], [e].[StreetAddress], [e].[ZipCode]
+FROM [Location] AS [e]
+WHERE [e].[Id] = @__get_Item_0" (0723d8ff)
+2019-09-04T12:31:43.9982419+02:00 0HLPH4BQB1TD5:00000002 [INF] Executed action method "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 40865.5251ms. (50a9e262)
+2019-09-04T12:31:44.0102426+02:00 0HLPH4BQB1TD5:00000002 [INF] Executing ObjectResult, writing value of type '"CarRental.API.Dtos.BookingForListDto"'. (8a1b66c8)
+2019-09-04T12:31:44.0412444+02:00 0HLPH4BQB1TD5:00000002 [INF] Executed action "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)" in 41352.5934ms (afa2e885)
+2019-09-04T12:31:44.0652457+02:00 0HLPH4BQB1TD5:00000002 [INF] Request finished in 41813.0077ms 200 application/json; charset=utf-8 (791a596a)
