@@ -1,0 +1,69 @@
+
+
+      <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow bg-primary">
+ <div class="container">
+        <!-- Sidebar Toggle (Topbar) -->
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+          <i class="fa fa-bars"></i>
+        </button>
+        <ul class="navbar-nav">
+
+          <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+          <li class="nav-item">
+            <a class="nav-link text-gray-800" [routerLink]="['']">
+              Home
+            </a>
+          
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-gray-800" [routerLink]="['/car-fleet']">
+              Car Fleat
+            </a>
+          
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-gray-800"[routerLink]="['']">
+              My Booking
+            </a>
+          
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-gray-800" href="#">
+             Contact Us
+            </a>
+          
+          </li>
+          <li class="nav-item" *ngIf="loggedIn()">
+              <a class="nav-link text-gray-800" [routerLink]="['/cars']">
+                Administrimi
+              </a>
+            
+            </li>
+        </ul>
+       
+        <div *ngIf="loggedIn()" ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>  Welcome {{authService.decodedToken?.unique_name}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem>Edit Profile</button>
+              <a (click)="logout()" ngbDropdownItem> Log out</a>        
+            </div>
+          </div> 
+      </div>
+      </nav>
+
+    
+
+<script src="../node_modules/startbootstrap-sb-admin-2/vendor/jquery/jquery.min.js"></script>
+<script src="../node_modules/startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="../node_modules/startbootstrap-sb-admin-2/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="../node_modules/startbootstrap-sb-admin-2/js/sb-admin-2.min.js"></script>
+
+  <script src="../node_modules/startbootstrap-sb-admin-2/vendor/chart.js/Chart.min.js"></script>
+
+  
+  <script src="../node_modules/startbootstrap-sb-admin-2/js/demo/chart-area-demo.js"></script>
+  <script src="../node_modules/startbootstrap-sb-admin-2/js/demo/chart-pie-demo.js"></script> 

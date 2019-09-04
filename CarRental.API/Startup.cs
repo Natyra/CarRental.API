@@ -10,6 +10,7 @@ using CarRental.API.Models;
 using CarRental.API.Repositories;
 using CarRental.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +32,7 @@ namespace CarRental.API
             Configuration = configuration;
         }
 
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -42,22 +44,50 @@ namespace CarRental.API
 
             services.AddDbContext<dbCarRentalContext>(x => x.UseSqlServer(Configuration.GetConnectionString("CRConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
-                   .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
+            //       .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                    });
+            });
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+           .AddEntityFrameworkStores<ApplicationDbContext>()
+           .AddDefaultUI()
+           .AddDefaultTokenProviders();
+
+            services.AddScoped<IUserClaimsPrincipalFactory<IdentityUser>, UserClaimsPrincipalFactory<IdentityUser, IdentityRole>>();
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICarService, CarService>();
+            services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<IModelService, ModelService>();
+            services.AddScoped<IFuelTypeService, FuelTypeService>();
+            services.AddScoped<ILocationService, LocationService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IBookingService, BookingService>();
+            services.AddScoped<ICarUploadService, CarUploadService>();
+            services.AddScoped<ITransmisionTypeService, TransmisionTypeService>();
+
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
+                    .RequireAuthenticatedUser().Build());
+            });
 
 
-
-            services.AddCors();
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-           .AddJsonOptions(opt => {
-               opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-           });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -67,7 +97,15 @@ namespace CarRental.API
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
+
+
             });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+           .AddJsonOptions(opt => {
+               opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+           });
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,9 +124,11 @@ namespace CarRental.API
             {
                 app.UseHsts();
             }
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            //app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors("AllowAll");
+            //app.UseHttpsRedirection();
             app.UseAuthentication();
-            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

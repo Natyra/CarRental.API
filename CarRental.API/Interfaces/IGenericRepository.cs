@@ -18,5 +18,6 @@ namespace CarRental.API.Interfaces
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
         Task<bool> SaveChanges();
+        Task SaveChangesAsync();
     }
 }
