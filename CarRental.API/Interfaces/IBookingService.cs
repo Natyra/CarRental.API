@@ -12,5 +12,6 @@ namespace CarRental.API.Interfaces
         Task<Booking> GetBookingByIdAsync(int id);
         Task DeleteBookingAsync(Booking booking);
         Task<Booking> GetBookingDetailsByIdAsync(int id);
+        Task<Booking> GetBookingAndDependenciesById(int id);
     }
 }

@@ -12,5 +12,6 @@ namespace CarRental.API.Interfaces
         Task<IEnumerable<AspNetUsers>> GetUsersAsync();
         Task DeleteUserAsync(AspNetUsers user);
         Task<AspNetUsers> GetUserByIdAsync(string id);
+        Task<string> GetUserIdByEmail(string email);
     }
 }

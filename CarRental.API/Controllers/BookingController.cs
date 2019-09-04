@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CarRental.API.Dtos;
 using CarRental.API.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +12,7 @@ namespace CarRental.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     public class BookingController : ControllerBase
     {
         private readonly IBookingService _bookingService;

@@ -78,6 +78,11 @@ namespace CarRental.API.Services
                 return null;
             }
         }
+        public async Task<string> GetUserIdByEmail(string email)
+        {
+            var user = await _genericRepository.FindOne(x => x.Email == email);
+            return user.Id;
+        }
 
 
         private void Logger(Exception ex, string message)
@@ -92,5 +97,7 @@ namespace CarRental.API.Services
 
             _logger.LogError(message + errorMessage + ", " + fullMethodName);
         }
+
+
     }
 }
