@@ -1,4 +1,5 @@
-﻿using CarRental.API.Interfaces;
+﻿using CarRental.API.Dtos;
+using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -157,6 +158,52 @@ namespace CarRental.API.Services
             {
                 Logger(ex, "Error adding save image in folder");
             }
+        }
+
+
+         public async Task<IEnumerable<Car>> CarsFilterLocationAsync(Location location)
+         {
+            try
+            {
+                return await _context
+                    .Car
+                    .Where(x => x.IsDeleted != true)
+                    .Where(x=> x.CarLocationId==location.Id)
+                    .Include(x=>x.Booking)
+                    .Include(x => x.Brand)
+                    .Include(x => x.Model)
+                    .Include(x => x.FuelType)
+                    .Include(x => x.TransmisionType)
+                    .Include(x => x.CarUpload)
+                    .ToListAsync();
+              
+            }
+            catch (Exception ex)
+            {
+
+                Logger(ex, "Getting cars from db failed");
+                return null; 
+            }
+            
+         }
+
+
+        public async Task<List<Booking>> GetPreBookingsAsync(int carId)
+        {
+            try
+            {
+                return await _context
+                    .Booking
+                    .Where(x => x.CarId == carId)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+                Logger(ex, "Getting cars from db failed");
+                return null;
+            }
+
         }
 
 

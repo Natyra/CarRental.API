@@ -15,12 +15,14 @@ export class BrandAddComponent implements OnInit {
 addBrandForm: FormGroup;
 model: Brand;
 brandName;
-
+id = +this.route.snapshot.paramMap.get('id');
   constructor(private fb: FormBuilder, private brandService: BrandService, private alertify: AlertifyService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.createAddBrandForm();
+    if(this.id !== 0){
     this.getBrnadById();
+    }
   }
 
 createAddBrandForm() {
@@ -30,9 +32,8 @@ createAddBrandForm() {
 }
 
 getBrnadById() {
-  const id = +this.route.snapshot.paramMap.get('id');
-  if (id !== 0) {
-  this.brandService.getBrandById(id).subscribe((brand: Brand) => {
+  if (this.id !== 0) {
+  this.brandService.getBrandById(this.id).subscribe((brand: Brand) => {
       this.brandName = brand.name;
     }, error => {
       this.alertify.error(error);
@@ -44,9 +45,8 @@ getBrnadById() {
 
 addBrand() {
   if (this.addBrandForm.valid) {
-    const id = +this.route.snapshot.paramMap.get('id');
     this.model = Object.assign({}, this.addBrandForm.value);
-    if (id === 0) {
+    if (this.id === 0) {
       this.brandService.addBrand(this.model).subscribe((result: any) => {
         this.alertify.success(result.message);
       }, error => {
@@ -55,7 +55,7 @@ addBrand() {
         this.router.navigate(['/brands']);
       });
     } else {
-      this.brandService.editBrand(this.model, id).subscribe((result: any) => {
+      this.brandService.editBrand(this.model, this.id).subscribe((result: any) => {
         this.alertify.success(result.message);
       }, error => {
         this.alertify.error(error);
