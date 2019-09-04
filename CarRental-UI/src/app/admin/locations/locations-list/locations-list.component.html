@@ -54,12 +54,22 @@
                                             <td>{{location.country}}</td>
 
                                             <td>
-                                                <a class="btn btn-danger btn-icon-split delete-car">
+                                                <a class="btn btn-warning btn-icon-split" title="Edit Model" [routerLink]="['/location/add/', location.id]" routerLinkActive="router-link-active">
                                                     <span class="icon">
-                                                        <i class="fas fa-trash" style="color:#ffffff"></i>
+                                                        <i class="fas fa-pencil-alt"></i>
                                                     </span>
 
                                                 </a>
+                                                <button type="button" class="btn btn-danger btn-icon-split" (click)="openModal(template)">  <span class="icon">
+                                                    <i class="fas fa-trash" style="color:#ffffff"></i>
+                                                </span></button>
+                                                <ng-template #template>
+                                                    <div class="modal-body text-center">
+                                                      <p>Are you sure to delete this location?</p>
+                                                      <button type="button" class="btn btn-success" (click)="confirm(location.id)" >Yes</button>
+                                                      <button type="button" class="btn btn-primary ml-2" (click)="decline()" >No</button>
+                                                    </div>
+                                                  </ng-template>
                                             </td>
 
                                         </tr>

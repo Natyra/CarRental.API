@@ -24,6 +24,8 @@
     "@ng-bootstrap/ng-bootstrap": "^5.1.0",
     "alertifyjs": "^1.11.4",
     "angular-jwt": "^0.1.11",
+    "bootstrap": "4.1.1",
+    "ngx-bootstrap": "^5.1.1",
     "rxjs": "~6.4.0",
     "startbootstrap-sb-admin-2": "^4.0.6",
     "tslib": "^1.10.0",

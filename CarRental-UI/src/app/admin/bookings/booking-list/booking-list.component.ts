@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BookingService } from 'src/app/_services/booking.service';
 import { Booking } from 'src/app/_models/Booking';
+import { AlertifyService } from 'src/app/_services/alertify.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-booking-list',
@@ -9,7 +11,8 @@ import { Booking } from 'src/app/_models/Booking';
 })
 export class BookingListComponent implements OnInit {
 bookings: Booking[];
-  constructor(private bookingService: BookingService) { }
+modalRef: BsModalRef;
+  constructor(private bookingService: BookingService, private alertify: AlertifyService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.loadBookings();
@@ -21,6 +24,26 @@ this.bookings = bookings;
 }, error => {
   console.log(error);
 });
+  }
+
+  deleteBooking(id: number) {
+    return this.bookingService.deleteBooking(id).subscribe((result:any) => {
+      this.alertify.success(result.message);
+      this.loadBookings();
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+  confirm(id: number): void {
+   this.deleteBooking(id);
+   this.modalRef.hide();
+  }
+  decline(): void {
+    this.modalRef.hide();
   }
 
 }

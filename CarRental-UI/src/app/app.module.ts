@@ -32,6 +32,7 @@ import { AlertifyService } from './_services/alertify.service';
 import { CarAddComponent } from './admin/cars/car-add/car-add.component';
 import { LocationAddComponent } from './admin/locations/location-add/location-add.component';
 import { BrandAddComponent } from './admin/brands/brand-add/brand-add.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -70,7 +71,8 @@ export function tokenGetter() {
             whitelistedDomains: ['localhost:5000'],
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
-      })
+      }),
+      ModalModule.forRoot()
    ],
    providers: [
       CarService,

@@ -64,12 +64,16 @@
                                                     </span>
 
                                                 </a>
-                                                <a class="btn btn-danger btn-icon-split delete-car">
-                                                    <span class="icon">
-                                                        <i class="fas fa-trash" style="color:#ffffff"></i>
-                                                    </span>
-
-                                                </a>
+                                                <button type="button" class="btn btn-danger btn-icon-split" (click)="openModal(template)">  <span class="icon">
+                                                    <i class="fas fa-trash" style="color:#ffffff"></i>
+                                                </span></button>
+                                                <ng-template #template>
+                                                    <div class="modal-body text-center">
+                                                      <p>Are you sure to delete this car?</p>
+                                                      <button type="button" class="btn btn-success" (click)="confirm(car.id)" >Yes</button>
+                                                      <button type="button" class="btn btn-primary ml-2" (click)="decline()" >No</button>
+                                                    </div>
+                                                  </ng-template>
                                             </td>
 
                                         </tr>

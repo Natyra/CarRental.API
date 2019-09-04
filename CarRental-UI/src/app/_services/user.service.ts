@@ -20,6 +20,10 @@ constructor(private http: HttpClient) { }
 getUsers(): Observable<User[]> {
   return this.http.get<User[]>(this.baseUrl + 'admin/user', this.httpOptions);
 }
+
+deleteUser(id: string) {
+  return this.http.delete(this.baseUrl + 'admin/user/delete/' + id, this.httpOptions);
+}
 }
 
 

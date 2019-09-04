@@ -38,7 +38,7 @@
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 265px;">First Name</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 419px;">Last Name</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 196px;">Phone Number</th>
-                                       
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 196px;">Actions</th>
                                         </tr>
                                         </thead>
 
@@ -52,12 +52,16 @@
                                             <td>{{user.lastName}}</td>
                                             <td>{{user.phoneNumber}}</td>
                                             <td>
-                                                <a class="btn btn-danger btn-icon-split delete-car">
-                                                    <span class="icon">
-                                                        <i class="fas fa-trash" style="color:#ffffff"></i>
-                                                    </span>
-
-                                                </a>
+                                                <button type="button" class="btn btn-danger btn-icon-split" (click)="openModal(template)">  <span class="icon">
+                                                    <i class="fas fa-trash" style="color:#ffffff"></i>
+                                                </span></button>
+                                                <ng-template #template>
+                                                    <div class="modal-body text-center">
+                                                      <p>Are you sure to delete this car?</p>
+                                                      <button type="button" class="btn btn-success" (click)="confirm(user.id)" >Yes</button>
+                                                      <button type="button" class="btn btn-primary ml-2" (click)="decline()" >No</button>
+                                                    </div>
+                                                  </ng-template>
                                             </td>
 
                                         </tr>

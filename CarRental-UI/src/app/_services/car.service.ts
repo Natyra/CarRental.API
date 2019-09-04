@@ -34,6 +34,10 @@ getCarById(id: number): Observable<CarAdd> {
 editCar(model: CarAdd, id: number) {
   return this.http.put(this.baseUrl + 'admin/car/edit/' + id, model, this.httpOptions);
 }
+
+deleteCar(id: number) {
+  return this.http.delete(this.baseUrl + 'admin/car/delete/' + id, this.httpOptions);
+}
 }
 
 
