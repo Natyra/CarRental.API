@@ -13,7 +13,7 @@ namespace CarRental.API.Areas.Admin.Controllers
     [Route("api/admin/[controller]")]
     [ApiController]
     [Authorize("Bearer")]
-    //[Authorize(Roles = "Admin")]
+
     public class BookingController : Controller
     {
         private IBookingService _bookingService;
@@ -86,5 +86,48 @@ namespace CarRental.API.Areas.Admin.Controllers
             });
 
         }
+
+        [HttpGet("GetBookingDetails/{id}")]
+        public async Task<IActionResult> GetBookingDetails(int id)
+        {
+            var model = new BookingForListDto();
+            var bookingsAsync = await _bookingService.GetBookingDetailsByIdAsync(id);
+            var booking= bookingsAsync;
+
+            if (booking == null )
+                return BadRequest("Booking not found");
+
+
+
+
+            model.Id = booking.Id;
+            model.PickUpLocation = await _locationService.GetLocationAsync((int)booking.PreBooking.PickLocationId);
+            model.ReturnLocation = await _locationService.GetLocationAsync((int)booking.PreBooking.ReturnLocationId);
+            model.PickUpDate = (DateTime)booking.PreBooking.PickDate;
+            model.ReturnDate = (DateTime)booking.PreBooking.ReturnDate;
+
+            model.Car = new CarForListDto
+            {
+                Id = booking.Car.Id,
+                CarNumber = booking.Car.CarNumber,
+                BrandName = booking.Car.Brand.Name,
+                ModelName = booking.Car.Model.Name
+            };
+
+            model.User = new UserDto
+            {
+                Id = booking.User.Id,
+                FirstName = booking.User.FirstName,
+                LastName = booking.User.LastName,
+                Email = booking.User.Email,
+                PhoneNumber = booking.User.PhoneNumber
+            };
+              
+            
+
+            return Ok(model);
+
+        }
+
     }
 }

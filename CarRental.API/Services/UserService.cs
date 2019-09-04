@@ -32,7 +32,7 @@ namespace CarRental.API.Services
             catch (Exception ex)
             {
 
-                Logger(ex, "Get user name failed");
+                Logger(ex, "Get user name faild");
                 return "";
             }
         }
@@ -46,7 +46,7 @@ namespace CarRental.API.Services
             }
             catch (Exception ex)
             {
-                Logger(ex, "Geting users from db failed");
+                Logger(ex, "Geting users from db faild");
                 return null;
             }
         }
@@ -60,7 +60,7 @@ namespace CarRental.API.Services
             }
             catch (Exception ex)
             {
-                Logger(ex, "Delete user from db failed");
+                Logger(ex, "Delete user from db faild");
 
             }
         }
@@ -74,23 +74,7 @@ namespace CarRental.API.Services
             catch (Exception ex)
             {
 
-                Logger(ex, "Get User by id failed");
-                return null;
-            }
-        }
-
-        public async Task<string> GetUserIdByEmail(string email)
-        {
-            try
-            {
-
-                var user = await _genericRepository.FindOne(x => x.Email == email);
-                return user.Id;
-
-            }
-            catch (Exception ex)
-            {
-                Logger(ex, "Get UserId by Email failed");
+                Logger(ex, "Get User by id faild");
                 return null;
             }
         }
@@ -108,8 +92,5 @@ namespace CarRental.API.Services
 
             _logger.LogError(message + errorMessage + ", " + fullMethodName);
         }
-
-
-
     }
 }

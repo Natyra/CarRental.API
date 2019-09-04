@@ -21,4 +21,8 @@ constructor(private http: HttpClient) { }
 getBookings(): Observable<Booking[]> {
   return this.http.get<Booking[]>(this.baseUrl + 'admin/booking', this.httpOptions);
 }
+
+deleteBooking(id: number) {
+  return this.http.delete(this.baseUrl + 'admin/booking/delete/' + id, this.httpOptions);
+}
 }

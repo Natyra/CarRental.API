@@ -12,7 +12,6 @@ namespace CarRental.API.Areas.Admin.Controllers
 {
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize("Bearer")]
     //[Authorize(Roles = "Admin")]
     public class LocationController : Controller
     {
@@ -51,7 +50,28 @@ namespace CarRental.API.Areas.Admin.Controllers
             return Ok(model);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetLocationById(int id)
+        {
+            var model = new LocationDto();
+            var loaction = await _locationService.GetLocationByIdAsync(id);
+
+            if (loaction == null)
+                return BadRequest("Location not found");
+
+            model.Id = loaction.Id;
+            model.City = loaction.City;
+            model.Country = loaction.Country;
+            model.StreetAddress = loaction.StreetAddress;
+            model.ZipCode = loaction.ZipCode;
+
+            return Ok(model);
+
+        }
+
+
         [HttpPost("add")]
+        [Authorize("Bearer")]
         public async Task<IActionResult> AddLocation(LocationDto model)
         {
             if (!ModelState.IsValid)
@@ -66,7 +86,6 @@ namespace CarRental.API.Areas.Admin.Controllers
                Country = model.Country,
                StreetAddress = model.StreetAddress
             };
-
             await _locationService.AddLocationAsync(location);
             await _genericRepository.SaveChangesAsync();
 
@@ -78,6 +97,8 @@ namespace CarRental.API.Areas.Admin.Controllers
         }
 
         [HttpPut("edit/{id}")]
+        [Authorize("Bearer")]
+
         public async Task<IActionResult> EditLocation(int id, LocationDto model)
         {
             if (!ModelState.IsValid)
@@ -106,6 +127,7 @@ namespace CarRental.API.Areas.Admin.Controllers
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize("Bearer")]
         public async Task<IActionResult> DeleteLocation(int id)
         {
             var location = await _locationService.GetLocationByIdAsync(id);
@@ -118,7 +140,7 @@ namespace CarRental.API.Areas.Admin.Controllers
             return Ok(new
             {
                 status = 200,
-                message = "Brand deleted successfully!"
+                message = "Location deleted successfully!"
             });
 
         }
