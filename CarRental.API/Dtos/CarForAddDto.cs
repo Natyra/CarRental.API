@@ -8,6 +8,7 @@ namespace CarRental.API.Dtos
 {
     public class CarForAddDto
     {
+        public int Id { get; set; }
         public string CarNumber { get; set; }
         public int? BrandId { get; set; }
         public int? ModelId { get; set; }

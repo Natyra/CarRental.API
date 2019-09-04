@@ -11,6 +11,8 @@ import { AuthGuard } from './_guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { CarAddComponent } from './admin/cars/car-add/car-add.component';
 import { FueltypesListComponent } from './admin/fueltypes/fueltypes-list/fueltypes-list.component';
+import { LocationAddComponent } from './admin/locations/location-add/location-add.component';
+import { BrandAddComponent } from './admin/brands/brand-add/brand-add.component';
 
 
 export const appRoutes: Routes = [
@@ -24,10 +26,15 @@ export const appRoutes: Routes = [
         { path: 'admin', component: AdminNavComponent},
         { path: 'cars', component: CarsListComponent},
         {path: 'cars/add', component: CarAddComponent},
+        {path: 'cars/add/:id', component: CarAddComponent},
         { path: 'users', component: UserListComponent },
         { path: 'bookings', component: BookingListComponent},
-        { path: 'lotacions', component: LocationsListComponent},
+        { path: 'locations', component: LocationsListComponent},
+        { path: 'locations/add', component: LocationAddComponent},
+        { path: 'locations/add/:id', component: LocationAddComponent},
         { path: 'brands', component: BrandsListComponent},
+        { path: 'brands/add', component: BrandAddComponent},
+        { path: 'brands/add/:id', component: BrandAddComponent},
         { path: 'fuel', component: FueltypesListComponent},
 
         { path: 'car-fleet', component: CarFleetComponent}

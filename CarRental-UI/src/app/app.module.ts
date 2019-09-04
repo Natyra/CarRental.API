@@ -30,6 +30,8 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
 import { CarAddComponent } from './admin/cars/car-add/car-add.component';
+import { LocationAddComponent } from './admin/locations/location-add/location-add.component';
+import { BrandAddComponent } from './admin/brands/brand-add/brand-add.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -50,7 +52,9 @@ export function tokenGetter() {
       FooterComponent,
       CarFleetComponent,
       LoginComponent,
-      CarAddComponent
+      CarAddComponent,
+      LocationAddComponent,
+      BrandAddComponent
    ],
    imports: [
       BrowserModule,

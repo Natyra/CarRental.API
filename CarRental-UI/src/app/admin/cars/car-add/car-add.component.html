@@ -1,5 +1,3 @@
-<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
-
 <div id="wrapper">
 <app-admin-nav></app-admin-nav>
 <div id="content-wrapper" class="d-flex flex-column">
@@ -21,7 +19,8 @@
                             <div class="form-group row">
                                 <div class="col-sm-4 mb-3 mb-sm-0">
                                     <label class="col-sm-12 label-nopadding">Car Number</label>
-                                    <input type="text" 
+                                    <input type="text"
+                                    [value]="carNumber" 
                                     [ngClass]="{'is-invalid':addCarForm.get('carNumber').errors && addCarForm.get('carNumber').touched}"
                                     class="form-control form-control-user input-width" 
                                     formControlName="carNumber">
@@ -31,15 +30,17 @@
                                     <label class="col-sm-12" style="padding-left:0px;padding-right:0px;">Car Brand</label>
 
                                     <select formControlName="brandId" class="browser-default custom-select" 
+                                    [value]="brandId"
                                     [ngClass]="{'is-invalid':addCarForm.get('brandId').errors && addCarForm.get('brandId').touched}" (change)="getModelsByBrandId($event.target.value)">
-                                        <option selected>-- Please Select --</option>
+                                        <option>-- Please Select --</option>
                                         <option *ngFor="let item of brands" value="{{item.id}}">{{item.name}}</option>
                                       </select>
                                       <div class="invalid-feedback">Brand is required</div>
                                 </div>
                                 <div class="col-sm-4 mb-3 mb-sm-0">
                                     <label class="col-sm-12 label-nopadding">Car Model</label>
-                                    <select formControlName="modelId" class="browser-default custom-select" 
+                                    <select formControlName="modelId" class="browser-default custom-select"
+                                    [value]="modelId" 
                                     [ngClass]="{'is-invalid':addCarForm.get('modelId').errors && addCarForm.get('modelId').touched}">
                                         <option selected>-- Please Select --</option>
                                         <option *ngFor="let item of models" value="{{item.id}}">{{item.name}}</option>
@@ -52,6 +53,7 @@
                                 <div class="col-sm-4 mb-3 mb-sm-0">
                                     <label class="col-sm-12 label-nopadding">Fuel Type</label>
                                     <select formControlName="fuelTypeId" class="browser-default custom-select" 
+                                    [value]="fuelTypeId"
                                     [ngClass]="{'is-invalid':addCarForm.get('fuelTypeId').errors && addCarForm.get('fuelTypeId').touched}">
                                         <option selected>-- Please Select --</option>
                                         <option *ngFor="let item of fuelTypes" value="{{item.id}}">{{item.name}}</option>
@@ -63,7 +65,9 @@
                                 <div class="col-sm-4 mb-3 mb-sm-0">
                                     <label class="col-sm-12 label-nopadding">Transmision Type</label>
 
-                                    <select formControlName="transmisionTypeId" class="browser-default custom-select" [ngClass]="{'is-invalid':addCarForm.get('transmisionTypeId').errors && addCarForm.get('transmisionTypeId').touched}">
+                                    <select formControlName="transmisionTypeId" class="browser-default custom-select"
+                                    [value]="transmisionTypeId"
+                                     [ngClass]="{'is-invalid':addCarForm.get('transmisionTypeId').errors && addCarForm.get('transmisionTypeId').touched}">
                                         <option selected>-- Please Select --</option>
                                         <option *ngFor="let item of transmisionTypes" value="{{item.id}}">{{item.name}}</option>
                                       </select>
@@ -73,7 +77,8 @@
                                 <div class="col-sm-4 mb-3 mb-sm-0">
                                     <label class="col-sm-12 label-nopadding">Car Location</label>
 
-                                    <select formControlName="carLocationId" class="browser-default custom-select" 
+                                    <select formControlName="carLocationId" class="browser-default custom-select"
+                                    [value]="carLocationId" 
                                     [ngClass]="{'is-invalid':addCarForm.get('carLocationId').errors && addCarForm.get('carLocationId').touched}">
                                         <option selected>-- Please Select --</option>
                                         <option *ngFor="let item of locations" value="{{item.id}}">{{item.streetAddress}}, {{item.zipCode}}, {{item.city}}, {{item.country}}</option>
@@ -86,7 +91,8 @@
                             <div class="form-group row">
                                 <div class="col-sm-4 mb-3 mb-sm-0">
                                     <label class="col-sm-12 label-nopadding">Model Year</label>
-                                    <input formControlName="modelYear" type="text" class="form-control form-control-user input-width" [ngClass]="{'is-invalid':addCarForm.get('modelYear').errors && addCarForm.get('modelYear').touched}">
+                                    <input formControlName="modelYear" type="text" class="form-control form-control-user input-width"
+                                    [value]="modelYear" [ngClass]="{'is-invalid':addCarForm.get('modelYear').errors && addCarForm.get('modelYear').touched}">
                                     <div class="invalid-feedback">Model Year is required</div>
 
                                 </div>
@@ -94,14 +100,16 @@
                                 <div class="col-sm-4 mb-3 mb-sm-0">
                                     <label class="col-md-12 label-nopadding">Number Of Doors</label>
 
-                                    <input formControlName="numberOfDoors" type="text" class="form-control form-control-user input-width" [ngClass]="{'is-invalid':addCarForm.get('numberOfDoors').errors && addCarForm.get('numberOfDoors').touched}">
+                                    <input formControlName="numberOfDoors" type="text" class="form-control form-control-user input-width" 
+                                    [value]="numberOfDoors" [ngClass]="{'is-invalid':addCarForm.get('numberOfDoors').errors && addCarForm.get('numberOfDoors').touched}">
                                     <div class="invalid-feedback">Number O fDoors is required</div>
 
                                 </div>
                                 <div class="col-sm-4 mb-3 mb-sm-0">
                                     <label class="col-md-12 label-nopadding">Car Capacity</label>
 
-                                    <input formControlName="carCapacity" type="text" class="form-control form-control-user input-width" [ngClass]="{'is-invalid':addCarForm.get('carCapacity').errors && addCarForm.get('carCapacity').touched}">
+                                    <input formControlName="carCapacity" type="text" class="form-control form-control-user input-width"
+                                    [value]="carCapacity" [ngClass]="{'is-invalid':addCarForm.get('carCapacity').errors && addCarForm.get('carCapacity').touched}">
                                     <div class="invalid-feedback">Car Capacity is required</div>
 
                                 </div>
@@ -111,7 +119,8 @@
 
                                 <div class="col-sm-4 mb-3 mb-sm-0">
                                     <label class="col-md-12 label-nopadding">Car Color</label>
-                                    <input formControlName="carColor" type="text" class="form-control form-control-user input-width" [ngClass]="{'is-invalid':addCarForm.get('carColor').errors && addCarForm.get('carColor').touched}">
+                                    <input formControlName="carColor" type="text" class="form-control form-control-user input-width" 
+                                    [value]="carColor" [ngClass]="{'is-invalid':addCarForm.get('carColor').errors && addCarForm.get('carColor').touched}">
                                     <div class="invalid-feedback">Car Color is required</div>
 
                                 </div>
@@ -119,7 +128,8 @@
                                 <div class="col-sm-4 mb-3 mb-sm-0">
                                     <label class="col-md-12 label-nopadding">Price For Day</label>
 
-                                    <input formControlName="priceForDay" type="text" class="form-control form-control-user input-width" data-val="true" data-val-number="The field PriceForDay must be a number." [ngClass]="{'is-invalid':addCarForm.get('priceForDay').errors && addCarForm.get('priceForDay').touched}">
+                                    <input formControlName="priceForDay" type="text" class="form-control form-control-user input-width" data-val="true" data-val-number="The field PriceForDay must be a number." 
+                                    [value]="priceForDay" [ngClass]="{'is-invalid':addCarForm.get('priceForDay').errors && addCarForm.get('priceForDay').touched}">
                                     <div class="invalid-feedback">Price ForDay is required</div>
 
                                 </div>
@@ -131,11 +141,9 @@
                                 <div class="col-sm-12 mb-12 mb-sm-0">
                                     <label class="col-md-12 label-nopadding">Description</label>
 
-                                    <textarea formControlName="description" type="text" class="form-control form-control-user" ></textarea>
+                                    <textarea formControlName="description" type="text" class="form-control form-control-user" [value]="description"></textarea>
                                 </div>
                             </div>
-                            <p>Form value: {{addCarForm.value | json}}</p>
-                            <p>Form status: {{addCarForm.status | json}}</p>
 
 
                             <!-- <div class="form-group row">

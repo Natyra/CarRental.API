@@ -11,14 +11,28 @@ import { CarAdd } from '../_models/CarAdd';
 export class CarService {
   baseUrl = environment.apiUrl;
 
+  token = localStorage.getItem('token');
+headersObj = new HttpHeaders().set('Authorization', 'Bearer ' + this.token);
+httpOptions = {
+  headers: this.headersObj
+};
+
 constructor(private http: HttpClient) { }
 
 getCars(): Observable<Car[]> {
-  return this.http.get<Car[]>(this.baseUrl + 'admin/car');
+  return this.http.get<Car[]>(this.baseUrl + 'admin/car', this.httpOptions);
 }
 
 addCar(model: CarAdd) {
-  return this.http.post(this.baseUrl + 'admin/car/add', model);
+  return this.http.post(this.baseUrl + 'admin/car/add', model, this.httpOptions);
+}
+
+getCarById(id: number): Observable<CarAdd> {
+  return this.http.get<CarAdd>(this.baseUrl + 'admin/car/' + id, this.httpOptions);
+}
+
+editCar(model: CarAdd, id: number) {
+  return this.http.put(this.baseUrl + 'admin/car/edit/' + id, model, this.httpOptions);
 }
 }
 
