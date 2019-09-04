@@ -32,7 +32,7 @@ namespace CarRental.API.Services
             }
             catch (Exception ex)
             {
-                Logger(ex, "Geting bookings from db faild");
+                Logger(ex, "Geting bookings from db failed");
                 return null;
             }
         }
@@ -47,7 +47,7 @@ namespace CarRental.API.Services
             catch (Exception ex)
             {
 
-                Logger(ex, "Get booking by id faild");
+                Logger(ex, "Get booking by id failed");
                 return null;
             }
         }
@@ -62,9 +62,25 @@ namespace CarRental.API.Services
             }
             catch (Exception ex)
             {
-                Logger(ex, "Delete booking from db faild");
+                Logger(ex, "Delete booking from db failed");
 
             }
+        }
+
+        public async Task<Booking> GetBookingDetailsByIdAsync(int id)
+        {
+            try
+            {
+                var booking = await  _context.Booking.Where(x => x.IsDeleted != true).Include(x => x.PreBooking).Include(x => x.User).Include(x => x.Car).ThenInclude(x=>x.Model).Include(x=>x.Car).ThenInclude(x=>x.Brand).FirstOrDefaultAsync(x=>x.Id==id);
+                return booking;
+
+            }
+            catch (Exception ex)
+            {
+                Logger(ex, "Geting booking from db failed");
+                return null;
+            }
+
         }
 
         private void Logger(Exception ex, string message)
@@ -77,7 +93,7 @@ namespace CarRental.API.Services
             string methodName = method.ReflectedType.Name;
             string fullMethodName = className + " " + methodName;
 
-            _logger.LogError(message + errorMessage + ", " + fullMethodName);
+            _logger.LogError(message + errorMessage + "," + fullMethodName);
         }
 
 
