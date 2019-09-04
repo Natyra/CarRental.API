@@ -23,11 +23,15 @@ getLocations(): Observable<Location[]> {
 }
 
 getLocationById(id: number): Observable<Location> {
-  return this.http.get<Location>(this.baseUrl + 'admin/location' + id, this.httpOptions);
+  return this.http.get<Location>(this.baseUrl + 'admin/location/' + id, this.httpOptions);
 }
 
 addLocation(model: Location) {
   return this.http.post(this.baseUrl + 'admin/location/add', model, this.httpOptions);
+}
+
+editLocation(id: number, model: Location) {
+  return this.http.put(this.baseUrl + 'admin/location/edit/' + id, model, this.httpOptions);
 }
 
 deleteLocation(id: number) {

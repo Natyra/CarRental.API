@@ -18,6 +18,7 @@
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label class="col-sm-12 label-nopadding">Street Address</label>
                                     <input type="text" 
+                                    [value]="streetAddress"
                                     [ngClass]="{'is-invalid':addLocationForm.get('streetAddress').errors && addLocationForm.get('streetAddress').touched}"
                                     class="form-control form-control-user input-width" 
                                     formControlName="streetAddress">
@@ -27,6 +28,7 @@
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                   <label class="col-sm-12 label-nopadding">Zip Code</label>
                                   <input type="text" 
+                                  [value]="zipCode"
                                   [ngClass]="{'is-invalid':addLocationForm.get('zipCode').errors && addLocationForm.get('zipCode').touched}"
                                   class="form-control form-control-user input-width" 
                                   formControlName="zipCode">
@@ -39,6 +41,7 @@
                               <div class="col-sm-6 mb-3 mb-sm-0">
                                   <label class="col-sm-12 label-nopadding">City</label>
                                   <input type="text" 
+                                  [value]="city"
                                   [ngClass]="{'is-invalid':addLocationForm.get('city').errors && addLocationForm.get('city').touched}"
                                   class="form-control form-control-user input-width" 
                                   formControlName="city">
@@ -48,6 +51,7 @@
                               <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label class="col-sm-12 label-nopadding">Country</label>
                                 <input type="text" 
+                                [value]="country"                                
                                 [ngClass]="{'is-invalid':addLocationForm.get('country').errors && addLocationForm.get('country').touched}"
                                 class="form-control form-control-user input-width" 
                                 formControlName="country">

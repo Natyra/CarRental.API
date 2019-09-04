@@ -26,7 +26,7 @@ id = +this.route.snapshot.paramMap.get('id');
   ngOnInit() {
     this.createAddLocationForm();
 
-    if (this.id !== 0){
+    if (this.id !== 0) {
       this.getLocationById();
     }
   }
@@ -34,14 +34,25 @@ id = +this.route.snapshot.paramMap.get('id');
   addLocation() {
     if (this.addLocationForm.valid) {
       this.model = Object.assign({}, this.addLocationForm.value);
-      this.locationService.addLocation(this.model).subscribe(() => {
-        this.alertify.success('Location added successfully');
+      console.log(this.id);
+      if (this.id === 0) {
+      this.locationService.addLocation(this.model).subscribe((result: any) => {
+        this.alertify.success(result.message);
+      }, error => {
+        this.alertify.error(error);
+      }, () => {
+        this.router.navigate(['/locations']);
+      });
+    } else {
+      this.locationService.editLocation(this.id, this.model).subscribe((result: any) => {
+        this.alertify.success(result.message);
       }, error => {
         this.alertify.error(error);
       }, () => {
         this.router.navigate(['/locations']);
       });
     }
+    } 
   }
 
   createAddLocationForm() {

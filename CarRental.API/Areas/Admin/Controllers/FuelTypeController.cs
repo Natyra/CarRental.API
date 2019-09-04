@@ -47,8 +47,24 @@ namespace CarRental.API.Areas.Admin.Controllers
             return Ok(model);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetFuelTypeById(int id)
+        {
+            var model = new FuelTypeDto();
+            var fuel = await _fuelTypeService.GetFuelTypeByIdAsync(id);
+
+            if (fuel == null)
+                return BadRequest("Location not found");
+
+            model.Id = fuel.Id;
+            model.Name = fuel.Name;
+
+            return Ok(model);
+
+        }
+
         [HttpPost("add")]
-        public async Task<IActionResult> AddFuelType([FromForm]FuelTypeDto model)
+        public async Task<IActionResult> AddFuelType(FuelTypeDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -71,7 +87,7 @@ namespace CarRental.API.Areas.Admin.Controllers
         }
 
         [HttpPut("edit/{id}")]
-        public async Task<IActionResult> EditFuelType(int id, [FromForm]FuelTypeDto model)
+        public async Task<IActionResult> EditFuelType(int id, FuelTypeDto model)
         {
             if (!ModelState.IsValid)
             {

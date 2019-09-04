@@ -39,4 +39,8 @@ addBrand(model: Brand) {
 editBrand(model: Brand, id: number) {
   return this.http.put(this.baseUrl + 'admin/brand/edit/' + id, model, this.httpOptions);
 }
+
+deleteBrand(id: number) {
+  return this.http.delete(this.baseUrl + 'admin/brand/delete/' + id, this.httpOptions);
+}
 }
