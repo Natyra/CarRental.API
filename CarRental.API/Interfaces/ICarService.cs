@@ -16,5 +16,7 @@ namespace CarRental.API.Interfaces
         Task UpdateCarAsync(Car car);
 
         Task UploadImage(IFormFile image, int id);
+        Task<IEnumerable<Car>> CarsFilterLocationAsync(Location location);
+        Task<List<Booking>> GetPreBookingsAsync(int carId);
     }
 }
