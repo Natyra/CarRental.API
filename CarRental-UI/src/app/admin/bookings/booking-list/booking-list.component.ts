@@ -27,7 +27,7 @@ this.bookings = bookings;
   }
 
   deleteBooking(id: number) {
-    return this.bookingService.deleteBooking(id).subscribe((result:any) => {
+    return this.bookingService.deleteBooking(id).subscribe((result: any) => {
       this.alertify.success(result.message);
       this.loadBookings();
     }, error => {

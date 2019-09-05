@@ -48,8 +48,24 @@ namespace CarRental.API.Areas.Admin.Controllers
             return Ok(model);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetModelById(int id)
+        {
+            var model = new ModelDto();
+            var modelById = await _modelService.GetModellByIdAsync(id);
+
+            if (modelById == null)
+                return BadRequest("Model not found");
+
+            model.Id = modelById.Id;
+            model.BrandId = modelById.BrandId;
+            model.Name = modelById.Name;
+
+            return Ok(model);
+        }
+
         [HttpPost("add")]
-        public async Task<IActionResult> AddModel([FromForm]ModelDto model)
+        public async Task<IActionResult> AddModel(ModelDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -73,7 +89,7 @@ namespace CarRental.API.Areas.Admin.Controllers
         }
 
         [HttpPut("edit/{id}")]
-        public async Task<IActionResult> EditModel(int id, [FromForm]ModelDto model)
+        public async Task<IActionResult> EditModel(int id, ModelDto model)
         {
             if (!ModelState.IsValid)
             {

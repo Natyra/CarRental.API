@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class BrandsListComponent implements OnInit {
 brands: Brand[];
 modalRef: BsModalRef;
+
   constructor(private brandService: BrandService, private modalService: BsModalService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
@@ -33,8 +34,6 @@ console.log(error);
       this.loadBrands();
     }, error => {
       this.alertify.error(error);
-    }, () => {
-      this.router.navigate(['/brands']);
     });
   }
 

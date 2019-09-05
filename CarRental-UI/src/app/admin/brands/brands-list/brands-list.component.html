@@ -1,7 +1,4 @@
-<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
 
-<div id="wrapper">
-<app-admin-nav></app-admin-nav>
 <div id="content-wrapper" class="d-flex flex-column">
 
   <!-- Main Content -->
@@ -18,7 +15,7 @@
       <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Brands</h6>
-            <a class="btn btn-primary btn-icon-split" [routerLink]="['/brands/add']" routerLinkActive="router-link-active" >
+            <a class="btn btn-primary btn-icon-split" [routerLink]="['/admin/brands/add']" routerLinkActive="router-link-active" >
                 <span class="icon text-white-50">
                     <i class="fas fa-plus"></i>
                 </span>
@@ -48,8 +45,14 @@
                                             <td>{{brand.name}}</td>
 
                                             <td>
+
+                                                <a class="btn btn-info btn-icon-split" title="Models List" [routerLink]="['/admin/models/']" [queryParams]="{ brandId: brand.id }" routerLinkActive="router-link-active">
+                                                  <span class="icon">
+                                                      <i class="fas fa-list"></i> 
+                                                  </span>
+</a>
                                                 
-                                                        <a class="btn btn-warning btn-icon-split" title="Edit Model" [routerLink]="['/brands/add/', brand.id]" routerLinkActive="router-link-active">
+                                                        <a class="btn btn-warning btn-icon-split ml-2" title="Edit Brand" [routerLink]="['/admin/brands/add/', brand.id]" routerLinkActive="router-link-active">
                                                             <span class="icon">
                                                                 <i class="fas fa-pencil-alt"></i>
                                                             </span>
@@ -95,16 +98,3 @@
   <!-- End of Footer -->
 
 </div>
-</div>
-
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-
-<script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#dataTable').DataTable();
-    
-});
-</script> -->

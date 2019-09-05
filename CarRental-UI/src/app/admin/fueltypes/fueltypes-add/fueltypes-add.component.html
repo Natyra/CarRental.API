@@ -1,5 +1,4 @@
-<div id="wrapper">
-  <app-admin-nav></app-admin-nav>
+
   <div id="content-wrapper" class="d-flex flex-column">
   
     <div id="content">
@@ -15,29 +14,31 @@
                       <div class="p-5">
                           <form [formGroup]="addFuelForm" (submit)="addFueltype()">
                               <div class="form-group row">
-                                  <div class="col-sm-6 mb-3 mb-sm-0">
-                                      <label class="col-sm-12 label-nopadding">Model Name</label>
+                                  <div class="col-sm-12 mb-3 mb-sm-0">
+                                      <label class="col-sm-12 label-nopadding">Fuel Type</label>
                                       <input type="text"
-                                      [value]="modelName" 
+                                      [value]="fuelTypeName" 
                                       [ngClass]="{'is-invalid':addFuelForm.get('name').errors && addFuelForm.get('name').touched}"
                                       class="form-control form-control-user input-width" 
                                       formControlName="name">
-                                      <div class="invalid-feedback">Model Name is required</div>
+                                      <div class="invalid-feedback">Fuel Type is required</div>
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <button type="button" class="btn btn-secondary btn-icon-split" (click)="cancel()" style="margin-left:40px; margin-right:20px;">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                  <button type="button" class="btn btn-secondary btn-icon-split" (click)="cancel()">
                                       <span class="icon text-white-50">
                                           <i class="fas fa-arrow-left"></i>
                                       </span>
                                       <span class="text ext-white-50">Cancel</span>
                                   </button>
-                                  <button type="submit" [disabled]="!addFuelForm.valid" class="btn btn-success btn-icon-split">
+                                  <button type="submit" [disabled]="!addFuelForm.valid" class="btn btn-success btn-icon-split ml-2">
                                       <span class="icon text-white-50">
                                           <i class="fas fa-check"></i>
                                       </span>
                                       <span class="text">Save</span>
                                   </button>
+                                  </div>
                               </div>
                           </form>
                       </div>
@@ -53,5 +54,4 @@
         </div>
       </div>
     </footer>
-  </div>
   </div>

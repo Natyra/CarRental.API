@@ -123,7 +123,7 @@ addCar() {
     }, error => {
       this.alertify.error(error);
     }, () => {
-      this.router.navigate(['/cars']);
+      this.router.navigate(['/admin/cars']);
     });
   } else {
     this.carService.editCar(this.model, this.id).subscribe((result: any) => {
@@ -131,7 +131,7 @@ addCar() {
     }, error => {
       this.alertify.error(error);
     }, () => {
-      this.router.navigate(['/cars']);
+      this.router.navigate(['/admin/cars']);
     });
   }
   }
@@ -140,7 +140,7 @@ addCar() {
 
 cancel() {
   this.cancelAddCar.emit(false);
-  this.router.navigate(['/cars']);
+  this.router.navigate(['/admin/cars']);
 }
 
 getBrands() {

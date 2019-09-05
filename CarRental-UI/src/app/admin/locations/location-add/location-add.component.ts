@@ -41,7 +41,7 @@ id = +this.route.snapshot.paramMap.get('id');
       }, error => {
         this.alertify.error(error);
       }, () => {
-        this.router.navigate(['/locations']);
+        this.router.navigate(['/admin/locations']);
       });
     } else {
       this.locationService.editLocation(this.id, this.model).subscribe((result: any) => {
@@ -49,7 +49,7 @@ id = +this.route.snapshot.paramMap.get('id');
       }, error => {
         this.alertify.error(error);
       }, () => {
-        this.router.navigate(['/locations']);
+        this.router.navigate(['/admin/locations']);
       });
     }
     } 
@@ -84,7 +84,7 @@ id = +this.route.snapshot.paramMap.get('id');
 
   cancel() {
     this.cancelAddCar.emit(false);
-    this.router.navigate(['/locations']);
+    this.router.navigate(['/admin/locations']);
   }
 
 }

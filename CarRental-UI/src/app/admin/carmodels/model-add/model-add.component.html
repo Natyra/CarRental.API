@@ -1,4 +1,4 @@
-  <div id="content-wrapper" class="d-flex flex-column" style="width:100%;">
+<div id="content-wrapper" class="d-flex flex-column" style="width:100%;">
   
     <div id="content">
   <br>
@@ -6,22 +6,37 @@
         
           <div class="card shadow mb-4">
               <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Add Brand</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">{{addOrEditMessage}}</h6>
               </div>
               <div class="card-body">
                   <div class="col-lg-12">
                       <div class="p-5">
-                          <form [formGroup]="addBrandForm" (submit)="addBrand()">
+                          <form [formGroup]="addModelForm" (submit)="addModel()">
+                            <!-- <div class="form-group row">
+                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <label class="col-sm-12" style="padding-left:0px;padding-right:0px;">Brand</label>
+
+                                    <select formControlName="brandId" class="browser-default custom-select" 
+                                    [value]="brandId"
+                                    [ngClass]="{'is-invalid':addModelForm.get('brandId').errors && addModelForm.get('brandId').touched}">
+                                        <option>-- Please Select --</option>
+                                        <option *ngFor="let item of brands" value="{{item.id}}">{{item.name}}</option>
+                                      </select>
+                                      <div class="invalid-feedback">Brand is required</div>
+                                </div>
+                            </div> -->
                               <div class="form-group row">
+                                
                                   <div class="col-sm-12 mb-3 mb-sm-0">
-                                      <label class="col-sm-12 label-nopadding">Brand Name</label>
+                                      <label class="col-sm-12 label-nopadding">Model Name</label>
                                       <input type="text"
-                                      [value]="brandName" 
-                                      [ngClass]="{'is-invalid':addBrandForm.get('name').errors && addBrandForm.get('name').touched}"
+                                      [value]="modelName" 
+                                      [ngClass]="{'is-invalid':addModelForm.get('name').errors && addModelForm.get('name').touched}"
                                       class="form-control form-control-user input-width" 
                                       formControlName="name">
-                                      <div class="invalid-feedback">Brand Name is required</div>
+                                      <div class="invalid-feedback">Model Name is required</div>
                                   </div>
+                             
                               </div>
                               <div class="form-group row">
                                   <button type="button" class="btn btn-secondary btn-icon-split" (click)="cancel()" style="margin-left:40px; margin-right:20px;">
@@ -30,7 +45,7 @@
                                       </span>
                                       <span class="text ext-white-50">Cancel</span>
                                   </button>
-                                  <button type="submit" [disabled]="!addBrandForm.valid" class="btn btn-success btn-icon-split">
+                                  <button type="submit" [disabled]="!addModelForm.valid" class="btn btn-success btn-icon-split">
                                       <span class="icon text-white-50">
                                           <i class="fas fa-check"></i>
                                       </span>

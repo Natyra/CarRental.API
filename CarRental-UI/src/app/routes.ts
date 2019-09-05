@@ -14,17 +14,20 @@ import { FueltypesListComponent } from './admin/fueltypes/fueltypes-list/fueltyp
 import { LocationAddComponent } from './admin/locations/location-add/location-add.component';
 import { BrandAddComponent } from './admin/brands/brand-add/brand-add.component';
 import { FueltypesAddComponent } from './admin/fueltypes/fueltypes-add/fueltypes-add.component';
+import { ModelListComponent } from './admin/carmodels/model-list/model-list.component';
+import { ModelAddComponent } from './admin/carmodels/model-add/model-add.component';
 
 
 export const appRoutes: Routes = [
  { path: '', component: HomeComponent},
  { path: 'login', component: LoginComponent},
  {
-    path: '',
+    path: 'admin',
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
+    component: AdminNavComponent,
     children: [
-        { path: 'admin', component: AdminNavComponent},
+        //{ path: 'admin', component: AdminNavComponent},
         { path: 'cars', component: CarsListComponent},
         {path: 'cars/add', component: CarAddComponent},
         {path: 'cars/add/:id', component: CarAddComponent},
@@ -39,6 +42,9 @@ export const appRoutes: Routes = [
         { path: 'fuel', component: FueltypesListComponent},
         { path: 'fuel/add', component: FueltypesAddComponent},
         { path: 'fuel/add/:id', component: FueltypesAddComponent},
+        { path: 'models', component: ModelListComponent},
+        { path: 'models/add', component: ModelAddComponent},
+        { path: 'models/add', component: ModelAddComponent},
         { path: 'car-fleet', component: CarFleetComponent}
     ]
  },

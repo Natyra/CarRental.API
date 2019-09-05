@@ -34,7 +34,7 @@ deleteFuelType(id: number) {
   }, error => {
     this.alertify.error(error);
   }, () => {
-    this.router.navigate(['/fuel']);
+    this.router.navigate(['/admin/fuel']);
   })
 }
 

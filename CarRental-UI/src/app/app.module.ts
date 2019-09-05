@@ -34,6 +34,9 @@ import { LocationAddComponent } from './admin/locations/location-add/location-ad
 import { BrandAddComponent } from './admin/brands/brand-add/brand-add.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FueltypesAddComponent } from './admin/fueltypes/fueltypes-add/fueltypes-add.component';
+import { ModelListComponent } from './admin/carmodels/model-list/model-list.component';
+import { ModelAddComponent } from './admin/carmodels/model-add/model-add.component';
+import { CarmodelService } from './_services/carmodel.service';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -57,7 +60,9 @@ export function tokenGetter() {
       CarAddComponent,
       LocationAddComponent,
       BrandAddComponent,
-      FueltypesAddComponent
+      FueltypesAddComponent,
+      ModelListComponent,
+      ModelAddComponent
    ],
    imports: [
       BrowserModule,
@@ -84,7 +89,8 @@ export function tokenGetter() {
       LocationService,
       FueltypeService,
       AuthService,
-      AlertifyService
+      AlertifyService,
+      CarmodelService
    ],
    bootstrap: [
       AppComponent
