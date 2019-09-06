@@ -22,6 +22,10 @@ getLocations(): Observable<Location[]> {
   return this.http.get<Location[]>(this.baseUrl + 'admin/location', this.httpOptions);
 }
 
+getLocationsForList(): Observable<Location[]> {
+  return this.http.get<Location[]>(this.baseUrl + 'home/locations');
+}
+
 getLocationById(id: number): Observable<Location> {
   return this.http.get<Location>(this.baseUrl + 'admin/location/' + id, this.httpOptions);
 }

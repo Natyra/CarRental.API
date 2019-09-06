@@ -1,4 +1,6 @@
-﻿using CarRental.API.Interfaces;
+﻿using CarRental.API.Dtos;
+using CarRental.API.Helpers;
+using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using System;
 using System.Collections.Generic;
@@ -35,6 +37,22 @@ namespace CarRental.API.Services
 
                 Logger(ex, "Get location faild");
                 return "";
+            }
+        }
+
+        public async Task<PagedList<Location>> GetFilteredLocationsAsync(PaginationParams paginationParams)
+        {
+            try
+            {
+                var locations = _context.Location;
+
+                return await PagedList<Location>.CreateAsync(locations, paginationParams.PageNumber, paginationParams.PageSize);
+            }
+            catch (Exception ex)
+            {
+
+                Logger(ex, "Geting locations from db faild");
+                return null;
             }
         }
 

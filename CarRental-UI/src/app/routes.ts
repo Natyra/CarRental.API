@@ -21,6 +21,7 @@ import { ModelAddComponent } from './admin/carmodels/model-add/model-add.compone
 export const appRoutes: Routes = [
  { path: '', component: HomeComponent},
  { path: 'login', component: LoginComponent},
+ { path: 'car-fleet', component: CarFleetComponent},
  {
     path: 'admin',
     runGuardsAndResolvers: 'always',
@@ -45,7 +46,6 @@ export const appRoutes: Routes = [
         { path: 'models', component: ModelListComponent},
         { path: 'models/add', component: ModelAddComponent},
         { path: 'models/add', component: ModelAddComponent},
-        { path: 'car-fleet', component: CarFleetComponent}
     ]
  },
  { path: '**', redirectTo: '', pathMatch: 'full'},

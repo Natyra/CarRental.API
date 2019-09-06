@@ -8,13 +8,13 @@ using CarRental.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using CarRental.API.Helpers;
 
 namespace CarRental.API.Areas.Admin
 {
     
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize("Bearer")]
     //[Authorize(Roles = "Admin")]
     public class CarController : Controller
     {
@@ -41,8 +41,8 @@ namespace CarRental.API.Areas.Admin
             _carUploadService = carUploadService;
         }
  
-        [HttpGet()]
-        public async Task<IActionResult> GetCars()
+        [HttpGet]
+        public async Task<IActionResult> GetCars([FromQuery]PaginationParams carsParam)
         {
             //if (!User.Identity.IsAuthenticated)
             //    return Unauthorized();
@@ -50,7 +50,7 @@ namespace CarRental.API.Areas.Admin
             //    return Unauthorized();
 
             var model = new List<CarForListDto>();
-            var carsAsync = await _carService.GetCarsAsync();
+            var carsAsync = await _carService.GetFilteredCarsAsync(carsParam);
             var cars = carsAsync.ToList();
 
             if (cars == null || cars.Count() <= 0)
@@ -77,6 +77,8 @@ namespace CarRental.API.Areas.Admin
                     Path = carUpload != null? Url.Content(carUpload.Path):""
                 });
             }
+
+            Response.AddPagination(carsAsync.CurrentPage, carsAsync.PageSize, carsAsync.TotalCount, carsAsync.TotalPages);
 
             return Ok(model);
         }
@@ -109,6 +111,8 @@ namespace CarRental.API.Areas.Admin
         }
 
         [HttpPost("add")]
+        [Authorize("Bearer")]
+
         public async Task<IActionResult> AddCar(CarForAddDto model)
         {
             //if (!User.Identity.IsAuthenticated)
@@ -154,6 +158,8 @@ namespace CarRental.API.Areas.Admin
         }
 
         [HttpPut("edit/{id}")]
+        [Authorize("Bearer")]
+
         public async Task<IActionResult> EditCar(int id, CarForEditDto model)
         {
             if (!ModelState.IsValid)
@@ -190,6 +196,8 @@ namespace CarRental.API.Areas.Admin
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize("Bearer")]
+
         public async Task<IActionResult> DeleteCar(int id)
         {
             var carToDelete = await _carService.GetCarByIdAsync(id);

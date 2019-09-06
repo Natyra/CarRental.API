@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { appRoutes } from './routes';
-import {NgbModule, NgbDropdown} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule, NgbDropdown, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
@@ -71,6 +71,7 @@ export function tokenGetter() {
       HttpClientModule,
       FormsModule,
       ReactiveFormsModule,
+      NgbPaginationModule,
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
          config: {

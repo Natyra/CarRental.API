@@ -30,6 +30,7 @@ login(model: any) {
 
 loggedIn() {
   const token = localStorage.getItem('token');
+  this.decodedToken = this.jwtHelper.decodeToken(token);
   return !this.jwtHelper.isTokenExpired(token);
 }
 }

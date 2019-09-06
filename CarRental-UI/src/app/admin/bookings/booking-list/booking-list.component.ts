@@ -3,6 +3,7 @@ import { BookingService } from 'src/app/_services/booking.service';
 import { Booking } from 'src/app/_models/Booking';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { PaginatedResult } from 'src/app/_models/Pagination';
 
 @Component({
   selector: 'app-booking-list',
@@ -12,6 +13,11 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 export class BookingListComponent implements OnInit {
 bookings: Booking[];
 modalRef: BsModalRef;
+currentPage = 1;
+itemsPerPage = 10;
+totalItems;
+totalPages;
+
   constructor(private bookingService: BookingService, private alertify: AlertifyService, private modalService: BsModalService) { }
 
   ngOnInit() {
@@ -19,8 +25,12 @@ modalRef: BsModalRef;
   }
 
   loadBookings() {
-return this.bookingService.getBookings().subscribe((bookings: Booking[]) => {
-this.bookings = bookings;
+return this.bookingService.getBookings(this.currentPage, this.itemsPerPage).subscribe((bookings: PaginatedResult<Booking[]>) => {
+this.bookings = bookings.result;
+this.currentPage = bookings.pagination.currentPage;
+this.itemsPerPage = bookings.pagination.itemsPerPage;
+this.totalItems = bookings.pagination.totalItems;
+this.totalPages = bookings.pagination.totalPages;
 }, error => {
   console.log(error);
 });
@@ -44,6 +54,11 @@ this.bookings = bookings;
   }
   decline(): void {
     this.modalRef.hide();
+  }
+
+  pageChanged(event: any): void {
+    this.currentPage = event;
+    this.loadBookings();
   }
 
 }

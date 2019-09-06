@@ -9,10 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  username: string;
 
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
+    if (this.loggedIn() === true) {
+      this.username = this.authService.decodedToken.unique_name;
+    }
   }
 
   loggedIn() {

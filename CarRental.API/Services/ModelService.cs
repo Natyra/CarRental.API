@@ -1,4 +1,6 @@
-﻿using CarRental.API.Interfaces;
+﻿using CarRental.API.Dtos;
+using CarRental.API.Helpers;
+using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using System;
 using System.Collections.Generic;
@@ -34,6 +36,22 @@ namespace CarRental.API.Services
 
                 Logger(ex, "Get brand name faild");
                 return "";
+            }
+        }
+
+        public async Task<PagedList<Model>> GetFilteredModelsAsync(PaginationParams paginationParams, int brandId)
+        {
+            try
+            {
+                var models = _context.Model.Where(x => x.BrandId == brandId);
+
+                return await PagedList<Model>.CreateAsync(models, paginationParams.PageNumber, paginationParams.PageSize);
+            }
+            catch (Exception ex)
+            {
+
+                Logger(ex, "Geting models from db faild");
+                return null;
             }
         }
 

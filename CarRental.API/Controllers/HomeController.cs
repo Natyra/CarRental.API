@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CarRental.API.Dtos;
 using CarRental.API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using CarRental.API.Helpers;
 
 namespace CarRental.API.Controllers
 {
@@ -27,11 +28,36 @@ namespace CarRental.API.Controllers
             return View();
         }
 
+        [HttpGet("locations")]
+        public async Task<IActionResult> GetLocations()
+        {
+            var model = new List<LocationDto>();
+            var locationsAsync = await _locationService.GetLocationsAsync();
+            var locations = locationsAsync.ToList();
+
+            if (locations == null || locations.Count <= 0)
+                return BadRequest("Any location not found");
+
+            for (int i = 0; i < locations.Count(); i++)
+            {
+                model.Add(new LocationDto
+                {
+                    Id = locations[i].Id,
+                    StreetAddress = locations[i].StreetAddress,
+                    Country = locations[i].Country,
+                    City = locations[i].City,
+                    ZipCode = locations[i].ZipCode
+                });
+            }
+
+            return Ok(model);
+        }
+
         [HttpGet("carfleet")]
-        public async Task<IActionResult> CarFleet()
+        public async Task<IActionResult> CarFleet([FromQuery]PaginationParams carsParam)
         {
             var model = new List<CarForListDto>();
-            var carsAsync = await _carService.GetCarsAsync();
+            var carsAsync = await _carService.GetFilteredCarsAsync(carsParam);
 
             var cars = carsAsync.ToList();
 
@@ -57,6 +83,8 @@ namespace CarRental.API.Controllers
                     Path = carUpload != null ? Url.Content(carUpload.Path) : ""
                 });
             }
+            Response.AddPagination(carsAsync.CurrentPage, carsAsync.PageSize, carsAsync.TotalCount, carsAsync.TotalPages);
+
 
             return Ok(model);
 

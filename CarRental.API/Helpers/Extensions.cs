@@ -1,4 +1,7 @@
 ﻿using CarRental.API.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,20 +9,16 @@ using System.Threading.Tasks;
 
 namespace CarRental.API.Helpers
 {
-    public class Extensions<T> where T:class
+    public static class Extensions
     {
-        private readonly IAppLogger<T> _logger;
-
-        public Extensions(IAppLogger<T> logger)
+      public static void AddPagination(this HttpResponse response, int currentPage, int itemsPerPage, int totalItems, int totalPages)
         {
-            _logger = logger;
-        }
+            var paginationHeader = new PaginationHeader(currentPage, itemsPerPage, totalItems, totalPages);
 
-        public void Logger(Exception ex, string message)
-        {
-            var errorMessage = (ex.InnerException?.Message != null ? ex.InnerException.Message : ex.Message);
-
-            _logger.LogError(message + errorMessage);
+            var camelCaseFormater = new JsonSerializerSettings();
+            camelCaseFormater.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            response.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationHeader, camelCaseFormater));
+            response.Headers.Add("Access-Control-Expose-Headers", "Pagination");
         }
     }
 }

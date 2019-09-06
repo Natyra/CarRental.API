@@ -1,4 +1,6 @@
-﻿using CarRental.API.Interfaces;
+﻿using CarRental.API.Dtos;
+using CarRental.API.Helpers;
+using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using System;
 using System.Collections.Generic;
@@ -42,6 +44,22 @@ namespace CarRental.API.Services
             try
             {
                 return await _genericRepository.GetAll();
+
+            }
+            catch (Exception ex)
+            {
+                Logger(ex, "Geting users from db faild");
+                return null;
+            }
+        }
+
+        public async Task<PagedList<AspNetUsers>> GetFilteredUsersAsync(PaginationParams userParams)
+        {
+            try
+            {
+                var users = _context.AspNetUsers;
+               
+                return await PagedList<AspNetUsers>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
 
             }
             catch (Exception ex)

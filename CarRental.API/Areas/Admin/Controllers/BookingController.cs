@@ -7,12 +7,13 @@ using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CarRental.API.Helpers;
 
 namespace CarRental.API.Areas.Admin.Controllers
 {
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize("Bearer")]
+    //[Authorize("Bearer")]
 
     public class BookingController : Controller
     {
@@ -28,10 +29,10 @@ namespace CarRental.API.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetBookings()
+        public async Task<IActionResult> GetBookings([FromQuery]PaginationParams paginationParams)
         {
             var model = new List<BookingForListDto>();
-            var bookingsAsync = await _bookingService.GetBookingsAsync();
+            var bookingsAsync = await _bookingService.GetFilteredBookingsAsync(paginationParams);
             var bookings = bookingsAsync.ToList();
 
             if (bookings == null || bookings.Count <= 0)
@@ -63,6 +64,9 @@ namespace CarRental.API.Areas.Admin.Controllers
                     }
                 });
             }
+
+            Response.AddPagination(bookingsAsync.CurrentPage, bookingsAsync.PageSize, bookingsAsync.TotalCount, bookingsAsync.TotalPages);
+
 
             return Ok(model);
         }

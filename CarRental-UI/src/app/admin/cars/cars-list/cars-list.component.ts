@@ -3,6 +3,7 @@ import { CarService } from 'src/app/_services/car.service';
 import { Car } from 'src/app/_models/Car';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+import { Pagination, PaginatedResult } from 'src/app/_models/Pagination';
 
 @Component({
   selector: 'app-cars-list',
@@ -12,25 +13,34 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 export class CarsListComponent implements OnInit {
 cars: Car[];
 modalRef: BsModalRef;
+currentPage = 1;
+itemsPerPage = 10;
+totalItems;
+totalPages;
+
 
   constructor(private carService: CarService,  private modalService: BsModalService, private alertify: AlertifyService) { }
 
   ngOnInit() {
-    this.loadCars();
+    this.laodCars();
   }
 
-  loadCars() {
-  this.carService.getCars().subscribe((cars: Car[]) => {
-    this.cars = cars;
+  laodCars() {
+  this.carService.getCars(this.currentPage, this.itemsPerPage).subscribe((res: PaginatedResult<Car[]>) => { 
+    this.cars = res.result;
+    this.currentPage = res.pagination.currentPage;
+    this.totalItems = res.pagination.totalItems;
+    this.totalPages = res.pagination.totalPages;
+    this.itemsPerPage = res.pagination.itemsPerPage;
   }, error => {
    console.log(error);
   });
 }
 
 deleteCar(id: number) {
-  return this.carService.deleteCar(id).subscribe((result:any) => {
+  return this.carService.deleteCar(id).subscribe((result: any) => {
     this.alertify.success(result.message);
-    this.loadCars();
+    this.laodCars();
   }, error => {
     this.alertify.error(error);
   });
@@ -45,6 +55,11 @@ confirm(id: number): void {
 }
 decline(): void {
   this.modalRef.hide();
+}
+
+pageChanged(event: any): void {
+  this.currentPage = event;
+  this.laodCars();
 }
 
 }

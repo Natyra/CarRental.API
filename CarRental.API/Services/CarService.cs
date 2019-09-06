@@ -1,4 +1,5 @@
 ﻿using CarRental.API.Dtos;
+using CarRental.API.Helpers;
 using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -36,8 +37,24 @@ namespace CarRental.API.Services
         {
             try
             {
-                return await _context.Car.Where(x => x.IsDeleted != true).Include(x=>x.TransmisionType).Include(x=>x.FuelType).Include(x => x.Model).Include(x => x.Brand).Include(x => x.CarLocation).ToListAsync();
+                return await _context.Car.Where(x => x.IsDeleted != true).Include(x => x.TransmisionType).Include(x => x.FuelType).Include(x => x.Model).Include(x => x.Brand).Include(x => x.CarLocation).ToListAsync();
 
+                
+            }
+            catch (Exception ex)
+            {
+                Logger(ex, "Geting cars from db faild");
+                return null;
+            }
+        }
+
+        public async Task<PagedList<Car>> GetFilteredCarsAsync(PaginationParams carsParam)
+        {
+            try
+            {
+                var cars = _context.Car.Where(x => x.IsDeleted != true).Include(x => x.TransmisionType).Include(x => x.FuelType).Include(x => x.Model).Include(x => x.Brand).Include(x => x.CarLocation);
+
+                return await PagedList<Car>.CreateAsync(cars, carsParam.PageNumber, carsParam.PageSize);
             }
             catch (Exception ex)
             {

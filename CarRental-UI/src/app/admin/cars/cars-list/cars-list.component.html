@@ -77,6 +77,8 @@
                                     
                                 </tbody>
                             </table>
+                            <ngb-pagination class="d-flex justify-content-start" [pageSize]="itemsPerPage" [collectionSize]="totalItems" [(page)]="currentPage" (pageChange)="pageChanged($event)"></ngb-pagination>
+                            
                         </div>
                     </div>
                 </div>

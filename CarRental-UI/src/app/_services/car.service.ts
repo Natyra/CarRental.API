@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Car } from '../_models/car';
 import { CarAdd } from '../_models/CarAdd';
+import { PaginatedResult } from '../_models/Pagination';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +21,27 @@ httpOptions = {
 
 constructor(private http: HttpClient) { }
 
-getCars(): Observable<Car[]> {
-  return this.http.get<Car[]>(this.baseUrl + 'admin/car', this.httpOptions);
+getCars(page?, itemsPerPage?): Observable<PaginatedResult<Car[]>> {
+
+  const paginatedResult: PaginatedResult<Car[]> = new PaginatedResult<Car[]>();
+
+  let params = new HttpParams();
+
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+  return this.http.get<Car[]>(this.baseUrl + 'admin/car', { observe: 'response', params})
+  .pipe(
+    map(response => {
+      paginatedResult.result = response.body;
+      if (response.headers.get('Pagination') != null) {
+        paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+      }
+      return paginatedResult;
+  })
+  );
 }
 
 addCar(model: CarAdd) {

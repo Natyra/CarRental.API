@@ -1,4 +1,6 @@
-﻿using CarRental.API.Interfaces;
+﻿using CarRental.API.Dtos;
+using CarRental.API.Helpers;
+using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,12 +24,27 @@ namespace CarRental.API.Services
             _context = context;
         }
 
+        public async Task<PagedList<Booking>> GetFilteredBookingsAsync(PaginationParams paginationParams)
+        {
+            try
+            {
+                var bookings = _context.Booking.Where(x => x.IsDeleted != true).Include(x => x.PreBooking).Include(x => x.User).Include(x => x.Car);
+                return await PagedList<Booking>.CreateAsync(bookings, paginationParams.PageNumber, paginationParams.PageSize);
+
+            }
+            catch (Exception ex)
+            {
+                Logger(ex, "Geting bookings from db failed");
+                return null;
+            }
+        }
+
         public async Task<IEnumerable<Booking>> GetBookingsAsync()
         {
             try
             {
-                var bookings = await _context.Booking.Where(x => x.IsDeleted != true).Include(x => x.PreBooking).Include(x => x.User).Include(x => x.Car).ToListAsync();
-                return bookings;
+                return await  _context.Booking.Where(x => x.IsDeleted != true).Include(x => x.PreBooking).Include(x => x.User).Include(x => x.Car).ToListAsync();
+                
 
             }
             catch (Exception ex)
