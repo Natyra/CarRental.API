@@ -25,8 +25,34 @@ namespace CarRental.API.Areas.Admin.Controllers
             _genericRepository = genericRepository;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetUsers([FromQuery]PaginationParams paginationParams)
+        [HttpGet()]
+        public async Task<IActionResult> GetUsers()
+        {
+            var model = new List<UserDto>();
+            var usersAsync = await _userService.GetUsersAsync();
+            var users = usersAsync.ToList();
+
+            if (users == null || users.Count <= 0)
+                return BadRequest("Users not found");
+
+            for (int i = 0; i < users.Count(); i++)
+            {
+                model.Add(new UserDto
+                {
+                    Id = users[i].Id,
+                    UserName = users[i].UserName,
+                    Email = users[i].Email,
+                    FirstName = users[i].FirstName,
+                    LastName = users[i].LastName,
+                    PhoneNumber = users[i].PhoneNumber
+                });
+            }
+           
+            return Ok(model);
+        }
+
+        [HttpGet("users")]
+        public async Task<IActionResult> GetFilteredUsers([FromQuery]PaginationParams paginationParams)
         {
             var model = new List<UserDto>();
             var usersAsync = await _userService.GetFilteredUsersAsync(paginationParams);

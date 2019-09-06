@@ -19,8 +19,11 @@ httpOptions = {
 
 constructor(private http: HttpClient) { }
 
+getBookings(): Observable<Booking[]> {
+  return this.http.get<Booking[]>(this.baseUrl + 'admin/booking');
+}
 
-getBookings(page?, itemsPerPage?): Observable<PaginatedResult<Booking[]>> {
+getFilteredBookings(page?, itemsPerPage?): Observable<PaginatedResult<Booking[]>> {
   const paginatedResult: PaginatedResult<Booking[]> = new PaginatedResult<Booking[]>();
 
   let params = new HttpParams();
@@ -28,8 +31,8 @@ getBookings(page?, itemsPerPage?): Observable<PaginatedResult<Booking[]>> {
   if (page != null && itemsPerPage != null) {
     params = params.append('pageNumber', page);
     params = params.append('pageSize', itemsPerPage);
-    
-    return this.http.get<Booking[]>(this.baseUrl + 'admin/booking', { observe: 'response', params})
+
+    return this.http.get<Booking[]>(this.baseUrl + 'admin/booking/bookings', { observe: 'response', params})
     .pipe(
       map(response => {
         paginatedResult.result = response.body;

@@ -21,26 +21,27 @@ totalPages;
   constructor(private userService: UserService, private modalService: BsModalService, private alertify: AlertifyService) { }
 
   ngOnInit() {
-    this.loadUsers();
+    this.loadFilteredUsers();
   }
 
 
-  loadUsers() {
-    this.userService.getUsers(this.currentPage, this.itemsPerPage).subscribe((users: PaginatedResult<User[]>) => {
+  loadFilteredUsers() {
+    this.userService.getFilteredUsers(this.currentPage, this.itemsPerPage).subscribe((users: PaginatedResult<User[]>) => {
       this.users = users.result;
+      console.log(users);
       this.currentPage = users.pagination.currentPage;
       this.itemsPerPage = users.pagination.itemsPerPage;
       this.totalItems = users.pagination.totalItems;
-      this.totalPages = users.pagination.totalPages; 
+      this.totalPages = users.pagination.totalPages;
     }, error => {
      console.log(error);
     });
   }
 
   deleteUser(id: string) {
-    return this.userService.deleteUser(id).subscribe((result:any) => {
+    return this.userService.deleteUser(id).subscribe((result: any) => {
       this.alertify.success(result.message);
-      this.loadUsers();
+      this.loadFilteredUsers();
     }, error => {
       this.alertify.error(error);
     });
@@ -59,6 +60,6 @@ totalPages;
 
   pageChanged(event: any): void {
     this.currentPage = event;
-    this.loadUsers();
+    this.loadFilteredUsers();
   }
 }

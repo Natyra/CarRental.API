@@ -7,12 +7,13 @@ using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CarRental.API.Helpers;
 
 namespace CarRental.API.Controllers
 {
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize("Bearer")]
+    //[Authorize("Bearer")]
     //[Authorize(Roles = "Admin")]
 
     public class BrandController : Controller
@@ -51,6 +52,37 @@ namespace CarRental.API.Controllers
                     Name = brands[i].Name
                 });
             }
+
+            
+            return Ok(model);
+        }
+
+        [HttpGet("brands")]
+        public async Task<IActionResult> GetFilteredBrands([FromQuery]PaginationParams paginationParams)
+        {
+            //if (!User.Identity.IsAuthenticated)
+            //    return Unauthorized();
+
+            //if (!User.IsInRole("Admin"))
+            //    return Unauthorized();
+
+            var model = new List<BrandDto>();
+            var brandsAsync = await _brandService.GetFilteredBrandsAsync(paginationParams);
+            var brands = brandsAsync.ToList();
+
+            if (brands == null || brands.Count <= 0)
+                return BadRequest("Any brand not found");
+
+            for (int i = 0; i < brands.Count(); i++)
+            {
+                model.Add(new BrandDto
+                {
+                    Id = brands[i].Id,
+                    Name = brands[i].Name
+                });
+            }
+
+            Response.AddPagination(brandsAsync.CurrentPage, brandsAsync.PageSize, brandsAsync.TotalCount, brandsAsync.TotalPages);
 
             return Ok(model);
         }

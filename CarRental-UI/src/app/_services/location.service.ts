@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Location } from '../_models/Location';
 import { environment } from 'src/environments/environment';
+import { PaginatedResult } from '../_models/Pagination';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -20,6 +22,29 @@ constructor(private http: HttpClient) { }
 
 getLocations(): Observable<Location[]> {
   return this.http.get<Location[]>(this.baseUrl + 'admin/location', this.httpOptions);
+}
+
+getFilteredLocations(page?, itemsPerPage?): Observable<PaginatedResult<Location[]>> {
+
+  const paginatedResult: PaginatedResult<Location[]> = new PaginatedResult<Location[]>();
+
+  let params = new HttpParams();
+
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+  return this.http.get<Location[]>(this.baseUrl + 'admin/location/locations', { observe: 'response', params})
+  .pipe(
+    map(response => {
+      paginatedResult.result = response.body;
+      if (response.headers.get('Pagination') != null) {
+        paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+      }
+      return paginatedResult;
+  })
+  );
 }
 
 getLocationsForList(): Observable<Location[]> {

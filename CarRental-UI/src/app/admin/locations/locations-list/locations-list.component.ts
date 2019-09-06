@@ -3,6 +3,7 @@ import { LocationService } from 'src/app/_services/location.service';
 import { Location } from 'src/app/_models/Location';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+import { PaginatedResult } from 'src/app/_models/Pagination';
 
 @Component({
   selector: 'app-locations-list',
@@ -12,15 +13,24 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 export class LocationsListComponent implements OnInit {
 locations: Location[];
 modalRef: BsModalRef;
+currentPage = 1;
+itemsPerPage = 10;
+totalItems;
+totalPages;
+
   constructor(private locationService: LocationService, private modalService: BsModalService, private alertify: AlertifyService) { }
 
   ngOnInit() {
-    this.loadLocations();
+    this.loadFilteredLocations();
   }
 
-  loadLocations() {
- this.locationService.getLocations().subscribe((locations: Location[]) => {
-  this.locations = locations;
+  loadFilteredLocations() {
+ this.locationService.getFilteredLocations().subscribe((res: PaginatedResult<Location[]>) => {
+  this.locations = res.result;
+  this.currentPage = res.pagination.currentPage;
+  this.totalItems = res.pagination.totalItems;
+  this.totalPages = res.pagination.totalPages;
+  this.itemsPerPage = res.pagination.itemsPerPage;
 }, error => {
   console.log(error);
 });
@@ -29,7 +39,7 @@ modalRef: BsModalRef;
   deleteCar(id: number) {
     return this.locationService.deleteLocation(id).subscribe((result:any) => {
       this.alertify.success(result.message);
-      this.loadLocations();
+      this.loadFilteredLocations();
     }, error => {
       this.alertify.error(error);
     });
@@ -44,5 +54,10 @@ modalRef: BsModalRef;
   }
   decline(): void {
     this.modalRef.hide();
+  }
+
+  pageChanged(event: any): void {
+    this.currentPage = event;
+    this.loadFilteredLocations();
   }
 }

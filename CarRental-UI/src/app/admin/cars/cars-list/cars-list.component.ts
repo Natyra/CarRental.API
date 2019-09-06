@@ -22,11 +22,11 @@ totalPages;
   constructor(private carService: CarService,  private modalService: BsModalService, private alertify: AlertifyService) { }
 
   ngOnInit() {
-    this.laodCars();
+    this.laodFilteredCars();
   }
 
-  laodCars() {
-  this.carService.getCars(this.currentPage, this.itemsPerPage).subscribe((res: PaginatedResult<Car[]>) => { 
+  laodFilteredCars() {
+  this.carService.getFilteredCars(this.currentPage, this.itemsPerPage).subscribe((res: PaginatedResult<Car[]>) => { 
     this.cars = res.result;
     this.currentPage = res.pagination.currentPage;
     this.totalItems = res.pagination.totalItems;
@@ -40,7 +40,7 @@ totalPages;
 deleteCar(id: number) {
   return this.carService.deleteCar(id).subscribe((result: any) => {
     this.alertify.success(result.message);
-    this.laodCars();
+    this.laodFilteredCars();
   }, error => {
     this.alertify.error(error);
   });
@@ -59,7 +59,7 @@ decline(): void {
 
 pageChanged(event: any): void {
   this.currentPage = event;
-  this.laodCars();
+  this.laodFilteredCars();
 }
 
 }

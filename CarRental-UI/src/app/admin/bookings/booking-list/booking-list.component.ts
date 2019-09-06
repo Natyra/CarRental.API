@@ -21,11 +21,11 @@ totalPages;
   constructor(private bookingService: BookingService, private alertify: AlertifyService, private modalService: BsModalService) { }
 
   ngOnInit() {
-    this.loadBookings();
+    this.loadFilteredBookings();
   }
 
-  loadBookings() {
-return this.bookingService.getBookings(this.currentPage, this.itemsPerPage).subscribe((bookings: PaginatedResult<Booking[]>) => {
+  loadFilteredBookings() {
+return this.bookingService.getFilteredBookings(this.currentPage, this.itemsPerPage).subscribe((bookings: PaginatedResult<Booking[]>) => {
 this.bookings = bookings.result;
 this.currentPage = bookings.pagination.currentPage;
 this.itemsPerPage = bookings.pagination.itemsPerPage;
@@ -39,7 +39,7 @@ this.totalPages = bookings.pagination.totalPages;
   deleteBooking(id: number) {
     return this.bookingService.deleteBooking(id).subscribe((result: any) => {
       this.alertify.success(result.message);
-      this.loadBookings();
+      this.loadFilteredBookings();
     }, error => {
       this.alertify.error(error);
     });
@@ -58,7 +58,7 @@ this.totalPages = bookings.pagination.totalPages;
 
   pageChanged(event: any): void {
     this.currentPage = event;
-    this.loadBookings();
+    this.loadFilteredBookings();
   }
 
 }

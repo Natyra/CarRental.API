@@ -40,9 +40,50 @@ namespace CarRental.API.Areas.Admin
             _locationService = locationService;
             _carUploadService = carUploadService;
         }
- 
+
         [HttpGet]
-        public async Task<IActionResult> GetCars([FromQuery]PaginationParams carsParam)
+        public async Task<IActionResult> GetCars()
+        {
+            //if (!User.Identity.IsAuthenticated)
+            //    return Unauthorized();
+            //if (!User.IsInRole("Admin"))
+            //    return Unauthorized();
+
+            var model = new List<CarForListDto>();
+            var carsAsync = await _carService.GetCarsAsync();
+            var cars = carsAsync.ToList();
+
+            if (cars == null || cars.Count() <= 0)
+                return BadRequest();
+
+            for (int i = 0; i < cars.Count(); i++)
+            {
+                var carUpload = await _carUploadService.GetCarUploadByCarIdAsync(cars[i].Id);
+                model.Add(new CarForListDto
+                {
+                    Id = cars[i].Id,
+                    CarNumber = cars[i].CarNumber,
+                    BrandName = await _brandService.GetBrandNameAsync((int)cars[i].BrandId),
+                    ModelYear = cars[i].ModelYear,
+                    NumberOfDoors = cars[i].NumberOfDoors,
+                    CarCapacity = cars[i].CarCapacity,
+                    CarColor = cars[i].CarColor,
+                    PriceForDay = cars[i].PriceForDay,
+                    Description = cars[i].Description,
+                    ModelName = await _modelService.GetModelNameAsync((int)cars[i].ModelId),
+                    FuelType = await _fuelTypeService.GetFuelTypeNameAsync((int)cars[i].FuelTypeId),
+                    TransmisionType = cars[i].TransmisionType.Name,
+                    CarLocation = await _locationService.GetLocationAsync((int)cars[i].CarLocationId),
+                    Path = carUpload != null ? Url.Content(carUpload.Path) : ""
+                });
+            }
+
+           
+            return Ok(model);
+        }
+
+        [HttpGet("cars")]
+        public async Task<IActionResult> GetFilteredCars([FromQuery]PaginationParams carsParam)
         {
             //if (!User.Identity.IsAuthenticated)
             //    return Unauthorized();
