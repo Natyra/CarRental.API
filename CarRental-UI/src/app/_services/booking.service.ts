@@ -5,6 +5,7 @@ import { Booking } from '../_models/Booking';
 import { environment } from 'src/environments/environment';
 import { PaginatedResult } from '../_models/Pagination';
 import { map } from 'rxjs/operators';
+import { UserBooking } from '../_models/UserBooking';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +48,13 @@ getFilteredBookings(page?, itemsPerPage?): Observable<PaginatedResult<Booking[]>
 
 deleteBooking(id: number) {
   return this.http.delete(this.baseUrl + 'admin/booking/delete/' + id, this.httpOptions);
+}
+
+isUserValid(model: UserBooking) {
+  return this.http.post(this.baseUrl + 'booking/userbooking', model);
+}
+
+getBookingById(id: number): Observable<Booking> {
+ return this.http.get<Booking>(this.baseUrl + 'booking/bookingdetails/' + id);
 }
 }

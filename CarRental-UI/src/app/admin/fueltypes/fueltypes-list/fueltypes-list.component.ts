@@ -41,7 +41,7 @@ deleteFuelType(id: number) {
     this.alertify.success(result.message);
     this.loadFilteredFuelTypes();
   }, error => {
-    this.alertify.error(error);
+    this.alertify.error(error.error);
   }, () => {
     this.router.navigate(['/admin/fuel']);
   })

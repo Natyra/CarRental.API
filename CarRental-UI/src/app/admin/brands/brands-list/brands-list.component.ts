@@ -42,7 +42,7 @@ console.log(error);
       this.alertify.success(result.message);
       this.loadFilteredBrands();
     }, error => {
-      this.alertify.error(error);
+      this.alertify.error(error.error);
     });
   }
 

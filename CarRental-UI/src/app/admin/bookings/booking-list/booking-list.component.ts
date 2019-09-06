@@ -41,7 +41,7 @@ this.totalPages = bookings.pagination.totalPages;
       this.alertify.success(result.message);
       this.loadFilteredBookings();
     }, error => {
-      this.alertify.error(error);
+      this.alertify.error(error.error);
     });
   }
 

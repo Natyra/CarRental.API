@@ -41,7 +41,7 @@ totalPages;
       this.alertify.success(result.message);
       this.loadFilteredLocations();
     }, error => {
-      this.alertify.error(error);
+      this.alertify.error(error.error);
     });
   }
   

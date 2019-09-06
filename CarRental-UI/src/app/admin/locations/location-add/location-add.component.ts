@@ -39,7 +39,7 @@ id = +this.route.snapshot.paramMap.get('id');
       this.locationService.addLocation(this.model).subscribe((result: any) => {
         this.alertify.success(result.message);
       }, error => {
-        this.alertify.error(error);
+        this.alertify.error(error.error);
       }, () => {
         this.router.navigate(['/admin/locations']);
       });
@@ -47,7 +47,7 @@ id = +this.route.snapshot.paramMap.get('id');
       this.locationService.editLocation(this.id, this.model).subscribe((result: any) => {
         this.alertify.success(result.message);
       }, error => {
-        this.alertify.error(error);
+        this.alertify.error(error.error);
       }, () => {
         this.router.navigate(['/admin/locations']);
       });
@@ -78,7 +78,7 @@ id = +this.route.snapshot.paramMap.get('id');
       country: [location.country, Validators.required]
       });
     }, error => {
-      this.alertify.error(error);
+      this.alertify.error(error.error);
     });
   }
 

@@ -12,32 +12,57 @@ namespace CarRental.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize("Bearer")]
+    //[Authorize("Bearer")]
     public class BookingController : ControllerBase
     {
         private readonly IBookingService _bookingService;
         private readonly IUserService _userService;
         private readonly ILocationService _locationService;
+        private readonly ICarUploadService _carUploadService;
 
-        public BookingController(IBookingService bookingService, IUserService userService, ILocationService locationService)
+        public BookingController(IBookingService bookingService, IUserService userService, ILocationService locationService, ICarUploadService carUploadService)
         {
             _bookingService = bookingService;
             _userService = userService;
             _locationService = locationService;
+            _carUploadService = carUploadService;
         }
-        [HttpPost]
-        public async Task<bool> IsBookingOfUser ([FromBody]string email , int bookingId)
+        [HttpPost("userbooking")]
+        public async Task<IActionResult> IsBookingOfUser([FromBody]BookingLoginDto model)
         {
-            var userId = await _userService.GetUserIdByEmail(email);
-            var booking = await _bookingService.GetBookingByIdAsync(bookingId);
-            if (booking.UserId==userId)
+            var isValidUser = false;
+            if (!ModelState.IsValid)
+                return BadRequest(new
+                {
+                    message = "Email or bookingId is not fount"
+                });
+
+            var user = await _userService.GetUserIdByEmail(model.Email);
+            if (user == null)
+                return BadRequest("User not found");
+           
+            var booking = await _bookingService.GetBookingByIdAsync(model.BookingId);
+
+            if (booking == null)
+                return BadRequest("Booking not found");
+
+
+            if (booking.UserId==user.Id)
             {
-                return true;
+                isValidUser = true;
             }
-            return false;
+            else
+            {
+                isValidUser = false;
+            }
+
+            return Ok(new
+            {
+                isValidUser = isValidUser
+            });
         }
 
-        [HttpGet("GetBookingDetails/{id}")]
+        [HttpGet("bookingdetails/{id}")]
         public async Task<IActionResult> GetBookingDetails(int id)
         {
             var model = new BookingForListDto();
@@ -54,12 +79,16 @@ namespace CarRental.API.Controllers
             model.PickUpDate = (DateTime)booking.PreBooking.PickDate;
             model.ReturnDate = (DateTime)booking.PreBooking.ReturnDate;
 
+            var carUpload = await _carUploadService.GetCarUploadByCarIdAsync((int)booking.CarId);
             model.Car = new CarForListDto
             {
                 Id = booking.Car.Id,
                 CarNumber = booking.Car.CarNumber,
                 BrandName = booking.Car.Brand.Name,
-                ModelName = booking.Car.Model.Name
+                ModelName = booking.Car.Model.Name,
+                TransmisionType = booking.Car.TransmisionType.Name,
+                FuelType = booking.Car.FuelType.Name,
+                Path = Url.Content(carUpload.Path)
             };
 
             model.User = new UserDto

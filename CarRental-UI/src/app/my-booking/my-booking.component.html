@@ -1,0 +1,74 @@
+<div id="wrapper" class="mb-4">
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <app-nav></app-nav>
+      <div class="container">
+        <div class="d-sm-flex align-items-center justify-content-between mb-6">
+          <h1 class="h3 mb-0 text-gray-800">My Booking</h1>
+        </div>
+        <div class="row mb-4 mt-4">
+       
+         
+         
+          <div class="col-xl-6 col-md-6 mb-4">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary">Booking #{{bookingId}}</h4>
+              </div>
+              <div class="card-body">
+                  <p><span class="font-weight-bold">PickUp Date:</span><span> {{pickUpDate}}</span></p>
+                  <p><span class="font-weight-bold">PickUp Location:</span><span> {{pickUpLocation}}</span></p>
+                  <p><span class="font-weight-bold">Return Date:</span><span> {{returnDate}}</span></p>
+                  <p><span class="font-weight-bold">Return Location:</span><span> {{returnLocation}}</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-6 col-md-6 mb-4">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary">Bill To</h4>
+              </div>
+              <div class="card-body">
+                  <p><span class="font-weight-bold">First Name:</span><span> {{firstName}}</span></p>
+                  <p><span class="font-weight-bold">Last Name:</span><span> {{lastName}}</span></p>
+                  <p><span class="font-weight-bold">Email:</span><span> {{email}}</span></p>
+                  <p><span class="font-weight-bold">Phone Number:</span><span>{{phoneNumber}}</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+          
+        <div class="row mb-4 mt-4">
+       
+          <div class="col-xl-6 col-md-6 mb-4">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Car Details</h6>
+              </div>
+              <div class="card-body">
+                  <div class="text-center">
+                      <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 20rem;" src="assets{{path}}" alt="">
+                    </div>
+                    <p><span class="font-weight-bold">Car Number:</span><span> {{carNumber}}</span></p>
+                    <p><span class="font-weight-bold">Brand:</span><span> {{brandName}}</span></p>
+                    <p><span class="font-weight-bold">Model:</span><span> {{modelName}}</span></p>
+                    <p><span class="font-weight-bold">Fuel type:</span><span> {{fuelType}}</span></p>
+                    <p><span class="font-weight-bold">Transmission Type:</span><span> {{transmisionType}}</span></p>
+
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+  <app-footer></app-footer>
+    <!-- End of Footer -->
+
+  </div>
+ </div>

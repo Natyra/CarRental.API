@@ -37,6 +37,8 @@ import { FueltypesAddComponent } from './admin/fueltypes/fueltypes-add/fueltypes
 import { ModelListComponent } from './admin/carmodels/model-list/model-list.component';
 import { ModelAddComponent } from './admin/carmodels/model-add/model-add.component';
 import { CarmodelService } from './_services/carmodel.service';
+import { CustomerLoginComponent } from './customer-login/customer-login.component';
+import { MyBookingComponent } from './my-booking/my-booking.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -62,7 +64,9 @@ export function tokenGetter() {
       BrandAddComponent,
       FueltypesAddComponent,
       ModelListComponent,
-      ModelAddComponent
+      ModelAddComponent,
+      CustomerLoginComponent,
+      MyBookingComponent
    ],
    imports: [
       BrowserModule,

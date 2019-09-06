@@ -36,7 +36,7 @@ getFilteredCars(page?, itemsPerPage?): Observable<PaginatedResult<Car[]>> {
     params = params.append('pageSize', itemsPerPage);
   }
 
-  return this.http.get<Car[]>(this.baseUrl + 'admin/car/cars', { observe: 'response', params})
+  return this.http.get<Car[]>(this.baseUrl + 'admin/car/cars', { observe: 'response', params}) 
   .pipe(
     map(response => {
       paginatedResult.result = response.body;

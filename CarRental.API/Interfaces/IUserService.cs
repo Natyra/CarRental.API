@@ -15,6 +15,6 @@ namespace CarRental.API.Interfaces
         Task<PagedList<AspNetUsers>> GetFilteredUsersAsync(PaginationParams userParams);
         Task DeleteUserAsync(AspNetUsers user);
         Task<AspNetUsers> GetUserByIdAsync(string id);
-        Task<string> GetUserIdByEmail(string email);
+        Task<AspNetUsers> GetUserIdByEmail(string email);
     }
 }

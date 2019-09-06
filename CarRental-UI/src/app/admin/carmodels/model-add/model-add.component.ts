@@ -52,7 +52,7 @@ return this.brandService.getBrands().subscribe((brands: Brand[]) => {
   }
 
 }, error => {
-  this.alertify.error(error);
+  this.alertify.error(error.error);
 });
 }
 
@@ -63,7 +63,7 @@ getModelById() {
     this.modelService.getModelById(this.id).subscribe((model: ModelList) => {
       this.modelName = model.name;
     }, error => {
-      this.alertify.error(error);
+      this.alertify.error(error.error);
     });
   }
 }
@@ -80,7 +80,7 @@ addModel() {
       this.modelService.addModel(this.model).subscribe((result: any) => {
         this.alertify.success(result.message);
       }, error => {
-        this.alertify.error(error);
+        this.alertify.error(error.error);
       }, () => {
         this.router.navigate(['/admin/models/'], { queryParams: { brandId: this.brandId } });
       });
@@ -88,7 +88,7 @@ addModel() {
       this.modelService.editModel(this.id, this.model).subscribe((result: any) => {
         this.alertify.success(result.message);
       }, error => {
-        this.alertify.error(error);
+        this.alertify.error(error.error);
       }, () => {
         this.router.navigate(['/admin/models/'], { queryParams: { brandId: this.brandId } });
       });

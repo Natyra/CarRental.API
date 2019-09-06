@@ -36,7 +36,7 @@ getBrnadById() {
   this.brandService.getBrandById(this.id).subscribe((brand: Brand) => {
       this.brandName = brand.name;
     }, error => {
-      this.alertify.error(error);
+      this.alertify.error(error.error);
     });
   } else {
     this.brandName = '';
@@ -50,7 +50,7 @@ addBrand() {
       this.brandService.addBrand(this.model).subscribe((result: any) => {
         this.alertify.success(result.message);
       }, error => {
-        this.alertify.error(error);
+        this.alertify.error(error.error);
       }, () => {
         this.router.navigate(['/admin/brands']);
       });
@@ -58,7 +58,7 @@ addBrand() {
       this.brandService.editBrand(this.model, this.id).subscribe((result: any) => {
         this.alertify.success(result.message);
       }, error => {
-        this.alertify.error(error);
+        this.alertify.error(error.error);
       }, () => {
         this.router.navigate(['/admin/brands']);
       });

@@ -43,7 +43,7 @@ totalPages;
       this.alertify.success(result.message);
       this.loadFilteredUsers();
     }, error => {
-      this.alertify.error(error);
+      this.alertify.error(error.error);
     });
   }
   

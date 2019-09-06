@@ -96,10 +96,20 @@ namespace CarRental.API.Services
                 return null;
             }
         }
-        public async Task<string> GetUserIdByEmail(string email)
+        public async Task<AspNetUsers> GetUserIdByEmail(string email)
         {
-            var user = await _genericRepository.FindOne(x => x.Email == email);
-            return user.Id;
+            try
+            {
+                var user = await _genericRepository.FindOne(x => x.Email.ToLower() == email.ToLower());
+                return user;
+            }
+            catch (Exception ex)
+            {
+
+                Logger(ex, "Get User by email faild");
+                return null;
+            }
+         
         }
 
 

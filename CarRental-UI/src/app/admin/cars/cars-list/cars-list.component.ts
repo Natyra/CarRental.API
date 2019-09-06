@@ -42,7 +42,7 @@ deleteCar(id: number) {
     this.alertify.success(result.message);
     this.laodFilteredCars();
   }, error => {
-    this.alertify.error(error);
+    this.alertify.error(error.error);
   });
 }
 

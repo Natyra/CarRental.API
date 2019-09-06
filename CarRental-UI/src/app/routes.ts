@@ -16,12 +16,17 @@ import { BrandAddComponent } from './admin/brands/brand-add/brand-add.component'
 import { FueltypesAddComponent } from './admin/fueltypes/fueltypes-add/fueltypes-add.component';
 import { ModelListComponent } from './admin/carmodels/model-list/model-list.component';
 import { ModelAddComponent } from './admin/carmodels/model-add/model-add.component';
+import { CustomerLoginComponent } from './customer-login/customer-login.component';
+import { MyBookingComponent } from './my-booking/my-booking.component';
 
 
 export const appRoutes: Routes = [
  { path: '', component: HomeComponent},
  { path: 'login', component: LoginComponent},
  { path: 'car-fleet', component: CarFleetComponent},
+ { path: 'customer-login', component: CustomerLoginComponent},
+ { path: 'my-booking/:id', component: MyBookingComponent},
+
  {
     path: 'admin',
     runGuardsAndResolvers: 'always',

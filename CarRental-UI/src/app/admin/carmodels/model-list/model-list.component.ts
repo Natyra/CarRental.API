@@ -36,7 +36,7 @@ this.itemsPerPage = res.pagination.itemsPerPage;
 this.totalItems = res.pagination.totalItems;
 this.totalPages = res.pagination.totalPages;
 }, error => {
-  this.alertify.error(error);
+  this.alertify.error(error.error);
 });
 }
 
