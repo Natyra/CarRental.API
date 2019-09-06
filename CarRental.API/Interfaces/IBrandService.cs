@@ -12,7 +12,7 @@ namespace CarRental.API.Interfaces
     {
         Task<string> GetBrandNameAsync(int brandId);
         Task<IEnumerable<Brand>> GetBrandsAsync();
-        Task<PagedList<Brand>> GetFilteredBrandsAsync(PaginationParams paginationParams)
+        Task<PagedList<Brand>> GetFilteredBrandsAsync(PaginationParams paginationParams);
         Task AddBrandAsync(Brand brand);
         Task UpdateBrandAsync(Brand brand);
         Task DeleteBrandAsync(Brand brand);
