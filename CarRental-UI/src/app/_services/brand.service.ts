@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Brand } from '../_models/Brand';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ModelList } from '../_models/ModelList';
 import { AuthService } from './auth.service';
+import { PaginatedResult } from '../_models/Pagination';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +25,29 @@ constructor(private http: HttpClient, private authService: AuthService) { }
 
 getBrands(): Observable<Brand[]> {
   return this.http.get<Brand[]>(this.baseUrl + 'admin/brand', this.httpOptions);
+}
+
+getFilteredBrands(page?, itemsPerPage?): Observable<PaginatedResult<Brand[]>> {
+
+  const paginatedResult: PaginatedResult<Brand[]> = new PaginatedResult<Brand[]>();
+
+  let params = new HttpParams();
+
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+  return this.http.get<Brand[]>(this.baseUrl + 'admin/brand/brands', { observe: 'response', params})
+  .pipe(
+    map(response => {
+      paginatedResult.result = response.body;
+      if (response.headers.get('Pagination') != null) {
+        paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'))
+      }
+      return paginatedResult;
+  })
+  );
 }
 
 getBrandById(id: number): Observable<Brand> {

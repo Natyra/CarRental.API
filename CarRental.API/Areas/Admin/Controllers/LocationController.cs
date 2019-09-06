@@ -7,6 +7,7 @@ using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CarRental.API.Helpers;
 
 namespace CarRental.API.Areas.Admin.Controllers
 {
@@ -40,12 +41,41 @@ namespace CarRental.API.Areas.Admin.Controllers
                 model.Add(new LocationDto
                 {
                     Id = locations[i].Id,
+                    StreetAddress = locations[i].StreetAddress,
+                    Country = locations[i].Country,
+                    City = locations[i].City,
+                    ZipCode = locations[i].ZipCode
+                });
+            }
+
+            
+            return Ok(model);
+        }
+
+        [HttpGet("locations")]
+        public async Task<IActionResult> GetFilteredLocations([FromQuery]PaginationParams paginationParams)
+        {
+            var model = new List<LocationDto>();
+            var locationsAsync = await _locationService.GetFilteredLocationsAsync(paginationParams);
+            var locations = locationsAsync.ToList();
+
+            if (locations == null || locations.Count <= 0)
+                return BadRequest("Any location not found");
+
+            for (int i = 0; i < locations.Count(); i++)
+            {
+                model.Add(new LocationDto
+                {
+                    Id = locations[i].Id,
                  StreetAddress = locations[i].StreetAddress,
                  Country = locations[i].Country,
                  City =locations[i].City,
                  ZipCode = locations[i].ZipCode
                 });
             }
+
+            Response.AddPagination(locationsAsync.CurrentPage, locationsAsync.PageSize, locationsAsync.TotalCount, locationsAsync.TotalPages);
+
 
             return Ok(model);
         }

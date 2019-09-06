@@ -7,13 +7,14 @@ using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CarRental.API.Helpers;
 
 namespace CarRental.API.Areas.Admin.Controllers
 {
 
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize("Bearer")]
+    //[Authorize("Bearer")]
     //[Authorize(Roles = "Admin")]
     public class ModelController : Controller
     {
@@ -44,6 +45,32 @@ namespace CarRental.API.Areas.Admin.Controllers
                     Name = models[i].Name
                 });
             }
+
+            return Ok(model);
+        }
+
+        [HttpGet("models/{id}")]
+        public async Task<IActionResult> GetFilteredModels(int id, [FromQuery]PaginationParams paginationParams)
+        {
+            var model = new List<ModelDto>();
+            var modelsAsync = await _modelService.GetFilteredModelsAsync(paginationParams,id);
+            var models = modelsAsync.ToList();
+
+            if (models == null || models.Count <= 0)
+                return BadRequest("Any brand not found");
+
+            for (int i = 0; i < models.Count(); i++)
+            {
+                model.Add(new ModelDto
+                {
+                    Id = models[i].Id,
+                    BrandId = models[i].BrandId,
+                    Name = models[i].Name
+                });
+            }
+
+            Response.AddPagination(modelsAsync.CurrentPage, modelsAsync.PageSize, modelsAsync.TotalCount, modelsAsync.TotalPages);
+
 
             return Ok(model);
         }

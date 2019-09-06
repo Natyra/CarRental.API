@@ -21,7 +21,11 @@ httpOptions = {
 
 constructor(private http: HttpClient) { }
 
-getCars(page?, itemsPerPage?): Observable<PaginatedResult<Car[]>> {
+getCars(): Observable<Car[]> {
+  return this.http.get<Car[]>(this.baseUrl + 'admin/car');
+}
+
+getFilteredCars(page?, itemsPerPage?): Observable<PaginatedResult<Car[]>> {
 
   const paginatedResult: PaginatedResult<Car[]> = new PaginatedResult<Car[]>();
 
@@ -32,7 +36,7 @@ getCars(page?, itemsPerPage?): Observable<PaginatedResult<Car[]>> {
     params = params.append('pageSize', itemsPerPage);
   }
 
-  return this.http.get<Car[]>(this.baseUrl + 'admin/car', { observe: 'response', params})
+  return this.http.get<Car[]>(this.baseUrl + 'admin/car/cars', { observe: 'response', params})
   .pipe(
     map(response => {
       paginatedResult.result = response.body;

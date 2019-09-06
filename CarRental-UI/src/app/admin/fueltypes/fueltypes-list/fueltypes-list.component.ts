@@ -4,6 +4,7 @@ import { FuelType } from 'src/app/_models/fueltype';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Router } from '@angular/router';
+import { PaginatedResult } from 'src/app/_models/Pagination';
 
 @Component({
   selector: 'app-fueltypes-list',
@@ -13,15 +14,23 @@ import { Router } from '@angular/router';
 export class FueltypesListComponent implements OnInit {
 fuelTypes: FuelType[];
 modalRef: BsModalRef;
+currentPage = 1;
+itemsPerPage = 10;
+totalItems;
+totalPages;
   constructor(private fuelTypeService: FueltypeService, private modalService: BsModalService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
-    this.loadFuelTypes();
+    this.loadFilteredFuelTypes();
   }
 
-loadFuelTypes() {
-this.fuelTypeService.getFuelTypes().subscribe((fuel: FuelType[]) => {
-  this.fuelTypes = fuel;
+loadFilteredFuelTypes() {
+this.fuelTypeService.getFilteredCars(this.currentPage, this.itemsPerPage).subscribe((res: PaginatedResult<FuelType[]>) => {
+  this.fuelTypes = res.result;
+  this.currentPage = res.pagination.currentPage;
+  this.itemsPerPage = res.pagination.itemsPerPage;
+  this.totalItems = res.pagination.totalItems;
+  this.totalPages = res.pagination.totalPages;
 }, error =>{
 console.log(error);
 });
@@ -30,7 +39,7 @@ console.log(error);
 deleteFuelType(id: number) {
   return this.fuelTypeService.deleteFuelType(id).subscribe((result: any) => {
     this.alertify.success(result.message);
-    this.loadFuelTypes();
+    this.loadFilteredFuelTypes();
   }, error => {
     this.alertify.error(error);
   }, () => {
@@ -47,5 +56,10 @@ confirm(id: number): void {
 }
 decline(): void {
   this.modalRef.hide();
+}
+
+pageChanged(event: any): void {
+  this.currentPage = event;
+  this.loadFilteredFuelTypes();
 }
 }

@@ -19,7 +19,11 @@ httpOptions = {
 };
 constructor(private http: HttpClient) { }
 
-getUsers(page?, itemsPerPage?): Observable<PaginatedResult<User[]>> {
+getUsers(): Observable<User[]> {
+  return this.http.get<User[]>(this.baseUrl + 'admin/user');
+}
+
+getFilteredUsers(page?, itemsPerPage?): Observable<PaginatedResult<User[]>> {
 
   const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
   let params = new HttpParams();
@@ -29,7 +33,7 @@ getUsers(page?, itemsPerPage?): Observable<PaginatedResult<User[]>> {
     params = params.append('pageSize', itemsPerPage);
   }
 
-  return this.http.get<User[]>(this.baseUrl + 'admin/user', { observe: 'response', params})
+  return this.http.get<User[]>(this.baseUrl + 'admin/user/users', { observe: 'response', params})
   .pipe(
     map(response => {
       paginatedResult.result = response.body;

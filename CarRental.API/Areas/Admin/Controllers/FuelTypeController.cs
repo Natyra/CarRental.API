@@ -7,12 +7,13 @@ using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CarRental.API.Helpers;
 
 namespace CarRental.API.Areas.Admin.Controllers
 {
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize("Bearer")]
+    //[Authorize("Bearer")]
     //[Authorize(Roles = "Admin")]
     public class FuelTypeController : Controller
     {
@@ -25,7 +26,7 @@ namespace CarRental.API.Areas.Admin.Controllers
             _genericRepository = genericRepository;
         }
 
-          [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> GetFuelTypes()
         {
             var model = new List<FuelTypeDto>();
@@ -43,6 +44,30 @@ namespace CarRental.API.Areas.Admin.Controllers
                     Name = fuelTypes[i].Name
                 });
             }
+
+            return Ok(model);
+        }
+
+        [HttpGet("fueltypes")]
+        public async Task<IActionResult> GetFilteredFuelTypes([FromQuery]PaginationParams paginationParams)
+        {
+            var model = new List<FuelTypeDto>();
+            var fuelTypesAsync = await _fuelTypeService.GetFilteredFuelTypesAsync(paginationParams);
+            var fuelTypes = fuelTypesAsync.ToList();
+
+            if (fuelTypes == null || fuelTypes.Count <= 0)
+                return BadRequest("Any fuel type not found");
+
+            for (int i = 0; i < fuelTypes.Count(); i++)
+            {
+                model.Add(new FuelTypeDto
+                {
+                    Id = fuelTypes[i].Id,
+                    Name = fuelTypes[i].Name
+                });
+            }
+
+            Response.AddPagination(fuelTypesAsync.CurrentPage, fuelTypesAsync.PageSize, fuelTypesAsync.TotalCount, fuelTypesAsync.TotalPages);
 
             return Ok(model);
         }

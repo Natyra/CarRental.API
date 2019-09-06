@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FuelType } from '../_models/fueltype';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { PaginatedResult } from '../_models/Pagination';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,29 @@ constructor(private http: HttpClient) { }
 
 getFuelTypes(): Observable<FuelType[]> {
   return this.http.get<FuelType[]>(this.baseUrl + 'admin/fueltype', this.httpOptions);
+}
+
+getFilteredCars(page?, itemsPerPage?): Observable<PaginatedResult<FuelType[]>> {
+
+  const paginatedResult: PaginatedResult<FuelType[]> = new PaginatedResult<FuelType[]>();
+
+  let params = new HttpParams();
+
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+  return this.http.get<FuelType[]>(this.baseUrl + 'admin/fueltype/fueltypes', { observe: 'response', params})
+  .pipe(
+    map(response => {
+      paginatedResult.result = response.body;
+      if (response.headers.get('Pagination') != null) {
+        paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+      }
+      return paginatedResult;
+  })
+  );
 }
 
 getFuelTypeById(id: number): Observable<FuelType> {

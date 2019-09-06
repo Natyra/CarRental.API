@@ -7,12 +7,13 @@ using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CarRental.API.Helpers;
 
 namespace CarRental.API.Areas.Admin.Controllers
 {
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize("Bearer")]
+    //[Authorize("Bearer")]
     //[Authorize(Roles = "Admin")]
     public class TransmisionTypeController : Controller
     {
@@ -25,10 +26,10 @@ namespace CarRental.API.Areas.Admin.Controllers
             _genericRepository = genericRepository;
         }
 
-          [HttpGet]
-        public async Task<IActionResult> GetFuelTypes()
+        [HttpGet]
+        public async Task<IActionResult> GetTransmisionTypes()
         {
-            var model = new List<FuelTypeDto>();
+            var model = new List<TransmisionTypeDto>();
             var transmisionTypesAsync = await _transmisionTypeService.GetTransmisionTypesAsync();
             var transmisionTypes = transmisionTypesAsync.ToList();
 
@@ -37,18 +38,44 @@ namespace CarRental.API.Areas.Admin.Controllers
 
             for (int i = 0; i < transmisionTypes.Count(); i++)
             {
-                model.Add(new FuelTypeDto
+                model.Add(new TransmisionTypeDto
                 {
                     Id = transmisionTypes[i].Id,
                     Name = transmisionTypes[i].Name
                 });
             }
 
+          
+            return Ok(model);
+        }
+
+        [HttpGet("transmisiontypes")]
+        public async Task<IActionResult> GetFilteredTransmisionTypes([FromQuery]PaginationParams paginationParams)
+        {
+            var model = new List<TransmisionTypeDto>();
+            var transmisionTypesAsync = await _transmisionTypeService.GetFilteredTransmisionTypes(paginationParams);
+            var transmisionTypes = transmisionTypesAsync.ToList();
+
+            if (transmisionTypes == null || transmisionTypes.Count <= 0)
+                return BadRequest("Any Transmision Type not found");
+
+            for (int i = 0; i < transmisionTypes.Count(); i++)
+            {
+                model.Add(new TransmisionTypeDto
+                {
+                    Id = transmisionTypes[i].Id,
+                    Name = transmisionTypes[i].Name
+                });
+            }
+
+            Response.AddPagination(transmisionTypesAsync.CurrentPage, transmisionTypesAsync.PageSize, transmisionTypesAsync.TotalCount, transmisionTypesAsync.TotalPages);
+
+
             return Ok(model);
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddFuelType([FromForm]TransmisionTypeDto model)
+        public async Task<IActionResult> AddTransmisionType([FromForm]TransmisionTypeDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -71,7 +98,7 @@ namespace CarRental.API.Areas.Admin.Controllers
         }
 
         [HttpPut("edit/{id}")]
-        public async Task<IActionResult> EditFuelType(int id, [FromForm]TransmisionTypeDto model)
+        public async Task<IActionResult> EditTransmisionType(int id, [FromForm]TransmisionTypeDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -96,7 +123,7 @@ namespace CarRental.API.Areas.Admin.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> DeleteFuelType(int id)
+        public async Task<IActionResult> DeleteTransmisionType(int id)
         {
             var transmisionType = await _transmisionTypeService.GetTransmisionTypeByIdAsync(id);
 
