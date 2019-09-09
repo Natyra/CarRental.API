@@ -33,4 +33,15 @@ loggedIn() {
   this.decodedToken = this.jwtHelper.decodeToken(token);
   return !this.jwtHelper.isTokenExpired(token);
 }
+
+hasBookingIdInSession() {
+  const bookingId = sessionStorage.getItem('bookingId');
+  console.log(bookingId);
+
+  if (bookingId != null) {
+    return true;
+  } else {
+      return false;
+    }
+}
 }

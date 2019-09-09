@@ -19,13 +19,21 @@ namespace CarRental.API.Controllers
         private readonly IUserService _userService;
         private readonly ILocationService _locationService;
         private readonly ICarUploadService _carUploadService;
+        private readonly IBrandService _brandService;
+        private readonly IFuelTypeService _fuelTypeService;
+        private readonly ITransmisionTypeService _transmisionTypeService;
+        private readonly IModelService _modelService;
 
-        public BookingController(IBookingService bookingService, IUserService userService, ILocationService locationService, ICarUploadService carUploadService)
+        public BookingController(IBookingService bookingService, IUserService userService, ILocationService locationService, ICarUploadService carUploadService, IBrandService brandService, IFuelTypeService fuelTypeService, ITransmisionTypeService transmisionTypeService, IModelService modelService)
         {
             _bookingService = bookingService;
             _userService = userService;
             _locationService = locationService;
             _carUploadService = carUploadService;
+            _brandService = brandService;
+            _fuelTypeService = fuelTypeService;
+            _transmisionTypeService = transmisionTypeService;
+            _modelService = modelService;
         }
         [HttpPost("userbooking")]
         public async Task<IActionResult> IsBookingOfUser([FromBody]BookingLoginDto model)
@@ -79,16 +87,16 @@ namespace CarRental.API.Controllers
             model.PickUpDate = (DateTime)booking.PreBooking.PickDate;
             model.ReturnDate = (DateTime)booking.PreBooking.ReturnDate;
 
-            var carUpload = await _carUploadService.GetCarUploadByCarIdAsync((int)booking.CarId);
+            var carUpload = await _carUploadService.GetPathOfCarUploadAsync((int)booking.Car.Id);
             model.Car = new CarForListDto
             {
                 Id = booking.Car.Id,
                 CarNumber = booking.Car.CarNumber,
-                BrandName = booking.Car.Brand.Name,
-                ModelName = booking.Car.Model.Name,
-                TransmisionType = booking.Car.TransmisionType.Name,
-                FuelType = booking.Car.FuelType.Name,
-                Path = Url.Content(carUpload.Path)
+                BrandName = await _brandService.GetBrandNameAsync((int)booking.Car.BrandId),
+                ModelName = await _modelService.GetModelNameAsync((int)booking.Car.ModelId),
+                TransmisionType = await _transmisionTypeService.TransmisionTypeNameAsync((int)booking.Car.TransmisionTypeId),
+                FuelType = await _fuelTypeService.GetFuelTypeNameAsync((int)booking.Car.FuelTypeId),
+                Path = Url.Content(carUpload)
             };
 
             model.User = new UserDto

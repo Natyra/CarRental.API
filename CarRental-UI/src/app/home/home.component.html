@@ -19,58 +19,66 @@
                           <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Search for a Car</h1>
                           </div>
-                          <form class="user">
-                            <div class="form-group row">
-                              <div class="col-sm-3 mb-3 mb-sm-0">
-                                <label for=""> Where to pick</label>
-                                  <select class="browser-default custom-select" >
-                                      <option selected>-- Please Select --</option>
-                                      <option *ngFor="let item of locations" value="1">{{item.streetAddress}}, {{item.zipCode}}, {{item.city}}, {{item.country}}</option>
-                                    </select>
-                              </div>
-                              <div class="col-sm-3">
 
-                                  <form class="">
-                                      <div class="form-group">
+                          <form [formGroup]="searchCarsForm" (submit)="searchCars()" class="user">
+                            <div class="form-group row">
+                                <div class="col-sm-3 mb-3 mb-sm-0">
+                                    <label for=""> Where to pick</label>
+                                      <select class="browser-default custom-select" 
+                                      [ngClass]="{'is-invalid':searchCarsForm.get('pickUpLocationId').errors && searchCarsForm.get('pickUpLocationId').touched}" 
+                                      formControlName="pickUpLocationId">
+                                          <option value="" selected>-- Please Select --</option>
+                                          <option *ngFor="let item of locations" value={{item.id}}>{{item.streetAddress}}, {{item.zipCode}}, {{item.city}}, {{item.country}}</option>
+                                        </select>
+                                  </div>
+
+                             
+                              <div class="invalid-feedback">Pickup location is required</div>
+                        
+                                <div class="col-sm-3 mb-3 mb-sm-0">
+
                                 <label for=""> Pickup Date</label>
 
-                                        <div class="input-group">
+                                <div class="input-group">
 
-                                          <input class="form-control" placeholder="yyyy-mm-dd"
-                                                 name="dp" ngbDatepicker #d="ngbDatepicker" [value]="dp">
-                                          <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </form>
-                                
-                              </div>
-                              <div class="col-sm-3">
-                                  <form class="">
-                                      <div class="form-group">
-                                          <label for=""> Return Date</label>
-                                        <div class="input-group">
-                               
-
-                                          <input class="form-control" placeholder="yyyy-mm-dd"
-                                                 name="dp" ngbDatepicker #r="ngbDatepicker">
-                                          <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary calendar" (click)="r.toggle()" type="button"><i class="fa fa-calendar"></i> </button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </form>
+                                  <input class="form-control" placeholder="yyyy-mm-dd"
+                                         ngbDatepicker #d="ngbDatepicker"
+                                         [ngClass]="{'is-invalid':searchCarsForm.get('pickUpDate').errors && searchCarsForm.get('pickUpDate').touched}" 
+                                         formControlName="pickUpDate">
+                                  <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                                  </div>
                                 </div>
-                                <div class="col-sm-3">
+                              <div class="invalid-feedback">Booking Id is required</div>
+    </div>
+
+                            
+                                <div class="col-sm-3 mb-3 mb-sm-0">
+
+                                <label for=""> Return Date</label>
+                                <div class="input-group">
+                       
+
+                                  <input class="form-control" placeholder="yyyy-mm-dd"
+                                         ngbDatepicker #r="ngbDatepicker" 
+                                         [ngClass]="{'is-invalid':searchCarsForm.get('returnDate').errors && searchCarsForm.get('returnDate').touched}" 
+                                         formControlName="returnDate">
+                                  <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="r.toggle()" type="button"><i class="fa fa-calendar"></i> </button>
+                                  </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-3 mb-3 mb-sm-0">
                                 <label for=""></label>
 
-                                    <button href="login.html" class="btn btn-primary btn-user btn-block">
-                                        Search
-                                      </button>
-                                  </div>
+                            <button [disabled]="!searchCarsForm.valid" class="btn btn-primary btn-user btn-block" type="button" (click)="searchCars()">Search</button>
                             </div>
-                          </form>
+
+                          </div>
+                        </form>
+      
+                      
                       
                         </div>
                       </div>

@@ -33,7 +33,7 @@ export class CustomerLoginComponent implements OnInit {
     this.model = Object.assign({}, this.customerLoginForm.value);
     this.bookingService.isUserValid(this.model).subscribe((result: any) => {
       if (result.isValidUser) {
-        localStorage.setItem('bookingId', this.model.bookingId.toString());
+        sessionStorage.setItem('bookingId', this.model.bookingId.toString());
          this.router.navigate(['/my-booking/', this.model.bookingId]);
          this.alertify.success('My booking');
       } else {

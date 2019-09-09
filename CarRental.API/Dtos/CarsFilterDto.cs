@@ -14,10 +14,6 @@ namespace CarRental.API.Dtos
         public DateTime? PickUpDate { get; set; }
         public DateTime? ReturnDate { get; set; }
         public int DriverAge { get; set; }
-
-        public int Page { get; set; } = 1;
-        public int PageSize { get; set; } = 15;
-
-        public SelectList LocationList { get; set; }
+        public PaginationParams paginationParams { get; set; }
     }
 }

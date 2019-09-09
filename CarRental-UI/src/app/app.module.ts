@@ -39,6 +39,9 @@ import { ModelAddComponent } from './admin/carmodels/model-add/model-add.compone
 import { CarmodelService } from './_services/carmodel.service';
 import { CustomerLoginComponent } from './customer-login/customer-login.component';
 import { MyBookingComponent } from './my-booking/my-booking.component';
+import { AuthGuard } from './_guards/auth.guard';
+import { BookingGuard } from './_guards/booking.guard';
+import { DatePipe } from '@angular/common';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -95,7 +98,10 @@ export function tokenGetter() {
       FueltypeService,
       AuthService,
       AlertifyService,
-      CarmodelService
+      CarmodelService,
+      AuthGuard,
+      BookingGuard,
+      DatePipe
    ],
    bootstrap: [
       AppComponent

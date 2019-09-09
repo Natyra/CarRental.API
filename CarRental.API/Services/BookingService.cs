@@ -103,8 +103,18 @@ namespace CarRental.API.Services
 
         public async Task<Booking> GetBookingAndDependenciesById(int id)
         {
-            var bookingWithDependencys = await _context.Booking.Where(x => x.IsDeleted == false).Include(x => x.Car).ThenInclude(x => x.Model).Include(x => x.Car).ThenInclude(x => x.Brand).Include(x => x.User).Include(x=>x.PreBooking).FirstOrDefaultAsync(x=>x.Id==id);
-            return bookingWithDependencys;
+            try
+            {
+                var bookingWithDependencys = await _context.Booking.Where(x => x.IsDeleted == false).Include(x => x.Car).Include(x => x.User).Include(x => x.PreBooking).FirstOrDefaultAsync(x => x.Id == id);
+                return bookingWithDependencys;
+            }
+            catch (Exception ex)
+            {
+
+                Logger(ex, "Geting booking from db failed");
+                return null;
+            }
+           
         }
 
         private void Logger(Exception ex, string message)

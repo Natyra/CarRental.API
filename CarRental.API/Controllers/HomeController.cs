@@ -90,13 +90,72 @@ namespace CarRental.API.Controllers
 
         }
 
-        [HttpPost("filtercars")]
-        public async Task<IActionResult> SearchCars(CarsFilterDto model)
+        [HttpGet("filtercars")]
+        public async Task<IActionResult> SearchCars([FromQuery]CarsFilterDto filter)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            return Ok();
+            var model = new SearchCarDto();
+            var cars = new List<CarForListDto>();
+
+            if (filter.PickUpLocationId == 0 || filter.PickUpLocationId == null)
+                return BadRequest();
+            if (filter.PickUpDate == null)
+                return BadRequest();
+            if (filter.ReturnDate == null)
+                return BadRequest();
+
+            if (filter.ReturnLocationId == 0 || filter.ReturnLocationId == null)
+            {
+                filter.ReturnLocationId = filter.PickUpLocationId;
+            }
+
+            filter.paginationParams = new PaginationParams();
+            //filter.paginationParams.PageSize = 2;
+
+            var resultAsync = await _carService.GetCarsFromSearch(filter);
+
+            if (resultAsync == null)
+                return BadRequest("No car founded");
+
+            var result = resultAsync.ToList();
+
+            for (int i = 0; i < result.Count(); i++)
+            {
+                var carUploadPath = await _carUploadService.GetPathOfCarUploadAsync(result[i].Id);
+                cars.Add(new CarForListDto
+                {
+                    Id = result[i].Id,
+                    CarNumber = result[i].CarNumber,
+                    BrandName = result[i].Brand.Name,
+                    ModelName = result[i].Model.Name,
+                    CarCapacity = result[i].CarCapacity,
+                    CarColor = result[i].CarColor,
+                    CarLocation = await _locationService.GetLocationAsync((int)result[i].CarLocationId),
+                    FuelType = result[i].FuelType.Name,
+                    ModelYear = result[i].ModelYear,
+                    NumberOfDoors = result[i].NumberOfDoors,
+                    TransmisionType = result[i].TransmisionType.Name,
+                    PriceForDay = Math.Round((decimal)result[i].PriceForDay,2),
+                    Description = result[i].Description,
+                    Path = Url.Content(carUploadPath)
+                });
+            }
+
+            model.Cars = cars;
+            model.PicUpLocation = await _locationService.GetLocationAsync((int)filter.PickUpLocationId);
+            model.ReturnLocation = await _locationService.GetLocationAsync((int)filter.ReturnLocationId);
+            model.PickUpDate = filter.PickUpDate;
+            model.ReturnDate = filter.ReturnDate;
+            model.PickUpLocationId = filter.PickUpLocationId;
+            model.ReturnLocationId = filter.ReturnLocationId;
+
+            
+
+            Response.AddPagination(resultAsync.CurrentPage, resultAsync.PageSize, resultAsync.TotalCount, resultAsync.TotalPages);
+
+            return Ok(model);
         }
     }
 }

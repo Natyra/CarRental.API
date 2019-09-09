@@ -33,7 +33,7 @@ logout() {
 }
 
 hasBookingId() {
-  const bookingId = localStorage.getItem('bookingId');
+  const bookingId = sessionStorage.getItem('bookingId');
   console.log(bookingId);
   if (bookingId !== null) {
     this.bookingId = bookingId;
