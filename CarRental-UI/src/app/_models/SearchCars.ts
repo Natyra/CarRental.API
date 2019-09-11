@@ -1,7 +1,7 @@
 export interface SearchCars {
     pickUpLocationId: any;
     returnLocationId: any;
-    pickUpDate: Date;
+    pickUpDate: any;
     returnDate: any;
     driverAge: any;
 }

@@ -32,7 +32,7 @@ import { AlertifyService } from './_services/alertify.service';
 import { CarAddComponent } from './admin/cars/car-add/car-add.component';
 import { LocationAddComponent } from './admin/locations/location-add/location-add.component';
 import { BrandAddComponent } from './admin/brands/brand-add/brand-add.component';
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModalModule } from 'ngx-bootstrap';
 import { FueltypesAddComponent } from './admin/fueltypes/fueltypes-add/fueltypes-add.component';
 import { ModelListComponent } from './admin/carmodels/model-list/model-list.component';
 import { ModelAddComponent } from './admin/carmodels/model-add/model-add.component';
@@ -42,6 +42,8 @@ import { MyBookingComponent } from './my-booking/my-booking.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { BookingGuard } from './_guards/booking.guard';
 import { DatePipe } from '@angular/common';
+import { CarResultComponent } from './car-result/car-result.component';
+import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -69,10 +71,12 @@ export function tokenGetter() {
       ModelListComponent,
       ModelAddComponent,
       CustomerLoginComponent,
-      MyBookingComponent
+      MyBookingComponent,
+      CarResultComponent
    ],
    imports: [
       BrowserModule,
+      AngularDateTimePickerModule,
       NgbModule,
       AppRoutingModule,
       HttpClientModule,

@@ -1,3 +1,10 @@
 .form-control-user {
     border-radius:0rem !important; 
 }
+
+.wc-date-container {
+    border: 1px solid #d1d3e2 !important;
+    padding: 8px !important;
+    border-radius: 5px !important;
+    height: calc(1.5em + .75rem + 2px) !important;
+}

@@ -1,0 +1,38 @@
+.seats-icon {
+    background-image: url('/assets/images/solid-car-seat.png');
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    padding-left: 8px;
+    background-repeat: no-repeat;
+    margin-top: 5px;
+}
+
+.dors-icon {
+    background-image: url('/assets/images/solid-car-door.svg');
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    padding-left: 8px;
+    background-repeat: no-repeat;
+    margin-top: 5px;
+}
+
+.trasmision-manual-icon {
+    background-image: url('/assets/images/bk-gearbox.svg');
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    padding-left: 8px;
+    background-repeat: no-repeat;
+    margin-top: 5px;
+    background-color: transparent;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 16px;
+}
+
+.progress {
+    height: 3rem !important;
+    padding: 7px !important;
+}

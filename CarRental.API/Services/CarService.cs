@@ -70,7 +70,7 @@ namespace CarRental.API.Services
                 var carList = new List<Car>();
                 var carsAsync = await GetCarsAsync();
                 var cars = carsAsync.ToList();
-                if(filter.PickUpDate >= DateTime.UtcNow)
+                if(filter.PickUpDate >= DateTime.Now)
                 {
                     if (filter.PickUpLocationId.HasValue)
                     {

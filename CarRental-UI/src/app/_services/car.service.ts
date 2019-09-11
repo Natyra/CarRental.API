@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
-import { Car } from '../_models/car';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { Car } from '../_models/Car';
 import { CarAdd } from '../_models/CarAdd';
 import { PaginatedResult } from '../_models/Pagination';
 import { map } from 'rxjs/operators';
@@ -19,6 +19,10 @@ headersObj = new HttpHeaders().set('Authorization', 'Bearer ' + this.token);
 httpOptions = {
   headers: this.headersObj
 };
+
+model1: Car;
+private dataSource = new BehaviorSubject<Car>(this.model1);
+data = this.dataSource.asObservable();
 
 constructor(private http: HttpClient) { }
 

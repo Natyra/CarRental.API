@@ -19,6 +19,7 @@ import { ModelAddComponent } from './admin/carmodels/model-add/model-add.compone
 import { CustomerLoginComponent } from './customer-login/customer-login.component';
 import { MyBookingComponent } from './my-booking/my-booking.component';
 import { BookingGuard } from './_guards/booking.guard';
+import { CarResultComponent } from './car-result/car-result.component';
 
 
 export const appRoutes: Routes = [
@@ -27,6 +28,7 @@ export const appRoutes: Routes = [
  { path: 'car-fleet', component: CarFleetComponent},
  { path: 'customer-login', component: CustomerLoginComponent},
  { path: 'my-booking/:id', canActivate: [BookingGuard], component: MyBookingComponent},
+ {path: 'car-result', component: CarResultComponent},
 
  {
     path: 'admin',
