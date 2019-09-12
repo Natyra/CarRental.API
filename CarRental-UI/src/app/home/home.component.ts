@@ -112,10 +112,17 @@ searchCars() {
   if (this.searchCarsForm.valid) {
     this.model = Object.assign({}, this.searchCarsForm.value);
     const locationId = this.model.pickUpLocationId;
-    const rLocationId = this.model.returnLocationId;
-    const driverAge = this.model.driverAge;
+    let rLocationId = this.model.returnLocationId;
+    let driverAge = this.model.driverAge;
     const pickDate2 = parseDate(this.model.pickUpDate);
     const returnDate2 = parseDate(this.model.returnDate);
+
+    if(rLocationId === '') {
+      rLocationId = locationId;
+    }
+    if (driverAge === '') {
+      driverAge = 0;
+    }
     this.router.navigate(['/car-result'], { queryParams: { pickUpDate: pickDate2.toISOString(), pickUpLocationId: locationId, returnDate: returnDate2.toISOString(), returnLocationId: rLocationId, age: driverAge }});
 
   }

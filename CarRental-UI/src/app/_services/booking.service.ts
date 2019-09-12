@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { PaginatedResult } from '../_models/Pagination';
 import { map } from 'rxjs/operators';
 import { UserBooking } from '../_models/UserBooking';
+import { PreBooking } from '../_models/PreBooking';
 
 @Injectable({
   providedIn: 'root'
@@ -56,5 +57,9 @@ isUserValid(model: UserBooking) {
 
 getBookingById(id: number): Observable<Booking> {
  return this.http.get<Booking>(this.baseUrl + 'booking/bookingdetails/' + id);
+}
+
+addPreBooking(model: PreBooking) {
+  return this.http.post(this.baseUrl + 'booking/addprebooking', model);
 }
 }

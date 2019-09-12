@@ -7,6 +7,8 @@ import {Location} from '../_models/Location';
 import { parseDate } from 'ngx-bootstrap';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { SearchCars } from '../_models/SearchCars';
+import { PreBooking } from '../_models/PreBooking';
+import { BookingService } from '../_services/booking.service';
 
 @Component({
   selector: 'app-car-result',
@@ -18,13 +20,12 @@ export class CarResultComponent implements OnInit {
 cars: any;
 //model: any;
 model: SearchCars;
-
+preBooking: PreBooking;
 pickUpLocation;
 returnLocation;
 datePickUp;
 dateReturn;
 changeFilterField: boolean = false;
-searchCarsForm: FormGroup;
 locations: Location[];
 
 pickUpDateField: Date = new Date();
@@ -36,9 +37,6 @@ settings = {
 }
 retunDateField: Date = new Date();
 
-showReturnLocationField: boolean = false;
-showInputOfAgeField: boolean = false;
-
 
 locationId = this.route.snapshot.queryParamMap.get('pickUpLocationId');
 pickUpDate = this.route.snapshot.queryParamMap.get('pickUpDate');
@@ -46,22 +44,23 @@ returnDate = this.route.snapshot.queryParamMap.get('returnDate');
 rLocationId = this.route.snapshot.queryParamMap.get('returnLocationId');
 age = this.route.snapshot.queryParamMap.get('age');
 
-  constructor(private carService: CarService, private alertify: AlertifyService, private route: ActivatedRoute, private router: Router, private locationService: LocationService, private fb: FormBuilder) { }
+  constructor(private carService: CarService, private alertify: AlertifyService, private route: ActivatedRoute, private router: Router, private locationService: LocationService, private fb: FormBuilder, private bookingService: BookingService) { }
 
   ngOnInit() {
     this.loadCars();
-    this.getPickUpLocationById();
-    this.getReturnLocationById();
     this.datePickUp = parseDate(this.pickUpDate);
     // this.datePickUp = this.datePickUp.toDateString();
     this.dateReturn = parseDate(this.returnDate);
-
-    this.createSearchCarsForm();
     this.locationsList();
+    this.getPickUpLocationById();
+    this.getReturnLocationById();
   }
 
   loadCars() {
-  if (this.pickUpDate !== undefined && this.returnDate !== undefined && this.locationId !== undefined) {
+    if (this.rLocationId === 'NaN') {
+      this.rLocationId = this.locationId;
+    }
+    if (this.pickUpDate !== undefined && this.returnDate !== undefined && this.locationId !== undefined) {
       this.model = {
         pickUpDate: this.pickUpDate,
         returnDate : this.returnDate,
@@ -69,11 +68,7 @@ age = this.route.snapshot.queryParamMap.get('age');
         returnLocationId: this.rLocationId,
         driverAge: this.age
       }
-
-      console.log(this.model);
       this.carService.searchCars(this.model).subscribe((result: any) => {
-
-        console.log(result.result.cars);
         this.cars = result.result.cars;
       }, error => {
         this.alertify.error(error.error);
@@ -101,30 +96,6 @@ getReturnLocationById() {
   });
 }
 
-createSearchCarsForm() {
-  const minutesAdded = this.addMinutes(this.pickUpDateField, 5);
-  const daysAdded = this.addDays(this.retunDateField, 3);
-  this.searchCarsForm = this.fb.group({
-    pickUpLocationId: ['', Validators.required],
-    pickUpDate: [minutesAdded, Validators.required],
-    returnDate: [daysAdded, Validators.required],
-    returnLocationId: ['', null],
-    driverAge: ['', null]
-  });
-}
-
-addMinutes(date, minutes) {
-  const result = new Date(date);
-  result.setMinutes(result.getMinutes() + minutes);
-  return result;
-}
-
-addDays(date, days) {
-  const result = new Date(date);
-  result.setDate(result.getDate() + days);
-  return result;
-}
-
 locationsList() {
   this.locationService.getLocationsForList().subscribe((locations: Location[]) => {
 this.locations = locations;
@@ -133,47 +104,36 @@ this.locations = locations;
   });
 }
 
-showReturnLocation(event: any) {
-  const rLocationControl = this.searchCarsForm.get('returnLocationId');
+addPreBooking(carId: number) {
 
-  if (event.currentTarget.checked) {
-    this.showReturnLocationField = true;
-    rLocationControl.setValidators([Validators.required]);
-  } else {
-    this.showReturnLocationField = false;
-    rLocationControl.setValidators(null);
+  const model = {
+    carId: carId,
+    pickUpLocationId: parseInt(this.locationId),
+    returnLocationId: parseInt(this.rLocationId),
+    pickUpDate: parseDate(this.pickUpDate),
+    returnDate: parseDate(this.returnDate),
+    driverAge: parseInt(this.age)
+  };
 
-  }
+  this.bookingService.addPreBooking(model).subscribe((result: any) => {
+    console.log(result);
+  });
 
-  rLocationControl.updateValueAndValidity();
+
 }
 
-showInputOfAge(event: any) {
-  const driverAgeControl = this.searchCarsForm.get('driverAge');
-  if (event.currentTarget.checked) {
-    this.showInputOfAgeField = false;
-    driverAgeControl.setValidators(null);
-  } else {
-    this.showInputOfAgeField = true;
-    driverAgeControl.setValidators([Validators.required]);
 
+// searchCars() {
+// if (this.searchCarsForm.valid) {
+//   this.model = Object.assign({}, this.searchCarsForm.value);
+//   const locationId = this.model.pickUpLocationId;
+//   const rLocationId = this.model.returnLocationId;
+//   const driverAge = this.model.driverAge;
+//   const pickDate2 = parseDate(this.model.pickUpDate);
+//   const returnDate2 = parseDate(this.model.returnDate);
+//   this.router.navigate(['/car-result'], { queryParams: { pickUpDate: pickDate2.toISOString(), pickUpLocationId: locationId, returnDate: returnDate2.toISOString(), returnLocationId: rLocationId, age: driverAge }});
 
-  }
-
-  driverAgeControl.updateValueAndValidity();
-}
-
-searchCars() {
-if (this.searchCarsForm.valid) {
-  this.model = Object.assign({}, this.searchCarsForm.value);
-  const locationId = this.model.pickUpLocationId;
-  const rLocationId = this.model.returnLocationId;
-  const driverAge = this.model.driverAge;
-  const pickDate2 = parseDate(this.model.pickUpDate);
-  const returnDate2 = parseDate(this.model.returnDate);
-  this.router.navigate(['/car-result'], { queryParams: { pickUpDate: pickDate2.toISOString(), pickUpLocationId: locationId, returnDate: returnDate2.toISOString(), returnLocationId: rLocationId, age: driverAge }});
-
-}
-}
+// }
+// }
 
 }

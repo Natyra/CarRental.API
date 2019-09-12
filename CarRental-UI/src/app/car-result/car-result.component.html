@@ -8,106 +8,10 @@
           </div>
       
           <div class="row">
-            <div class="col-lg-4 mb-4" *ngIf="changeFilterField">
-                <form [formGroup]="searchCarsForm" (submit)="searchCars()" class="user">
-                    <div class="form-group row mb-0">
-                        <div class="col-sm-12 mb-3 mb-sm-0">
-                            <label for=""> Where to pick</label>
-                              <select class="browser-default custom-select" 
-                              [ngClass]="{'is-invalid':searchCarsForm.get('pickUpLocationId').errors && searchCarsForm.get('pickUpLocationId').touched}" 
-                              formControlName="pickUpLocationId">
-                                  <option value="" selected>-- Please Select --</option>
-                                  <option *ngFor="let item of locations" value={{item.id}}>{{item.streetAddress}}, {{item.zipCode}}, {{item.city}}, {{item.country}}</option>
-                                </select>
-                                <div class="invalid-feedback">Pickup location is required</div>
-                                <div class="form-group mt-3">
-                                  <div class="custom-control custom-checkbox small">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck" (change)="showReturnLocation($event)">
-                                    <label class="custom-control-label" for="customCheck"> Return Car To Another Location?</label>
-                                  </div>
-                                </div>
-                          
-                          </div>
-            
-
-                      
-                        <div class="col-sm-12 mb-3 mb-sm-0">
-
-                        <label for=""> Pickup Date</label>
-
-                        <div class="mb-4">
-                          <angular2-date-picker 
-                          
-                          formControlName="pickUpDate" [settings]="settings"></angular2-date-picker>
-                          <!-- <input class="form-control" placeholder="yyyy-mm-dd"
-                                 ngbDatepicker #d="ngbDatepicker"
-                                 [ngClass]="{'is-invalid':searchCarsForm.get('pickUpDate').errors && searchCarsForm.get('pickUpDate').touched}" 
-                                 formControlName="pickUpDate">
-                          <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
-                          </div> -->
-                        </div>
-                      <div class="invalid-feedback">PickUp Date is required</div>
-
-                      <div class="form-group">
-                        <div class="custom-control custom-checkbox small" style="margin-top:54px;">
-                          <input type="checkbox" class="custom-control-input" id="ageCheck" (change)="showInputOfAge($event)" checked="checked">
-                          <label class="custom-control-label" for="ageCheck"> Drivers Age At Rental Start: 25-65</label>
-
-                          
-                        </div>
-                        
-                      </div>
-</div>
-
-                    
-                        <div class="col-sm-12 mb-3 mb-sm-0">
-
-                        <label for=""> Return Date</label>
-                        <div class="">
-               
-                          <angular2-date-picker                  
-                          formControlName="returnDate" [settings]="settings"></angular2-date-picker>
-
-                          <!-- <input class="form-control" placeholder="yyyy-mm-dd"
-                                 ngbDatepicker #r="ngbDatepicker" 
-                                 [ngClass]="{'is-invalid':searchCarsForm.get('returnDate').errors && searchCarsForm.get('returnDate').touched}" 
-                                 formControlName="returnDate">
-                          <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar" (click)="r.toggle()" type="button"><i class="fa fa-calendar"></i> </button>
-                          </div> -->
-                        </div>
-
-                          <input class="form-control" style="margin-top:48px;" type="number" *ngIf="showInputOfAgeField"
-                            [ngClass]="{'is-invalid':searchCarsForm.get('driverAge').errors && searchCarsForm.get('driverAge').touched}" 
-                            formControlName="driverAge" [value]="0">
-                        
-                    </div>
-                    
-                    <div class="col-sm-12 mb-3 mb-sm-0">
-                        <label for=""></label>
-
-                    <button [disabled]="!searchCarsForm.valid" class="btn btn-primary btn-user btn-block" type="button" (click)="searchCars()">Search</button>
-                    </div>
-
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-sm-3 mb-3 mb-sm-0" *ngIf="showReturnLocationField">
-                      <label for=""> Where to return</label>
-                        <select class="browser-default custom-select" 
-                        [ngClass]="{'is-invalid':searchCarsForm.get('returnLocationId').errors && searchCarsForm.get('returnLocationId').touched}" 
-                        formControlName="returnLocationId">
-                            <option value="" selected>-- Please Select --</option>
-                            <option *ngFor="let item of locations" value={{item.id}}>{{item.streetAddress}}, {{item.zipCode}}, {{item.city}}, {{item.country}}</option>
-                          </select>
-                          <div class="invalid-feedback">Return location is required</div>
-          
-                    </div>
-                    
-                  </div>
-                </form>
-            </div>
-              <!-- Content Column -->
+           <div class="col-lg-4 mb-4" *ngIf="changeFilterField">
+              <app-change-search></app-change-search>
+           </div>
+           
               <div class="col-lg-4 mb-4" *ngIf="!changeFilterField">
   
                 <!-- Project Card Example -->
@@ -159,23 +63,25 @@
                       <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="assets{{item.path}}" alt="">
                     </div>
                     <div class="col-lg-8"><p><span class="seats-icon"></span>{{item.carCapacity}}</p>
+                 <div class="row">
+                   <div class="col-lg-6">
                       <p><span class="dors-icon"></span> {{item.numberOfDoors}}</p>
-                      <p>Fuel type: {{item.fuelType}}</p>
+                     
                       <p><span class="trasmision-manual-icon"></span> {{item.transmisionType}}</p>
-                      <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw →</a>
+                      <p>{{item.brandName}} {{item.modelName}} {{item.modelYear}}</p>
+                   </div>
+                   <div class="col-lg-6 text-right">
+                     <label>Price for day</label>
+                      <h4 class="large font-weight-bold">{{item.priceForDay}} &euro;</h4>
+                      <button (click)="addPreBooking(item.id)" class="btn btn-info btn-icon-split">
+                 
+                          <span class="text">Book Now</span>
+                        </button>
+                   </div>
+                 </div>
+                   
                     </div>
               </div>
-                  </div>
-                </div>
-  
-                <!-- Approach -->
-                <div class="card shadow mb-4">
-                  <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                  </div>
-                  <div class="card-body">
-                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
-                    <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
                   </div>
                 </div>
   

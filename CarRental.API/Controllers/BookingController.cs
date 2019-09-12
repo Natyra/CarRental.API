@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CarRental.API.Dtos;
 using CarRental.API.Interfaces;
+using CarRental.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,8 +24,9 @@ namespace CarRental.API.Controllers
         private readonly IFuelTypeService _fuelTypeService;
         private readonly ITransmisionTypeService _transmisionTypeService;
         private readonly IModelService _modelService;
+        private readonly IPreBookingService _preBookingService;
 
-        public BookingController(IBookingService bookingService, IUserService userService, ILocationService locationService, ICarUploadService carUploadService, IBrandService brandService, IFuelTypeService fuelTypeService, ITransmisionTypeService transmisionTypeService, IModelService modelService)
+        public BookingController(IBookingService bookingService, IUserService userService, ILocationService locationService, ICarUploadService carUploadService, IBrandService brandService, IFuelTypeService fuelTypeService, ITransmisionTypeService transmisionTypeService, IModelService modelService, IPreBookingService preBookingService)
         {
             _bookingService = bookingService;
             _userService = userService;
@@ -34,6 +36,7 @@ namespace CarRental.API.Controllers
             _fuelTypeService = fuelTypeService;
             _transmisionTypeService = transmisionTypeService;
             _modelService = modelService;
+            _preBookingService = preBookingService;
         }
         [HttpPost("userbooking")]
         public async Task<IActionResult> IsBookingOfUser([FromBody]BookingLoginDto model)
@@ -112,6 +115,34 @@ namespace CarRental.API.Controllers
 
             return Ok(model);
 
+        }
+
+        [HttpPost("addprebooking")]
+        public async Task<IActionResult> AddPreBooking(PreBookingForAdd model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+
+            var preBooking = new PreBooking();
+            preBooking.PickLocationId = model.PickUpLocationId;
+            preBooking.ReturnLocationId = model.ReturnLocationId;
+            preBooking.PickDate = model.PickUpDate;
+            preBooking.ReturnDate = model.ReturnDate;
+            preBooking.AgeOfUser = model.DriverAge;
+            preBooking.CreateOnDate = DateTime.Now;
+            preBooking.IsDeleted = false;
+
+            await _preBookingService.AddPreBooking(preBooking);
+            await _preBookingService.SaveChanges();
+
+            return Ok(new {
+                message = "PreBooking added successfully",
+                pb = preBooking.Id,
+                car = model.CarId
+            });
         }
 
     }
