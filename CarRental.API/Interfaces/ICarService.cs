@@ -22,6 +22,6 @@ namespace CarRental.API.Interfaces
         Task<IEnumerable<Car>> CarsFilterLocationAsync(Location location);
         Task<List<Booking>> GetPreBookingsAsync(int carId);
 
-        Task<PagedList<Car>> GetCarsFromSearch(CarsFilterDto filter);
+        Task<PagedList<Car>> GetCarsFromSearch(CarsFilterDtoOriginal filter);
     }
 }

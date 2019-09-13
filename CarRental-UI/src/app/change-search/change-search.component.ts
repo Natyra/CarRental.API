@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { parseDate } from 'ngx-bootstrap';
 import { SearchCars } from '../_models/SearchCars';
@@ -6,6 +6,8 @@ import { LocationService } from '../_services/location.service';
 import {Location} from '../_models/Location';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
+import { CarService } from '../_services/car.service';
+import { EventEmitter } from 'events';
 
 
 @Component({
@@ -15,6 +17,8 @@ import { AlertifyService } from '../_services/alertify.service';
 })
 export class ChangeSearchComponent implements OnInit {
   searchCarsForm: FormGroup;
+// cars: any;
+@Output() cars = new EventEmitter();
 model: SearchCars;
 locations: Location[];
 pickUpLocation;
@@ -42,13 +46,13 @@ returnDate = this.route.snapshot.queryParamMap.get('returnDate');
 rLocationId = this.route.snapshot.queryParamMap.get('returnLocationId');
 age = this.route.snapshot.queryParamMap.get('age');
 
-  constructor(private locationService: LocationService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private alertify: AlertifyService) { }
+  constructor(private carService: CarService, private locationService: LocationService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private alertify: AlertifyService) { }
 
   ngOnInit() {
     this.locationsList();
-    this.datePickUp = parseDate(this.pickUpDate);
+    this.datePickUp = this.pickUpDate;
     // this.datePickUp = this.datePickUp.toDateString();
-    this.dateReturn = parseDate(this.returnDate);
+    this.dateReturn = this.returnDate;
     this.createSearchCarsForm();
     this.getPickUpLocationById();
     this.getReturnLocationById();
@@ -95,12 +99,10 @@ age = this.route.snapshot.queryParamMap.get('age');
   }
 
   createSearchCarsForm() {
-    const minutesAdded = this.addMinutes(this.pickUpDateField, 5);
-    const daysAdded = this.addDays(this.retunDateField, 3);
     this.searchCarsForm = this.fb.group({
       pickUpLocationId: [parseInt(this.locationId), Validators.required],
-      pickUpDate: [minutesAdded, Validators.required],
-      returnDate: [daysAdded, Validators.required],
+      pickUpDate: [this.pickUpDate, Validators.required],
+      returnDate: [this.returnDate, Validators.required],
       returnLocationId: [parseInt(this.rLocationId), null],
       driverAge: [parseInt(this.age), null]
     });
@@ -124,12 +126,14 @@ age = this.route.snapshot.queryParamMap.get('age');
       const locationId = this.model.pickUpLocationId;
       const rLocationId = this.model.returnLocationId;
       const driverAge = this.model.driverAge;
-      const pickDate2 = parseDate(this.model.pickUpDate);
-      const returnDate2 = parseDate(this.model.returnDate);
-      this.router.navigate(['/car-result'], { queryParams: { pickUpDate: pickDate2.toISOString(), pickUpLocationId: locationId, returnDate: returnDate2.toISOString(), returnLocationId: rLocationId, age: driverAge }});
-    
+      const pickDate2 = this.model.pickUpDate;
+      const returnDate2 = this.model.returnDate;
+
+      this.router.navigate(['/car-result'], { queryParams: { pickUpDate: pickDate2, pickUpLocationId: locationId, returnDate: returnDate2, returnLocationId: rLocationId, age: driverAge }});
     }
     }
+
+   
 
     showReturnLocation(event: any) {
       const rLocationControl = this.searchCarsForm.get('returnLocationId');

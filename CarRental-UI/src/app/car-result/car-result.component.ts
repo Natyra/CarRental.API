@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService } from '../_services/car.service';
 import { AlertifyService } from '../_services/alertify.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterStateSnapshot, Event, NavigationStart, RoutesRecognized,
+  RouteConfigLoadStart, RouteConfigLoadEnd, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { LocationService } from '../_services/location.service';
 import {Location} from '../_models/Location';
 import { parseDate } from 'ngx-bootstrap';
@@ -44,23 +45,45 @@ returnDate = this.route.snapshot.queryParamMap.get('returnDate');
 rLocationId = this.route.snapshot.queryParamMap.get('returnLocationId');
 age = this.route.snapshot.queryParamMap.get('age');
 
-  constructor(private carService: CarService, private alertify: AlertifyService, private route: ActivatedRoute, private router: Router, private locationService: LocationService, private fb: FormBuilder, private bookingService: BookingService) { }
+endUrl: string;
+navigationEnd;
+navigationStart: string;
+
+  constructor(private carService: CarService, private alertify: AlertifyService, private route: ActivatedRoute, private router: Router, private locationService: LocationService, private fb: FormBuilder, private bookingService: BookingService) { 
+    this.router.events.subscribe( (event: Event) => {
+
+    if (event instanceof NavigationStart) {
+        this.endUrl = this.navigationEnd;
+        this.navigationStart = event.url;
+    } else if (event instanceof NavigationEnd) {
+         this.navigationEnd = event.url;
+        this.locationId = this.route.snapshot.queryParamMap.get('pickUpLocationId');
+        this.pickUpDate = this.route.snapshot.queryParamMap.get('pickUpDate');
+        this.returnDate = this.route.snapshot.queryParamMap.get('returnDate');
+        this.rLocationId = this.route.snapshot.queryParamMap.get('returnLocationId');
+        this.age = this.route.snapshot.queryParamMap.get('age');
+         if(this.navigationStart !== this.endUrl) {
+          this.loadCars();
+        }
+    }
+});
+
+  }
 
   ngOnInit() {
     this.loadCars();
-    this.datePickUp = parseDate(this.pickUpDate);
+    this.datePickUp = this.pickUpDate;
     // this.datePickUp = this.datePickUp.toDateString();
-    this.dateReturn = parseDate(this.returnDate);
+    this.dateReturn = this.returnDate;
     this.locationsList();
     this.getPickUpLocationById();
     this.getReturnLocationById();
   }
+  
+
 
   loadCars() {
-    if (this.rLocationId === 'NaN') {
-      this.rLocationId = this.locationId;
-    }
-    if (this.pickUpDate !== undefined && this.returnDate !== undefined && this.locationId !== undefined) {
+    if (this.locationId !== null && this.locationId !== undefined && this.locationId !== '0' && this.locationId !== 'NaN' && this.pickUpDate !== null && this.pickUpDate !== undefined && this.pickUpDate !== 'NaN'  && this.returnDate !== null && this.returnDate !== undefined && this.returnDate !== 'NaN') {
       this.model = {
         pickUpDate: this.pickUpDate,
         returnDate : this.returnDate,
@@ -69,6 +92,7 @@ age = this.route.snapshot.queryParamMap.get('age');
         driverAge: this.age
       }
       this.carService.searchCars(this.model).subscribe((result: any) => {
+        
         this.cars = result.result.cars;
       }, error => {
         this.alertify.error(error.error);
@@ -110,8 +134,8 @@ addPreBooking(carId: number) {
     carId: carId,
     pickUpLocationId: parseInt(this.locationId),
     returnLocationId: parseInt(this.rLocationId),
-    pickUpDate: parseDate(this.pickUpDate),
-    returnDate: parseDate(this.returnDate),
+    pickUpDate: this.pickUpDate,
+    returnDate: this.returnDate,
     driverAge: parseInt(this.age)
   };
 

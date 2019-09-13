@@ -114,8 +114,8 @@ searchCars() {
     const locationId = this.model.pickUpLocationId;
     let rLocationId = this.model.returnLocationId;
     let driverAge = this.model.driverAge;
-    const pickDate2 = parseDate(this.model.pickUpDate);
-    const returnDate2 = parseDate(this.model.returnDate);
+    const pickDate2 = this.model.pickUpDate;
+    const returnDate2 = this.model.returnDate;
 
     if(rLocationId === '') {
       rLocationId = locationId;
@@ -123,7 +123,7 @@ searchCars() {
     if (driverAge === '') {
       driverAge = 0;
     }
-    this.router.navigate(['/car-result'], { queryParams: { pickUpDate: pickDate2.toISOString(), pickUpLocationId: locationId, returnDate: returnDate2.toISOString(), returnLocationId: rLocationId, age: driverAge }});
+    this.router.navigate(['/car-result'], { queryParams: { pickUpDate: pickDate2, pickUpLocationId: locationId, returnDate: returnDate2, returnLocationId: rLocationId, age: driverAge }});
 
   }
 }

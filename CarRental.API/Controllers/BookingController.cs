@@ -125,12 +125,22 @@ namespace CarRental.API.Controllers
                 return BadRequest();
             }
 
+            var dateTimePickUpArray = model.PickUpDate.Split(" ");
+            var dateTimeReturnArray = model.ReturnDate.Split(" ");
+
+            var dateTimePickUp = dateTimePickUpArray[1] + " " + dateTimePickUpArray[2] + " " + dateTimePickUpArray[3] + " " + dateTimePickUpArray[4];
+
+            var dateTimeReturn = dateTimeReturnArray[1] + " " + dateTimeReturnArray[2] + " " + dateTimeReturnArray[3] + " " + dateTimeReturnArray[4];
+
+
+            var dateTimePickUpFinal = Convert.ToDateTime(dateTimePickUp);
+            var dateTimeReturnFinal = Convert.ToDateTime(dateTimeReturn);
 
             var preBooking = new PreBooking();
             preBooking.PickLocationId = model.PickUpLocationId;
             preBooking.ReturnLocationId = model.ReturnLocationId;
-            preBooking.PickDate = model.PickUpDate;
-            preBooking.ReturnDate = model.ReturnDate;
+            preBooking.PickDate = dateTimePickUpFinal;
+            preBooking.ReturnDate = dateTimeReturnFinal;
             preBooking.AgeOfUser = model.DriverAge;
             preBooking.CreateOnDate = DateTime.Now;
             preBooking.IsDeleted = false;

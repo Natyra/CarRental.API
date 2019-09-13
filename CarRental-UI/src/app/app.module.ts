@@ -46,6 +46,8 @@ import { CarResultComponent } from './car-result/car-result.component';
 import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 import { ChangeSearchComponent } from './change-search/change-search.component';
 import { BookingSummaryComponent } from './booking-summary/booking-summary.component';
+import { CarsResultGuard } from './_guards/carsresult.guard';
+import { GeneralService } from './_services/general.service';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -109,7 +111,10 @@ export function tokenGetter() {
       CarmodelService,
       AuthGuard,
       BookingGuard,
-      DatePipe
+      DatePipe,
+      BookingGuard,
+      CarsResultGuard,
+      GeneralService
    ],
    bootstrap: [
       AppComponent

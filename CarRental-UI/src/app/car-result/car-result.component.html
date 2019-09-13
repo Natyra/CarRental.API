@@ -38,11 +38,11 @@
                     <h4 class="small font-weight-bold">Return Date</h4>
                     <div class="progress mb-4">
                       <!-- <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div> -->
-                      {{returnDate}}
+                      {{dateReturn}}
                     </div>
                    
                 
-                    <button type="button" class="btn btn-google btn-block" (click)="changeFilter()">Change Search</button>
+                    <button type="button" class="btn btn-google btn-block" (click)="changeFilter()" >Change Search</button>
                      
                   </div>
                 </div>
@@ -53,7 +53,7 @@
               <div class="col-lg-8 mb-4">
   
                 <!-- Illustrations -->
-                <div class="card shadow mb-4" *ngFor="let item of cars">
+                <div class="card shadow mb-4" *ngFor="let item of cars"> 
                   <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">{{item.brandName}} {{item.modelName}}</h6>
                   </div>

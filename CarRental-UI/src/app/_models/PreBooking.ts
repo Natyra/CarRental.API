@@ -1,8 +1,8 @@
 export interface PreBooking {
     pickUpLocationId: number;
     returnLocationId: number;
-    pickUpDate: Date;
-    returnDate: Date;
+    pickUpDate: string;
+    returnDate: string;
     driverAge: number;
     carId: number;
 }

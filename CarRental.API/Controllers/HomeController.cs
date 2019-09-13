@@ -111,10 +111,31 @@ namespace CarRental.API.Controllers
                 filter.ReturnLocationId = filter.PickUpLocationId;
             }
 
+            
             filter.paginationParams = new PaginationParams();
             //filter.paginationParams.PageSize = 2;
 
-            var resultAsync = await _carService.GetCarsFromSearch(filter);
+            var dateTimePickUpArray = filter.PickUpDate.Split(" ");
+            var dateTimeReturnArray = filter.ReturnDate.Split(" ");
+
+            var dateTimePickUp = dateTimePickUpArray[1] + " " + dateTimePickUpArray[2] + " " + dateTimePickUpArray[3] + " " + dateTimePickUpArray[4];
+
+            var dateTimeReturn = dateTimeReturnArray[1] + " " + dateTimeReturnArray[2] + " " + dateTimeReturnArray[3] + " " + dateTimeReturnArray[4];
+
+
+            var dateTimePickUpFinal = Convert.ToDateTime(dateTimePickUp);
+            var dateTimeReturnFinal = Convert.ToDateTime(dateTimeReturn);
+
+
+            var filterO = new CarsFilterDtoOriginal();
+            filterO.PickUpLocationId = filter.PickUpLocationId;
+            filterO.ReturnDate = dateTimeReturnFinal;
+            filterO.ReturnLocationId = filter.ReturnLocationId;
+            filterO.PickUpDate = dateTimePickUpFinal;
+            filterO.DriverAge = filter.DriverAge;
+            filterO.paginationParams = filter.paginationParams;
+
+            var resultAsync = await _carService.GetCarsFromSearch(filterO);
 
             if (resultAsync == null)
                 return BadRequest("No car founded");
@@ -146,8 +167,8 @@ namespace CarRental.API.Controllers
             model.Cars = cars;
             model.PicUpLocation = await _locationService.GetLocationAsync((int)filter.PickUpLocationId);
             model.ReturnLocation = await _locationService.GetLocationAsync((int)filter.ReturnLocationId);
-            model.PickUpDate = filter.PickUpDate;
-            model.ReturnDate = filter.ReturnDate;
+            model.PickUpDate = filterO.PickUpDate;
+            model.ReturnDate = filterO.ReturnDate;
             model.PickUpLocationId = filter.PickUpLocationId;
             model.ReturnLocationId = filter.ReturnLocationId;
 

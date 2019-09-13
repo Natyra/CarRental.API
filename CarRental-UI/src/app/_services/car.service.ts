@@ -20,6 +20,8 @@ httpOptions = {
   headers: this.headersObj
 };
 
+hasUrlChange = false;
+
 model1: Car;
 private dataSource = new BehaviorSubject<Car>(this.model1);
 data = this.dataSource.asObservable();

@@ -63,7 +63,7 @@ namespace CarRental.API.Services
             }
         }
 
-        public async Task<PagedList<Car>> GetCarsFromSearch(CarsFilterDto filter)
+        public async Task<PagedList<Car>> GetCarsFromSearch(CarsFilterDtoOriginal filter)
         {
             try
             {
