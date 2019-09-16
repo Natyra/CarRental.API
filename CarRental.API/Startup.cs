@@ -71,6 +71,7 @@ namespace CarRental.API
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICarService, CarService>();
+            services.AddScoped<IDashboardService, DashboardService>();
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<IModelService, ModelService>();
             services.AddScoped<IFuelTypeService, FuelTypeService>();

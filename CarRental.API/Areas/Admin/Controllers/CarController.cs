@@ -306,16 +306,34 @@ namespace CarRental.API.Areas.Admin
         //                        TransmisionType=car.TransmisionType.Name,
         //                        Path = carUpload != null ? Url.Content(carUpload.Path) : ""
 
-        //                    });
-        //                }
+                    foreach (var car in carsInLocation)
+                    {
+                        var carsBooking = await _carService.GetPreBookingsAsync(car.Id);
+                        var bookingId = car.Booking.Select(x => x.Id).FirstOrDefault();
+                        if (bookingId == carsBooking.Select(x => x.Id).FirstOrDefault())
+                        {
+                            var carUpload = await _carUploadService.GetCarUploadByCarIdAsync(car.Id);
+                            model.Add(new CarForListDto
+                            {
+                                Id=car.Id,
+                                CarNumber=car.CarNumber,
+                                CarColor=car.CarColor,
+                                CarCapacity=car.CarCapacity,
+                                BrandName=car.Brand.Name,
+                                ModelName=car.Model.Name,
+                                NumberOfDoors=car.NumberOfDoors,
+                                PriceForDay=car.PriceForDay,
+                                FuelType=car.FuelType.Name,
+                                ModelYear=car.ModelYear,
+                                TransmisionType=car.TransmisionType.Name,
+                                Path = carUpload != null ? Url.Content(carUpload.Path) : ""
 
 
-        //            }
-        //        }
-        //    }
-        //    return Ok(model);
 
-        //}
+                    }
+                }
+            }
+            return Ok(model);
 
 
     }
