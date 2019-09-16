@@ -243,12 +243,12 @@ namespace CarRental.API.Areas.Admin
                                 PriceForDay=car.PriceForDay,
                                 FuelType=car.FuelType.Name,
                                 ModelYear=car.ModelYear,
+                                Description=car.Description,
                                 TransmisionType=car.TransmisionType.Name,
                                 Path = carUpload != null ? Url.Content(carUpload.Path) : ""
 
                             });
                         }
-
 
                     }
                 }
