@@ -1,0 +1,58 @@
+<div id="wrapper" class="mb-4">
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <app-nav></app-nav>
+      <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+    
+          <div class="col-xl-6 col-lg-12 col-md-9">
+    
+            <div class="card o-hidden border-0 shadow-lg my-5">
+              <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="p-5">
+                      <div class="text-center">
+                        <h1 class="h4 text-gray-900 mb-4">My booking</h1>
+                      </div>
+                      
+                      <form [formGroup]="customerLoginForm" (submit)="login()" class="user">
+                        <div class="form-group">
+                          <input type="text" [ngClass]="{'is-invalid':customerLoginForm.get('email').errors && customerLoginForm.get('email').touched}"
+                          formControlName="email"  
+                          class="form-control form-control-user"  placeholder="Enter Email Address...">
+                          <div class="invalid-feedback">Email is required</div>
+                        </div>
+                        <div class="form-group">
+                          <input type="text" 
+                          [ngClass]="{'is-invalid':customerLoginForm.get('bookingId').errors && customerLoginForm.get('bookingId').touched}"
+                          formControlName="bookingId" 
+                          class="form-control form-control-user" placeholder="Booking Id">
+                          <div class="invalid-feedback">Booking Id is required</div>
+
+                        </div>
+                
+                        <button [disabled]="!customerLoginForm.valid" class="btn btn-primary btn-user btn-block" type="submit">Login</button>
+                    </form>
+  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+          </div>
+    
+        </div>
+    
+      </div>
+    
+  <app-footer></app-footer>
+    <!-- End of Footer -->
+
+  </div>
+ </div>
+

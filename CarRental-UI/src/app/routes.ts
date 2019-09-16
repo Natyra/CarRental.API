@@ -14,17 +14,32 @@ import { FueltypesListComponent } from './admin/fueltypes/fueltypes-list/fueltyp
 import { LocationAddComponent } from './admin/locations/location-add/location-add.component';
 import { BrandAddComponent } from './admin/brands/brand-add/brand-add.component';
 import { FueltypesAddComponent } from './admin/fueltypes/fueltypes-add/fueltypes-add.component';
+import { ModelListComponent } from './admin/carmodels/model-list/model-list.component';
+import { ModelAddComponent } from './admin/carmodels/model-add/model-add.component';
+import { CustomerLoginComponent } from './customer-login/customer-login.component';
+import { MyBookingComponent } from './my-booking/my-booking.component';
+import { BookingGuard } from './_guards/booking.guard';
+import { CarResultComponent } from './car-result/car-result.component';
+import { BookingSummaryComponent } from './booking-summary/booking-summary.component';
+import { CarsResultGuard } from './_guards/carsresult.guard';
 
 
 export const appRoutes: Routes = [
  { path: '', component: HomeComponent},
  { path: 'login', component: LoginComponent},
+ { path: 'car-fleet', component: CarFleetComponent},
+ { path: 'customer-login', component: CustomerLoginComponent},
+ { path: 'my-booking/:id', canActivate: [BookingGuard], component: MyBookingComponent},
+ {path: 'car-result', component: CarResultComponent},
+ {path: 'booking-summary', component: BookingSummaryComponent},
+
  {
-    path: '',
+    path: 'admin',
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
+    component: AdminNavComponent,
     children: [
-        { path: 'admin', component: AdminNavComponent},
+        //{ path: 'admin', component: AdminNavComponent},
         { path: 'cars', component: CarsListComponent},
         {path: 'cars/add', component: CarAddComponent},
         {path: 'cars/add/:id', component: CarAddComponent},
@@ -39,7 +54,9 @@ export const appRoutes: Routes = [
         { path: 'fuel', component: FueltypesListComponent},
         { path: 'fuel/add', component: FueltypesAddComponent},
         { path: 'fuel/add/:id', component: FueltypesAddComponent},
-        { path: 'car-fleet', component: CarFleetComponent}
+        { path: 'models', component: ModelListComponent},
+        { path: 'models/add', component: ModelAddComponent},
+        { path: 'models/add', component: ModelAddComponent},
     ]
  },
  { path: '**', redirectTo: '', pathMatch: 'full'},

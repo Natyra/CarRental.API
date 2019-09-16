@@ -8,13 +8,13 @@ using CarRental.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using CarRental.API.Helpers;
 
 namespace CarRental.API.Areas.Admin
 {
     
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize("Bearer")]
     //[Authorize(Roles = "Admin")]
     public class CarController : Controller
     {
@@ -40,8 +40,8 @@ namespace CarRental.API.Areas.Admin
             _locationService = locationService;
             _carUploadService = carUploadService;
         }
- 
-        [HttpGet()]
+
+        [HttpGet]
         public async Task<IActionResult> GetCars()
         {
             //if (!User.Identity.IsAuthenticated)
@@ -51,6 +51,47 @@ namespace CarRental.API.Areas.Admin
 
             var model = new List<CarForListDto>();
             var carsAsync = await _carService.GetCarsAsync();
+            var cars = carsAsync.ToList();
+
+            if (cars == null || cars.Count() <= 0)
+                return BadRequest();
+
+            for (int i = 0; i < cars.Count(); i++)
+            {
+                var carUpload = await _carUploadService.GetCarUploadByCarIdAsync(cars[i].Id);
+                model.Add(new CarForListDto
+                {
+                    Id = cars[i].Id,
+                    CarNumber = cars[i].CarNumber,
+                    BrandName = await _brandService.GetBrandNameAsync((int)cars[i].BrandId),
+                    ModelYear = cars[i].ModelYear,
+                    NumberOfDoors = cars[i].NumberOfDoors,
+                    CarCapacity = cars[i].CarCapacity,
+                    CarColor = cars[i].CarColor,
+                    PriceForDay = cars[i].PriceForDay,
+                    Description = cars[i].Description,
+                    ModelName = await _modelService.GetModelNameAsync((int)cars[i].ModelId),
+                    FuelType = await _fuelTypeService.GetFuelTypeNameAsync((int)cars[i].FuelTypeId),
+                    TransmisionType = cars[i].TransmisionType.Name,
+                    CarLocation = await _locationService.GetLocationAsync((int)cars[i].CarLocationId),
+                    Path = carUpload != null ? Url.Content(carUpload.Path) : ""
+                });
+            }
+
+           
+            return Ok(model);
+        }
+
+        [HttpGet("cars")]
+        public async Task<IActionResult> GetFilteredCars([FromQuery]PaginationParams carsParam)
+        {
+            //if (!User.Identity.IsAuthenticated)
+            //    return Unauthorized();
+            //if (!User.IsInRole("Admin"))
+            //    return Unauthorized();
+
+            var model = new List<CarForListDto>();
+            var carsAsync = await _carService.GetFilteredCarsAsync(carsParam);
             var cars = carsAsync.ToList();
 
             if (cars == null || cars.Count() <= 0)
@@ -77,6 +118,8 @@ namespace CarRental.API.Areas.Admin
                     Path = carUpload != null? Url.Content(carUpload.Path):""
                 });
             }
+
+            Response.AddPagination(carsAsync.CurrentPage, carsAsync.PageSize, carsAsync.TotalCount, carsAsync.TotalPages);
 
             return Ok(model);
         }
@@ -109,6 +152,8 @@ namespace CarRental.API.Areas.Admin
         }
 
         [HttpPost("add")]
+        [Authorize("Bearer")]
+
         public async Task<IActionResult> AddCar(CarForAddDto model)
         {
             //if (!User.Identity.IsAuthenticated)
@@ -154,6 +199,8 @@ namespace CarRental.API.Areas.Admin
         }
 
         [HttpPut("edit/{id}")]
+        [Authorize("Bearer")]
+
         public async Task<IActionResult> EditCar(int id, CarForEditDto model)
         {
             if (!ModelState.IsValid)
@@ -190,6 +237,8 @@ namespace CarRental.API.Areas.Admin
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize("Bearer")]
+
         public async Task<IActionResult> DeleteCar(int id)
         {
             var carToDelete = await _carService.GetCarByIdAsync(id);
@@ -213,16 +262,38 @@ namespace CarRental.API.Areas.Admin
 
         }
 
-        [HttpPost("SearchResult")]
-        public async Task<IActionResult> SearchResult([FromBody]CarsFilterDto carsFilterDto)
-        {
-            var location = new Location { Id = (int)carsFilterDto.PickUpLocationId };
-            var model = new List<CarForListDto>();
-            if (carsFilterDto.PickUpDate >= DateTime.UtcNow)
-            {
-                if (carsFilterDto.PickUpLocationId.HasValue)
-                {
-                    var carsInLocation = await _carService.CarsFilterLocationAsync(location);
+        //[HttpPost("SearchResult")]
+        //public async Task<IActionResult> SearchResult([FromBody]CarsFilterDto carsFilterDto)
+        //{
+        //    var location = new Location { Id = (int)carsFilterDto.PickUpLocationId };
+        //    var model = new List<CarForListDto>();
+        //    if (carsFilterDto.PickUpDate >= DateTime.UtcNow)
+        //    {
+        //        if (carsFilterDto.PickUpLocationId.HasValue)
+        //        {
+        //            var carsInLocation = await _carService.CarsFilterLocationAsync(location);
+
+        //            foreach (var car in carsInLocation)
+        //            {
+        //                var carsBooking = await _carService.GetPreBookingsAsync(car.Id);
+        //                var bookingId = car.Booking.Select(x => x.Id).FirstOrDefault();
+        //                if (bookingId == carsBooking.Select(x => x.Id).FirstOrDefault())
+        //                {
+        //                    var carUpload = await _carUploadService.GetCarUploadByCarIdAsync(car.Id);
+        //                    model.Add(new CarForListDto
+        //                    {
+        //                        Id=car.Id,
+        //                        CarNumber=car.CarNumber,
+        //                        CarColor=car.CarColor,
+        //                        CarCapacity=car.CarCapacity,
+        //                        BrandName=car.Brand.Name,
+        //                        ModelName=car.Model.Name,
+        //                        NumberOfDoors=car.NumberOfDoors,
+        //                        PriceForDay=car.PriceForDay,
+        //                        FuelType=car.FuelType.Name,
+        //                        ModelYear=car.ModelYear,
+        //                        TransmisionType=car.TransmisionType.Name,
+        //                        Path = carUpload != null ? Url.Content(carUpload.Path) : ""
 
                     foreach (var car in carsInLocation)
                     {
@@ -243,19 +314,16 @@ namespace CarRental.API.Areas.Admin
                                 PriceForDay=car.PriceForDay,
                                 FuelType=car.FuelType.Name,
                                 ModelYear=car.ModelYear,
-                                Description=car.Description,
                                 TransmisionType=car.TransmisionType.Name,
                                 Path = carUpload != null ? Url.Content(carUpload.Path) : ""
 
-                            });
-                        }
+
 
                     }
                 }
             }
             return Ok(model);
 
-        }
 
     }
 }

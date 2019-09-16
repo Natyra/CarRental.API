@@ -14,7 +14,7 @@ export class FueltypesAddComponent implements OnInit {
   @Output() cancelAddBrand = new EventEmitter();
 addFuelForm: FormGroup;
 model: FuelType;
-modelName = '';
+fuelTypeName = '';
 id = +this.route.snapshot.paramMap.get('id');
   constructor(private fb: FormBuilder, private fuelService: FueltypeService, private alertify: AlertifyService, private router: Router, private route: ActivatedRoute) { }
 
@@ -39,18 +39,18 @@ id = +this.route.snapshot.paramMap.get('id');
         this.fuelService.addFuelType(this.model).subscribe((result: any) => {
           this.alertify.success(result.message);
         }, error => {
-            this.alertify.error(error);
+            this.alertify.error(error.error);
         }, () => {
-          this.router.navigate(['/fuel']);
+          this.router.navigate(['/admin/fuel']);
         });
       } else {
         this.fuelService.editFuelType(this.id, this.model).subscribe((result: any) => {
           this.alertify.success(result.message);
         }, error => {
-          this.alertify.error(error);
+          this.alertify.error(error.error);
         }, () => {
-            this.router.navigate(['/fuel']);
-        }); 
+            this.router.navigate(['/admin/fuel']);
+        });
       }
     }
   }
@@ -58,17 +58,17 @@ id = +this.route.snapshot.paramMap.get('id');
   getFuelTypeById() {
     if (this.id !== 0) {
       this.fuelService.getFuelTypeById(this.id).subscribe((fuel: FuelType) => {
-        this.modelName = fuel.name;
+        this.fuelTypeName = fuel.name;
       }, error => {
-        this.alertify.error(error);
+        this.alertify.error(error.error);
       });
     } else {
-      this.modelName = '';
+      this.fuelTypeName = '';
     }
   }
 
   cancel() {
     this.cancelAddBrand.emit(false);
-    this.router.navigate(['/fuel']);
+    this.router.navigate(['/admin/fuel']);
   }
 }

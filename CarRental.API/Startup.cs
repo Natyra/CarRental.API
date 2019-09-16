@@ -80,6 +80,7 @@ namespace CarRental.API
             services.AddScoped<IBookingService, BookingService>();
             services.AddScoped<ICarUploadService, CarUploadService>();
             services.AddScoped<ITransmisionTypeService, TransmisionTypeService>();
+            services.AddScoped<IPreBookingService, PreBookingService>();
 
             services.AddAuthorization(auth =>
             {

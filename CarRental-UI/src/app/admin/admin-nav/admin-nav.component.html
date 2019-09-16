@@ -1,7 +1,7 @@
 
 
 
-
+<div id="wrapper">
   <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <a class="sidebar-brand d-flex align-items-center justify-content-center" [routerLink]="['/']">
@@ -20,7 +20,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" [routerLink]="['/cars']">
+      <a class="nav-link collapsed" [routerLink]="['/admin/cars']">
         <i class="fas fa-fw fa-car"></i>
         <span>Cars</span>
       </a>
@@ -28,7 +28,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" [routerLink]="['/users']" routerLinkActive="router-link-active">
+      <a class="nav-link collapsed" [routerLink]="['/admin/users']" routerLinkActive="router-link-active">
         <i class="fas fa-fw fa-user"></i>
         <span>Users</span>
       </a>
@@ -36,27 +36,27 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed"  [routerLink]="['/bookings']" routerLinkActive="router-link-active">
+      <a class="nav-link collapsed"  [routerLink]="['/admin/bookings']" routerLinkActive="router-link-active">
         <i class="fas fa-fw fa-folder"></i>
         <span>Bookings</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/locations']" routerLinkActive="router-link-active">
+      <a class="nav-link" [routerLink]="['/admin/locations']" routerLinkActive="router-link-active">
         <i class="fas fa-fw fa-location-arrow"></i>
         <span>Locations</span></a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link"  [routerLink]="['/brands']" routerLinkActive="router-link-active">
+      <a class="nav-link"  [routerLink]="['/admin/brands']" routerLinkActive="router-link-active">
         <i class="fas fa-fw fa-table"></i>
         <span>Brands and Models</span></a>
     </li>
 
     
     <li class="nav-item">
-      <a class="nav-link"  [routerLink]="['/fuel']" routerLinkActive="router-link-active">
+      <a class="nav-link"  [routerLink]="['/admin/fuel']" routerLinkActive="router-link-active">
         <i class="fas fa-fw fa-oil-can"></i>
         <span>Fuel Types</span></a>
     </li>
@@ -66,6 +66,10 @@
     </div>
 
   </ul>
+  <router-outlet></router-outlet>
+</div>
+
+
 
 
 <script src="../node_modules/startbootstrap-sb-admin-2/vendor/jquery/jquery.min.js"></script>

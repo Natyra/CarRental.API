@@ -7,12 +7,13 @@ using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CarRental.API.Helpers;
 
 namespace CarRental.API.Areas.Admin.Controllers
 {
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize("Bearer")]
+    //[Authorize("Bearer")]
 
     public class BookingController : Controller
     {
@@ -63,6 +64,49 @@ namespace CarRental.API.Areas.Admin.Controllers
                     }
                 });
             }
+
+            return Ok(model);
+        }
+
+        [HttpGet("bookings")]
+        public async Task<IActionResult> GetFilteredBookings([FromQuery]PaginationParams paginationParams)
+        {
+            var model = new List<BookingForListDto>();
+            var bookingsAsync = await _bookingService.GetFilteredBookingsAsync(paginationParams);
+            var bookings = bookingsAsync.ToList();
+
+            if (bookings == null || bookings.Count <= 0)
+                return BadRequest("Booking not found");
+
+            for (int i = 0; i < bookings.Count(); i++)
+            {
+                model.Add(new BookingForListDto
+                {
+                    Id = bookings[i].Id,
+                    PickUpLocation = await _locationService.GetLocationAsync((int)bookings[i].PreBooking.PickLocationId),
+                    ReturnLocation = await _locationService.GetLocationAsync((int)bookings[i].PreBooking.ReturnLocationId),
+                    PickUpDate = (DateTime)bookings[i].PreBooking.PickDate,
+                    ReturnDate = (DateTime)bookings[i].PreBooking.ReturnDate,
+
+                    Car = new CarForListDto
+                    {
+                        Id = bookings[i].Car.Id,
+                        CarNumber = bookings[i].Car.CarNumber
+                    },
+
+                    User = new UserDto
+                    {
+                        Id = bookings[i].User.Id,
+                        FirstName = bookings[i].User.FirstName,
+                        LastName = bookings[i].User.LastName,
+                        Email = bookings[i].User.Email,
+                        PhoneNumber = bookings[i].User.PhoneNumber
+                    }
+                });
+            }
+
+            Response.AddPagination(bookingsAsync.CurrentPage, bookingsAsync.PageSize, bookingsAsync.TotalCount, bookingsAsync.TotalPages);
+
 
             return Ok(model);
         }

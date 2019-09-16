@@ -1,4 +1,6 @@
-﻿using CarRental.API.Interfaces;
+﻿using CarRental.API.Dtos;
+using CarRental.API.Helpers;
+using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using System;
 using System.Collections.Generic;
@@ -51,6 +53,22 @@ namespace CarRental.API.Services
             }
         }
 
+        public async Task<PagedList<AspNetUsers>> GetFilteredUsersAsync(PaginationParams userParams)
+        {
+            try
+            {
+                var users = _context.AspNetUsers;
+               
+                return await PagedList<AspNetUsers>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
+
+            }
+            catch (Exception ex)
+            {
+                Logger(ex, "Geting users from db faild");
+                return null;
+            }
+        }
+
         public async Task DeleteUserAsync(AspNetUsers user)
         {
             try
@@ -78,10 +96,20 @@ namespace CarRental.API.Services
                 return null;
             }
         }
-        public async Task<string> GetUserIdByEmail(string email)
+        public async Task<AspNetUsers> GetUserIdByEmail(string email)
         {
-            var user = await _genericRepository.FindOne(x => x.Email == email);
-            return user.Id;
+            try
+            {
+                var user = await _genericRepository.FindOne(x => x.Email.ToLower() == email.ToLower());
+                return user;
+            }
+            catch (Exception ex)
+            {
+
+                Logger(ex, "Get User by email faild");
+                return null;
+            }
+         
         }
 
 

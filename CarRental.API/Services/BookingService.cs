@@ -1,4 +1,6 @@
-﻿using CarRental.API.Interfaces;
+﻿using CarRental.API.Dtos;
+using CarRental.API.Helpers;
+using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,12 +24,27 @@ namespace CarRental.API.Services
             _context = context;
         }
 
+        public async Task<PagedList<Booking>> GetFilteredBookingsAsync(PaginationParams paginationParams)
+        {
+            try
+            {
+                var bookings = _context.Booking.Where(x => x.IsDeleted != true).Include(x => x.PreBooking).Include(x => x.User).Include(x => x.Car);
+                return await PagedList<Booking>.CreateAsync(bookings, paginationParams.PageNumber, paginationParams.PageSize);
+
+            }
+            catch (Exception ex)
+            {
+                Logger(ex, "Geting bookings from db failed");
+                return null;
+            }
+        }
+
         public async Task<IEnumerable<Booking>> GetBookingsAsync()
         {
             try
             {
-                var bookings = await _context.Booking.Where(x => x.IsDeleted != true).Include(x => x.PreBooking).Include(x => x.User).Include(x => x.Car).ToListAsync();
-                return bookings;
+                return await  _context.Booking.Where(x => x.IsDeleted != true).Include(x => x.PreBooking).Include(x => x.User).Include(x => x.Car).ToListAsync();
+                
 
             }
             catch (Exception ex)
@@ -86,8 +103,18 @@ namespace CarRental.API.Services
 
         public async Task<Booking> GetBookingAndDependenciesById(int id)
         {
-            var bookingWithDependencys = await _context.Booking.Where(x => x.IsDeleted == false).Include(x => x.Car).ThenInclude(x => x.Model).Include(x => x.Car).ThenInclude(x => x.Brand).Include(x => x.User).Include(x=>x.PreBooking).FirstOrDefaultAsync(x=>x.Id==id);
-            return bookingWithDependencys;
+            try
+            {
+                var bookingWithDependencys = await _context.Booking.Where(x => x.IsDeleted == false).Include(x => x.Car).Include(x => x.User).Include(x => x.PreBooking).FirstOrDefaultAsync(x => x.Id == id);
+                return bookingWithDependencys;
+            }
+            catch (Exception ex)
+            {
+
+                Logger(ex, "Geting booking from db failed");
+                return null;
+            }
+           
         }
 
         private void Logger(Exception ex, string message)

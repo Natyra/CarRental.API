@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { appRoutes } from './routes';
-import {NgbModule, NgbDropdown} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule, NgbDropdown, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
@@ -32,8 +32,22 @@ import { AlertifyService } from './_services/alertify.service';
 import { CarAddComponent } from './admin/cars/car-add/car-add.component';
 import { LocationAddComponent } from './admin/locations/location-add/location-add.component';
 import { BrandAddComponent } from './admin/brands/brand-add/brand-add.component';
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModalModule } from 'ngx-bootstrap';
 import { FueltypesAddComponent } from './admin/fueltypes/fueltypes-add/fueltypes-add.component';
+import { ModelListComponent } from './admin/carmodels/model-list/model-list.component';
+import { ModelAddComponent } from './admin/carmodels/model-add/model-add.component';
+import { CarmodelService } from './_services/carmodel.service';
+import { CustomerLoginComponent } from './customer-login/customer-login.component';
+import { MyBookingComponent } from './my-booking/my-booking.component';
+import { AuthGuard } from './_guards/auth.guard';
+import { BookingGuard } from './_guards/booking.guard';
+import { DatePipe } from '@angular/common';
+import { CarResultComponent } from './car-result/car-result.component';
+import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
+import { ChangeSearchComponent } from './change-search/change-search.component';
+import { BookingSummaryComponent } from './booking-summary/booking-summary.component';
+import { CarsResultGuard } from './_guards/carsresult.guard';
+import { GeneralService } from './_services/general.service';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -57,15 +71,24 @@ export function tokenGetter() {
       CarAddComponent,
       LocationAddComponent,
       BrandAddComponent,
-      FueltypesAddComponent
+      FueltypesAddComponent,
+      ModelListComponent,
+      ModelAddComponent,
+      CustomerLoginComponent,
+      MyBookingComponent,
+      CarResultComponent,
+      ChangeSearchComponent,
+      BookingSummaryComponent
    ],
    imports: [
       BrowserModule,
+      AngularDateTimePickerModule,
       NgbModule,
       AppRoutingModule,
       HttpClientModule,
       FormsModule,
       ReactiveFormsModule,
+      NgbPaginationModule,
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
          config: {
@@ -84,7 +107,14 @@ export function tokenGetter() {
       LocationService,
       FueltypeService,
       AuthService,
-      AlertifyService
+      AlertifyService,
+      CarmodelService,
+      AuthGuard,
+      BookingGuard,
+      DatePipe,
+      BookingGuard,
+      CarsResultGuard,
+      GeneralService
    ],
    bootstrap: [
       AppComponent

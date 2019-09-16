@@ -7,12 +7,12 @@ using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CarRental.API.Helpers;
 
 namespace CarRental.API.Areas.Admin.Controllers
 {
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize("Bearer")]
     //[Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
@@ -25,11 +25,37 @@ namespace CarRental.API.Areas.Admin.Controllers
             _genericRepository = genericRepository;
         }
 
-        [HttpGet]
+        [HttpGet()]
         public async Task<IActionResult> GetUsers()
         {
             var model = new List<UserDto>();
             var usersAsync = await _userService.GetUsersAsync();
+            var users = usersAsync.ToList();
+
+            if (users == null || users.Count <= 0)
+                return BadRequest("Users not found");
+
+            for (int i = 0; i < users.Count(); i++)
+            {
+                model.Add(new UserDto
+                {
+                    Id = users[i].Id,
+                    UserName = users[i].UserName,
+                    Email = users[i].Email,
+                    FirstName = users[i].FirstName,
+                    LastName = users[i].LastName,
+                    PhoneNumber = users[i].PhoneNumber
+                });
+            }
+           
+            return Ok(model);
+        }
+
+        [HttpGet("users")]
+        public async Task<IActionResult> GetFilteredUsers([FromQuery]PaginationParams paginationParams)
+        {
+            var model = new List<UserDto>();
+            var usersAsync = await _userService.GetFilteredUsersAsync(paginationParams);
             var users = usersAsync.ToList();
 
             if (users == null || users.Count <= 0)
@@ -47,13 +73,18 @@ namespace CarRental.API.Areas.Admin.Controllers
                    PhoneNumber = users[i].PhoneNumber
                 });
             }
+            Response.AddPagination(usersAsync.CurrentPage, usersAsync.PageSize, usersAsync.TotalCount, usersAsync.TotalPages);
 
             return Ok(model);
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize("Bearer")]
         public async Task<IActionResult> DeleteUser(string id)
         {
+            if (!User.IsInRole("Admin"))
+                return Unauthorized();
+
             var user = await _userService.GetUserByIdAsync(id);
 
             if (user == null)

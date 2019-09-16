@@ -1,4 +1,6 @@
-﻿using CarRental.API.Models;
+﻿using CarRental.API.Dtos;
+using CarRental.API.Helpers;
+using CarRental.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +12,9 @@ namespace CarRental.API.Interfaces
     {
         Task<string> GetUserNameAsync(string id);
         Task<IEnumerable<AspNetUsers>> GetUsersAsync();
+        Task<PagedList<AspNetUsers>> GetFilteredUsersAsync(PaginationParams userParams);
         Task DeleteUserAsync(AspNetUsers user);
         Task<AspNetUsers> GetUserByIdAsync(string id);
-        Task<string> GetUserIdByEmail(string email);
+        Task<AspNetUsers> GetUserIdByEmail(string email);
     }
 }

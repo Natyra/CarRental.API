@@ -14,7 +14,7 @@ export class BrandAddComponent implements OnInit {
   @Output() cancelAddBrand = new EventEmitter();
 addBrandForm: FormGroup;
 model: Brand;
-brandName;
+brandName = '';
 id = +this.route.snapshot.paramMap.get('id');
   constructor(private fb: FormBuilder, private brandService: BrandService, private alertify: AlertifyService, private router: Router, private route: ActivatedRoute) { }
 
@@ -36,7 +36,7 @@ getBrnadById() {
   this.brandService.getBrandById(this.id).subscribe((brand: Brand) => {
       this.brandName = brand.name;
     }, error => {
-      this.alertify.error(error);
+      this.alertify.error(error.error);
     });
   } else {
     this.brandName = '';
@@ -50,17 +50,17 @@ addBrand() {
       this.brandService.addBrand(this.model).subscribe((result: any) => {
         this.alertify.success(result.message);
       }, error => {
-        this.alertify.error(error);
+        this.alertify.error(error.error);
       }, () => {
-        this.router.navigate(['/brands']);
+        this.router.navigate(['/admin/brands']);
       });
     } else {
       this.brandService.editBrand(this.model, this.id).subscribe((result: any) => {
         this.alertify.success(result.message);
       }, error => {
-        this.alertify.error(error);
+        this.alertify.error(error.error);
       }, () => {
-        this.router.navigate(['/brands']);
+        this.router.navigate(['/admin/brands']);
       });
     }
   }
@@ -68,6 +68,6 @@ addBrand() {
 
 cancel() {
   this.cancelAddBrand.emit(false);
-  this.router.navigate(['/brands']);
+  this.router.navigate(['/admin/brands']);
 }
 }

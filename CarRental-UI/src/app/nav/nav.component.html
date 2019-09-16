@@ -22,11 +22,14 @@
           
           </li>
           <li class="nav-item">
-            <a class="nav-link text-gray-800"[routerLink]="['']">
+            <a (click)="hasBookingId()" class="nav-link text-gray-800" style="cursor: pointer">
               My Booking
             </a>
+
+          
           
           </li>
+
           <li class="nav-item">
             <a class="nav-link text-gray-800" href="#">
              Contact Us
@@ -34,7 +37,7 @@
           
           </li>
           <li class="nav-item" *ngIf="loggedIn()">
-              <a class="nav-link text-gray-800" [routerLink]="['/cars']">
+              <a class="nav-link text-gray-800" [routerLink]="['/admin/cars']">
                 Administrimi
               </a>
             
@@ -42,7 +45,7 @@
         </ul>
        
         <div *ngIf="loggedIn()" ngbDropdown class="d-inline-block">
-            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>  Welcome {{authService.decodedToken?.unique_name}}</button>
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>  Welcome {{username}}</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button ngbDropdownItem>Edit Profile</button>
               <a (click)="logout()" ngbDropdownItem> Log out</a>        

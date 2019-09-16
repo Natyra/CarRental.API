@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CarRental.API.Dtos;
 using CarRental.API.Interfaces;
+using CarRental.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,32 +13,67 @@ namespace CarRental.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize("Bearer")]
+    //[Authorize("Bearer")]
     public class BookingController : ControllerBase
     {
         private readonly IBookingService _bookingService;
         private readonly IUserService _userService;
         private readonly ILocationService _locationService;
+        private readonly ICarUploadService _carUploadService;
+        private readonly IBrandService _brandService;
+        private readonly IFuelTypeService _fuelTypeService;
+        private readonly ITransmisionTypeService _transmisionTypeService;
+        private readonly IModelService _modelService;
+        private readonly IPreBookingService _preBookingService;
 
-        public BookingController(IBookingService bookingService, IUserService userService, ILocationService locationService)
+        public BookingController(IBookingService bookingService, IUserService userService, ILocationService locationService, ICarUploadService carUploadService, IBrandService brandService, IFuelTypeService fuelTypeService, ITransmisionTypeService transmisionTypeService, IModelService modelService, IPreBookingService preBookingService)
         {
             _bookingService = bookingService;
             _userService = userService;
             _locationService = locationService;
+            _carUploadService = carUploadService;
+            _brandService = brandService;
+            _fuelTypeService = fuelTypeService;
+            _transmisionTypeService = transmisionTypeService;
+            _modelService = modelService;
+            _preBookingService = preBookingService;
         }
-        [HttpPost]
-        public async Task<bool> IsBookingOfUser ([FromBody]string email , int bookingId)
+        [HttpPost("userbooking")]
+        public async Task<IActionResult> IsBookingOfUser([FromBody]BookingLoginDto model)
         {
-            var userId = await _userService.GetUserIdByEmail(email);
-            var booking = await _bookingService.GetBookingByIdAsync(bookingId);
-            if (booking.UserId==userId)
+            var isValidUser = false;
+            if (!ModelState.IsValid)
+                return BadRequest(new
+                {
+                    message = "Email or bookingId is not fount"
+                });
+
+            var user = await _userService.GetUserIdByEmail(model.Email);
+            if (user == null)
+                return BadRequest("User not found");
+           
+            var booking = await _bookingService.GetBookingByIdAsync(model.BookingId);
+
+            if (booking == null)
+                return BadRequest("Booking not found");
+
+
+            if (booking.UserId==user.Id)
             {
-                return true;
+                isValidUser = true;
             }
-            return false;
+            else
+            {
+                isValidUser = false;
+            }
+
+            return Ok(new
+            {
+                isValidUser = isValidUser
+            });
         }
 
-        [HttpGet("GetBookingDetails/{id}")]
+        [HttpGet("bookingdetails/{id}")]
         public async Task<IActionResult> GetBookingDetails(int id)
         {
             var model = new BookingForListDto();
@@ -54,12 +90,16 @@ namespace CarRental.API.Controllers
             model.PickUpDate = (DateTime)booking.PreBooking.PickDate;
             model.ReturnDate = (DateTime)booking.PreBooking.ReturnDate;
 
+            var carUpload = await _carUploadService.GetPathOfCarUploadAsync((int)booking.Car.Id);
             model.Car = new CarForListDto
             {
                 Id = booking.Car.Id,
                 CarNumber = booking.Car.CarNumber,
-                BrandName = booking.Car.Brand.Name,
-                ModelName = booking.Car.Model.Name
+                BrandName = await _brandService.GetBrandNameAsync((int)booking.Car.BrandId),
+                ModelName = await _modelService.GetModelNameAsync((int)booking.Car.ModelId),
+                TransmisionType = await _transmisionTypeService.TransmisionTypeNameAsync((int)booking.Car.TransmisionTypeId),
+                FuelType = await _fuelTypeService.GetFuelTypeNameAsync((int)booking.Car.FuelTypeId),
+                Path = Url.Content(carUpload)
             };
 
             model.User = new UserDto
@@ -75,6 +115,44 @@ namespace CarRental.API.Controllers
 
             return Ok(model);
 
+        }
+
+        [HttpPost("addprebooking")]
+        public async Task<IActionResult> AddPreBooking(PreBookingForAdd model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var dateTimePickUpArray = model.PickUpDate.Split(" ");
+            var dateTimeReturnArray = model.ReturnDate.Split(" ");
+
+            var dateTimePickUp = dateTimePickUpArray[1] + " " + dateTimePickUpArray[2] + " " + dateTimePickUpArray[3] + " " + dateTimePickUpArray[4];
+
+            var dateTimeReturn = dateTimeReturnArray[1] + " " + dateTimeReturnArray[2] + " " + dateTimeReturnArray[3] + " " + dateTimeReturnArray[4];
+
+
+            var dateTimePickUpFinal = Convert.ToDateTime(dateTimePickUp);
+            var dateTimeReturnFinal = Convert.ToDateTime(dateTimeReturn);
+
+            var preBooking = new PreBooking();
+            preBooking.PickLocationId = model.PickUpLocationId;
+            preBooking.ReturnLocationId = model.ReturnLocationId;
+            preBooking.PickDate = dateTimePickUpFinal;
+            preBooking.ReturnDate = dateTimeReturnFinal;
+            preBooking.AgeOfUser = model.DriverAge;
+            preBooking.CreateOnDate = DateTime.Now;
+            preBooking.IsDeleted = false;
+
+            await _preBookingService.AddPreBooking(preBooking);
+            await _preBookingService.SaveChanges();
+
+            return Ok(new {
+                message = "PreBooking added successfully",
+                pb = preBooking.Id,
+                car = model.CarId
+            });
         }
 
     }

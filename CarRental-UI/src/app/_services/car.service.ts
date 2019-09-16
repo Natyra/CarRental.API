@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
-import { Car } from '../_models/car';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { Car } from '../_models/Car';
 import { CarAdd } from '../_models/CarAdd';
+import { PaginatedResult } from '../_models/Pagination';
+import { map } from 'rxjs/operators';
+import { SearchCars } from '../_models/SearchCars';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +20,39 @@ httpOptions = {
   headers: this.headersObj
 };
 
+hasUrlChange = false;
+
+model1: Car;
+private dataSource = new BehaviorSubject<Car>(this.model1);
+data = this.dataSource.asObservable();
+
 constructor(private http: HttpClient) { }
 
 getCars(): Observable<Car[]> {
-  return this.http.get<Car[]>(this.baseUrl + 'admin/car', this.httpOptions);
+  return this.http.get<Car[]>(this.baseUrl + 'admin/car');
+}
+
+getFilteredCars(page?, itemsPerPage?): Observable<PaginatedResult<Car[]>> {
+
+  const paginatedResult: PaginatedResult<Car[]> = new PaginatedResult<Car[]>();
+
+  let params = new HttpParams();
+
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+  return this.http.get<Car[]>(this.baseUrl + 'admin/car/cars', { observe: 'response', params}) 
+  .pipe(
+    map(response => {
+      paginatedResult.result = response.body;
+      if (response.headers.get('Pagination') != null) {
+        paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+      }
+      return paginatedResult;
+  })
+  );
 }
 
 addCar(model: CarAdd) {
@@ -37,6 +69,34 @@ editCar(model: CarAdd, id: number) {
 
 deleteCar(id: number) {
   return this.http.delete(this.baseUrl + 'admin/car/delete/' + id, this.httpOptions);
+}
+
+searchCars(model: SearchCars, page?, itemsPerPage?) {
+
+  const paginatedResult: PaginatedResult<Car[]> = new PaginatedResult<Car[]>();
+
+  let params = new HttpParams();
+
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+
+  }
+  params = params.append('pickUpLocationId', model.pickUpLocationId);
+  params = params.append('returnLocationId', '0');
+  params = params.append('pickUpDate', model.pickUpDate.toString());
+  params = params.append('returnDate', model.returnDate);
+
+  return this.http.get<Car[]>(this.baseUrl + 'home/filtercars', { observe: 'response', params}) 
+  .pipe(
+    map(response => {
+      paginatedResult.result = response.body;
+      if (response.headers.get('Pagination') != null) {
+        paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+      }
+      return paginatedResult;
+  })
+  );
 }
 }
 

@@ -9,10 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  username: string;
+  bookingId: string;
+  hasBooking = false;
 
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
+    if (this.loggedIn() === true) {
+      this.username = this.authService.decodedToken.unique_name;
+    }
   }
 
   loggedIn() {
@@ -24,6 +30,20 @@ logout() {
  localStorage.removeItem('token');
  this.alertify.message('logged out');
  this.router.navigate(['/']);
+}
+
+hasBookingId() {
+  const bookingId = sessionStorage.getItem('bookingId');
+  console.log(bookingId);
+  if (bookingId !== null) {
+    this.bookingId = bookingId;
+    this.hasBooking = true;
+    this.router.navigate(['/my-booking', bookingId]);
+  } else {
+    this.hasBooking = false;
+    this.router.navigate(['/customer-login']);
+
+  }
 }
 
 }

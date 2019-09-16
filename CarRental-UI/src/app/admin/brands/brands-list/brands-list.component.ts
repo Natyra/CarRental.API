@@ -4,6 +4,7 @@ import { BrandService } from 'src/app/_services/brand.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Router } from '@angular/router';
+import { PaginatedResult } from 'src/app/_models/Pagination';
 
 @Component({
   selector: 'app-brands-list',
@@ -13,15 +14,24 @@ import { Router } from '@angular/router';
 export class BrandsListComponent implements OnInit {
 brands: Brand[];
 modalRef: BsModalRef;
+currentPage = 1;
+itemsPerPage = 10;
+totalItems;
+totalPages;
+
   constructor(private brandService: BrandService, private modalService: BsModalService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
-    this.loadBrands();
+    this.loadFilteredBrands();
   }
 
-  loadBrands() {
-this.brandService.getBrands().subscribe((brands: Brand[]) => {
-  this.brands = brands;
+  loadFilteredBrands() {
+this.brandService.getFilteredBrands(this.currentPage, this.itemsPerPage).subscribe((res: PaginatedResult<Brand[]>) => {
+  this.brands = res.result;
+  this.currentPage = res.pagination.currentPage;
+  this.itemsPerPage = res.pagination.itemsPerPage;
+  this.totalItems = res.pagination.totalItems;
+  this.totalPages = res.pagination.totalPages;
 }, error => {
 console.log(error);
 });
@@ -30,11 +40,9 @@ console.log(error);
   deleteBrand(id: number) {
     return this.brandService.deleteBrand(id).subscribe((result: any) => {
       this.alertify.success(result.message);
-      this.loadBrands();
+      this.loadFilteredBrands();
     }, error => {
-      this.alertify.error(error);
-    }, () => {
-      this.router.navigate(['/brands']);
+      this.alertify.error(error.error);
     });
   }
 
@@ -47,6 +55,11 @@ console.log(error);
   }
   decline(): void {
     this.modalRef.hide();
+  }
+
+  pageChanged(event: any): void {
+    this.currentPage = event;
+    this.loadFilteredBrands();
   }
 
 }

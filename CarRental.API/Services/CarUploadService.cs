@@ -77,6 +77,20 @@ namespace CarRental.API.Services
             }
         }
 
+        public async Task<string> GetPathOfCarUploadAsync(int carId)
+        {
+            try
+            {
+                var upload = await _genericRepository.FindOne(x => x.CarId == carId);
+                return upload.Path;
+            }
+            catch (Exception ex)
+            {
+                Logger(ex, "Get car upload by id faild");
+                return "";
+            }
+        }
+
         private void Logger(Exception ex, string message)
         {
             var errorMessage = (ex.InnerException?.Message != null ? ex.InnerException.Message : ex.Message);

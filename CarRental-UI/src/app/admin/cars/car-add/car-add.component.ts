@@ -110,7 +110,7 @@ getCarById() {
     });
 
   }, error => {
-    this.alertify.error(error);
+    this.alertify.error(error.error);
   });
 }
 
@@ -121,17 +121,17 @@ addCar() {
     this.carService.addCar(this.model).subscribe(() => {
       this.alertify.success('Car added successfully');
     }, error => {
-      this.alertify.error(error);
+      this.alertify.error(error.error);
     }, () => {
-      this.router.navigate(['/cars']);
+      this.router.navigate(['/admin/cars']);
     });
   } else {
     this.carService.editCar(this.model, this.id).subscribe((result: any) => {
       this.alertify.success(result.message);
     }, error => {
-      this.alertify.error(error);
+      this.alertify.error(error.error);
     }, () => {
-      this.router.navigate(['/cars']);
+      this.router.navigate(['/admin/cars']);
     });
   }
   }
@@ -140,14 +140,14 @@ addCar() {
 
 cancel() {
   this.cancelAddCar.emit(false);
-  this.router.navigate(['/cars']);
+  this.router.navigate(['/admin/cars']);
 }
 
 getBrands() {
   this.brandService.getBrands().subscribe((brands: Brand[]) => {
     this.brands = brands;
   }, error =>{
-    this.alertify.error(error);
+    this.alertify.error(error.error);
   });
 }
 
@@ -155,7 +155,7 @@ getFuelTypes() {
 this.fuelTypeService.getFuelTypes().subscribe((fuelTypes: FuelType[]) =>{
   this.fuelTypes = fuelTypes;
 }, error => {
-  this.alertify.error(error);
+  this.alertify.error(error.error);
 });
 }
 
@@ -163,7 +163,7 @@ getTransmisionTypes() {
   this.transmisionTypeService.getTransmisionTypes().subscribe((types: TransmisionType[]) => {
     this.transmisionTypes = types;
   }, error => {
-    this.alertify.error(error);
+    this.alertify.error(error.error);
   });
 }
 
@@ -171,7 +171,7 @@ getLocations() {
 this.locationService.getLocations().subscribe((locations: Location[]) => {
   this.locations = locations;
 }, error => {
-this.alertify.error(error);
+this.alertify.error(error.error);
 });
 }
 
@@ -179,7 +179,7 @@ getModelsByBrandId(brandId: number) {
   this.brandService.getModelsByBrandId(brandId).subscribe((models: ModelList[]) => {
 this.models = models;
   }, error => {
-    this.alertify.error(error);
+    this.alertify.error(error.error);
   });
 }
 }

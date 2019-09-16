@@ -15,8 +15,9 @@ cars: Car[];
     this.loadCars();
   }
 loadCars() {
-  this.carService.getCars().subscribe((cars: Car[]) => {
-    this.cars = cars;
+  this.carService.getCars().subscribe((result: any) => {
+    console.log(result);
+    this.cars = result;
   }, error => {
     console.log(error);
   });

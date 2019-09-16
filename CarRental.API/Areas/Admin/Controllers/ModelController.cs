@@ -7,13 +7,14 @@ using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CarRental.API.Helpers;
 
 namespace CarRental.API.Areas.Admin.Controllers
 {
 
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize("Bearer")]
+    //[Authorize("Bearer")]
     //[Authorize(Roles = "Admin")]
     public class ModelController : Controller
     {
@@ -48,8 +49,50 @@ namespace CarRental.API.Areas.Admin.Controllers
             return Ok(model);
         }
 
+        [HttpGet("models/{id}")]
+        public async Task<IActionResult> GetFilteredModels(int id, [FromQuery]PaginationParams paginationParams)
+        {
+            var model = new List<ModelDto>();
+            var modelsAsync = await _modelService.GetFilteredModelsAsync(paginationParams,id);
+            var models = modelsAsync.ToList();
+
+            if (models == null || models.Count <= 0)
+                return BadRequest("Any brand not found");
+
+            for (int i = 0; i < models.Count(); i++)
+            {
+                model.Add(new ModelDto
+                {
+                    Id = models[i].Id,
+                    BrandId = models[i].BrandId,
+                    Name = models[i].Name
+                });
+            }
+
+            Response.AddPagination(modelsAsync.CurrentPage, modelsAsync.PageSize, modelsAsync.TotalCount, modelsAsync.TotalPages);
+
+
+            return Ok(model);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetModelById(int id)
+        {
+            var model = new ModelDto();
+            var modelById = await _modelService.GetModellByIdAsync(id);
+
+            if (modelById == null)
+                return BadRequest("Model not found");
+
+            model.Id = modelById.Id;
+            model.BrandId = modelById.BrandId;
+            model.Name = modelById.Name;
+
+            return Ok(model);
+        }
+
         [HttpPost("add")]
-        public async Task<IActionResult> AddModel([FromForm]ModelDto model)
+        public async Task<IActionResult> AddModel(ModelDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -73,7 +116,7 @@ namespace CarRental.API.Areas.Admin.Controllers
         }
 
         [HttpPut("edit/{id}")]
-        public async Task<IActionResult> EditModel(int id, [FromForm]ModelDto model)
+        public async Task<IActionResult> EditModel(int id, ModelDto model)
         {
             if (!ModelState.IsValid)
             {

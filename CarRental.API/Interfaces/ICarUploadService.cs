@@ -12,5 +12,6 @@ namespace CarRental.API.Interfaces
         Task UpdateCarUploadAsync(CarUpload upload);
         Task DeleteCarUploadAsync(CarUpload upload);
         Task<CarUpload> GetCarUploadByCarIdAsync(int carId);
+        Task<string> GetPathOfCarUploadAsync(int carId);
     }
 }

@@ -1,4 +1,6 @@
-﻿using CarRental.API.Interfaces;
+﻿using CarRental.API.Dtos;
+using CarRental.API.Helpers;
+using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using System;
 using System.Collections.Generic;
@@ -33,6 +35,22 @@ namespace CarRental.API.Services
 
                 Logger(ex, "Get Transmision Type name faild");
                 return "";
+            }
+        }
+
+        public async Task<PagedList<TransmisionType>> GetFilteredTransmisionTypes(PaginationParams paginationParams)
+        {
+            try
+            {
+                var tTypes = _context.TransmisionType;
+
+                return await PagedList<TransmisionType>.CreateAsync(tTypes, paginationParams.PageNumber, paginationParams.PageSize);
+            }
+            catch (Exception ex)
+            {
+
+                Logger(ex, "Geting Transmision Type from db faild");
+                return null;
             }
         }
 
