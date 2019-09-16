@@ -62,4 +62,8 @@ getBookingById(id: number): Observable<Booking> {
 addPreBooking(model: PreBooking) {
   return this.http.post(this.baseUrl + 'booking/addprebooking', model);
 }
+
+getPreBookingById(id: number): Observable<PreBooking> {
+  return this.http.get<PreBooking>(this.baseUrl + 'booking/prebooking/' + id);
+}
 }

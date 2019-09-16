@@ -11,10 +11,14 @@ namespace CarRental.API.Dtos
         public int Id { get; set; }
         public string CarNumber { get; set; }
         public int? BrandId { get; set; }
+        public string BrandName { get; set; }
         public int? ModelId { get; set; }
+        public string ModelName { get; set; }
         public string ModelYear { get; set; }
         public int? FuelTypeId { get; set; }
+        public string FuelType { get; set; }
         public int? TransmisionTypeId { get; set; }
+        public string TransmisionType { get; set; }
         public int? NumberOfDoors { get; set; }
         public int? CarCapacity { get; set; }
         public string CarColor { get; set; }
@@ -22,6 +26,7 @@ namespace CarRental.API.Dtos
         public int? CarLocationId { get; set; }
         public string Description { get; set; }
         public IFormFile Image { get; set; }
+        public string Path { get; set; }
 
 
         public DateTime CreateOnDate

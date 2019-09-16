@@ -22,6 +22,7 @@ import { BookingGuard } from './_guards/booking.guard';
 import { CarResultComponent } from './car-result/car-result.component';
 import { BookingSummaryComponent } from './booking-summary/booking-summary.component';
 import { CarsResultGuard } from './_guards/carsresult.guard';
+import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.component';
 
 
 export const appRoutes: Routes = [
@@ -32,6 +33,7 @@ export const appRoutes: Routes = [
  { path: 'my-booking/:id', canActivate: [BookingGuard], component: MyBookingComponent},
  {path: 'car-result', component: CarResultComponent},
  {path: 'booking-summary', component: BookingSummaryComponent},
+ {path: 'confirm-booking', component: ConfirmBookingComponent},
 
  {
     path: 'admin',

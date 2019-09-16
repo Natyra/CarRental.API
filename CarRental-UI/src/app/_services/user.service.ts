@@ -23,6 +23,10 @@ getUsers(): Observable<User[]> {
   return this.http.get<User[]>(this.baseUrl + 'admin/user');
 }
 
+getUserById(id: string): Observable<User> {
+  return this.http.get<User>(this.baseUrl + 'admin/user/' + id);
+}
+
 getFilteredUsers(page?, itemsPerPage?): Observable<PaginatedResult<User[]>> {
 
   const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
@@ -47,6 +51,10 @@ getFilteredUsers(page?, itemsPerPage?): Observable<PaginatedResult<User[]>> {
 
 deleteUser(id: string) {
   return this.http.delete(this.baseUrl + 'admin/user/delete/' + id, this.httpOptions);
+}
+
+addCustomer(model: User) {
+  return this.http.post(this.baseUrl + 'booking/addcustomer', model);
 }
 }
 

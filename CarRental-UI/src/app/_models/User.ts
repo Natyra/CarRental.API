@@ -5,4 +5,6 @@ export interface User {
     userName: string;
     email: string;
     phoneNumber: string;
+    carId: number;
+    preBookingId: number;
 }

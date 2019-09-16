@@ -51,7 +51,18 @@
               </div>
   
               <div class="col-lg-8 mb-4">
-  
+                 
+
+                  <div class="card shadow mb-4" *ngIf="noCarsFound != '' "> 
+                      
+                      <div class="card-body">
+                  <div class="row">
+                   
+                <div class="col-lg-12"> <p>{{noCarsFound}}</p></div>
+                       
+                        </div>
+                  </div>
+                      </div>
                 <!-- Illustrations -->
                 <div class="card shadow mb-4" *ngFor="let item of cars"> 
                   <div class="card-header py-3">
@@ -59,6 +70,7 @@
                   </div>
                   <div class="card-body">
               <div class="row">
+               
                   <div class="col-lg-4">
                       <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="assets{{item.path}}" alt="">
                     </div>

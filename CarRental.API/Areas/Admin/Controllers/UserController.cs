@@ -25,7 +25,7 @@ namespace CarRental.API.Areas.Admin.Controllers
             _genericRepository = genericRepository;
         }
 
-        [HttpGet()]
+        [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
             var model = new List<UserDto>();
@@ -48,6 +48,24 @@ namespace CarRental.API.Areas.Admin.Controllers
                 });
             }
            
+            return Ok(model);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(string id)
+        {
+            var model = new UserDto();
+            var user = await _userService.GetUserByIdAsync(id);
+
+            if (user == null)
+                return BadRequest("User not found");
+
+            model.FirstName = user.FirstName;
+            model.LastName = user.LastName;
+            model.PhoneNumber = user.PhoneNumber;
+            model.Email = user.Email;
+            model.Id = user.Id;
+
             return Ok(model);
         }
 

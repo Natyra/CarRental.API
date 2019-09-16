@@ -48,6 +48,7 @@ age = this.route.snapshot.queryParamMap.get('age');
 endUrl: string;
 navigationEnd;
 navigationStart: string;
+noCarsFound: string;
 
   constructor(private carService: CarService, private alertify: AlertifyService, private route: ActivatedRoute, private router: Router, private locationService: LocationService, private fb: FormBuilder, private bookingService: BookingService) { 
     this.router.events.subscribe( (event: Event) => {
@@ -64,6 +65,7 @@ navigationStart: string;
         this.age = this.route.snapshot.queryParamMap.get('age');
          if(this.navigationStart !== this.endUrl) {
           this.loadCars();
+          this.changeFilterField = false;
         }
     }
 });
@@ -94,6 +96,12 @@ navigationStart: string;
       this.carService.searchCars(this.model).subscribe((result: any) => {
         
         this.cars = result.result.cars;
+
+        if (this.cars.length <= 0) {
+          this.noCarsFound = 'No Car Founded';
+        } else {
+          this.noCarsFound = '';
+        }
       }, error => {
         this.alertify.error(error.error);
       });
@@ -141,6 +149,9 @@ addPreBooking(carId: number) {
 
   this.bookingService.addPreBooking(model).subscribe((result: any) => {
     console.log(result);
+    this.router.navigate(['/booking-summary'], { queryParams: { pb: result.pb, car: result.car}});
+  }, error => {
+    this.alertify.error(error.error);
   });
 
 

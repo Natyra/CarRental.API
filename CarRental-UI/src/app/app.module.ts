@@ -48,6 +48,7 @@ import { ChangeSearchComponent } from './change-search/change-search.component';
 import { BookingSummaryComponent } from './booking-summary/booking-summary.component';
 import { CarsResultGuard } from './_guards/carsresult.guard';
 import { GeneralService } from './_services/general.service';
+import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -78,7 +79,8 @@ export function tokenGetter() {
       MyBookingComponent,
       CarResultComponent,
       ChangeSearchComponent,
-      BookingSummaryComponent
+      BookingSummaryComponent,
+      ConfirmBookingComponent
    ],
    imports: [
       BrowserModule,

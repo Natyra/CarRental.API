@@ -112,6 +112,48 @@ namespace CarRental.API.Services
          
         }
 
+        public async Task AddUserAsync(AspNetUsers user)
+        {
+            try
+            {
+                await _genericRepository.Add(user);
+            }
+            catch (Exception ex)
+            {
+
+                Logger(ex, "Add user faild");
+
+            }
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            try
+            {
+                await _genericRepository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+
+                Logger(ex, "Save user faild");
+            }
+        }
+
+        public void UpdateUser(AspNetUsers user)
+        {
+            try
+            {
+                _genericRepository.Update(user);
+            }
+            catch (Exception ex)
+            {
+
+                Logger(ex, "Update user faild");
+
+            }
+        }
+
 
         private void Logger(Exception ex, string message)
         {

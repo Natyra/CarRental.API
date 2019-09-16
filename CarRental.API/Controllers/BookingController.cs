@@ -7,6 +7,7 @@ using CarRental.API.Interfaces;
 using CarRental.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.API.Controllers
@@ -25,8 +26,9 @@ namespace CarRental.API.Controllers
         private readonly ITransmisionTypeService _transmisionTypeService;
         private readonly IModelService _modelService;
         private readonly IPreBookingService _preBookingService;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public BookingController(IBookingService bookingService, IUserService userService, ILocationService locationService, ICarUploadService carUploadService, IBrandService brandService, IFuelTypeService fuelTypeService, ITransmisionTypeService transmisionTypeService, IModelService modelService, IPreBookingService preBookingService)
+        public BookingController(IBookingService bookingService, IUserService userService, ILocationService locationService, ICarUploadService carUploadService, IBrandService brandService, IFuelTypeService fuelTypeService, ITransmisionTypeService transmisionTypeService, IModelService modelService, IPreBookingService preBookingService, UserManager<IdentityUser> userManager)
         {
             _bookingService = bookingService;
             _userService = userService;
@@ -37,6 +39,7 @@ namespace CarRental.API.Controllers
             _transmisionTypeService = transmisionTypeService;
             _modelService = modelService;
             _preBookingService = preBookingService;
+            _userManager = userManager;
         }
         [HttpPost("userbooking")]
         public async Task<IActionResult> IsBookingOfUser([FromBody]BookingLoginDto model)
@@ -152,6 +155,91 @@ namespace CarRental.API.Controllers
                 message = "PreBooking added successfully",
                 pb = preBooking.Id,
                 car = model.CarId
+            });
+        }
+
+
+        [HttpGet("prebooking/{id}")]
+        public async Task<IActionResult> GetPreBookingById(int id)
+        {
+            if(id == 0)
+            {
+                return BadRequest("PreBooking not found");
+            }
+
+        
+
+            var preBooking = await _preBookingService.GetPreBookingByIdAsync(id);
+
+
+            var model = new PreBookingForAdd
+            {
+                Id = preBooking.Id,
+                DriverAge = (int)preBooking.AgeOfUser,
+                PickUpDate = preBooking.PickDate.ToString(),
+                PickUpLocationId = preBooking.PickLocationId,
+                ReturnDate = preBooking.ReturnDate.ToString(),
+                ReturnLocationId = preBooking.ReturnLocationId,
+                
+            };
+
+            return Ok(model);
+        }
+
+        [HttpPost("addcustomer")]
+        public async Task<IActionResult> AddCustomer(UserDto model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var userExists = await _userService.GetUserIdByEmail(model.Email);
+
+            if(userExists != null)
+            {
+                userExists.FirstName = model.FirstName;
+                userExists.LastName = model.LastName;
+                userExists.PhoneNumber = model.PhoneNumber;
+                userExists.Email = model.Email;
+
+                _userService.UpdateUser(userExists);
+                await _userService.SaveChangesAsync();
+                return Ok(new
+                {
+                    car = model.CarId,
+                    pb = model.PreBookingId,
+                    user = userExists.Id
+                });
+            }
+            else
+            {
+                var identityUser = new IdentityUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(identityUser);
+
+                if(result.Succeeded)
+                {
+                    var userToUpdate = await _userService.GetUserIdByEmail(model.Email);
+                    userToUpdate.FirstName = model.FirstName;
+                    userToUpdate.LastName = model.LastName;
+                    userToUpdate.PhoneNumber = model.PhoneNumber;
+                    _userService.UpdateUser(userToUpdate);
+                    await _userService.SaveChangesAsync();
+
+                    return Ok(new
+                    {
+                        car = model.CarId,
+                        pb = model.PreBookingId,
+                        user = userToUpdate.Id
+                    });
+
+                }
+
+               
+            }
+
+            return BadRequest(new
+            {
+                car = model.CarId,
+                pb = model.PreBookingId
             });
         }
 

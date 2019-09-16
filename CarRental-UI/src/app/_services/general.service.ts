@@ -5,16 +5,13 @@ import { ActivatedRoute } from '@angular/router';
   providedIn: 'root'
 })
 export class GeneralService {
-  locationId = this.route.snapshot.queryParamMap.get('pickUpLocationId');
-  pickUpDate = this.route.snapshot.queryParamMap.get('pickUpDate');
-  returnDate = this.route.snapshot.queryParamMap.get('returnDate');
-  rLocationId = this.route.snapshot.queryParamMap.get('returnLocationId');
-  age = this.route.snapshot.queryParamMap.get('age');
+  carId = this.route.snapshot.queryParamMap.get('carId');
+  pb = this.route.snapshot.queryParamMap.get('pb');
 
 constructor(private route: ActivatedRoute) { }
 
 isValidSearch() {
-  if(this.locationId !== null && this.locationId !== undefined && this.locationId !== '0' && this.locationId !== 'NaN' && this.pickUpDate !== null && this.pickUpDate !== undefined && this.pickUpDate !== 'NaN'  && this.returnDate !== null && this.returnDate !== undefined && this.returnDate !== 'NaN' ) {
+  if(this.carId !== null && this.carId !== undefined && this.carId !== '0' && this.carId !== 'NaN' && this.pb !== null && this.pb !== undefined && this.pb !== 'NaN' ) {
     return true;
   } else {
     return false;

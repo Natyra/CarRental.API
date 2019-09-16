@@ -26,10 +26,11 @@ namespace CarRental.API.Areas.Admin
         private IFuelTypeService _fuelTypeService;
         private ILocationService _locationService;
         private ICarUploadService _carUploadService;
+        private ITransmisionTypeService _transmisionTypeService;
 
         public CarController(ICarService carService, UserManager<IdentityUser> userManager, 
             IGenericRepository<Car> genericRepository, IBrandService brandService,
-            IModelService modelService, IFuelTypeService fuelTypeService, ILocationService locationService, ICarUploadService carUploadService)
+            IModelService modelService, IFuelTypeService fuelTypeService, ILocationService locationService, ICarUploadService carUploadService, ITransmisionTypeService transmisionTypeService)
         {
             _carService = carService;
             _userManager = userManager;
@@ -39,6 +40,7 @@ namespace CarRental.API.Areas.Admin
             _fuelTypeService = fuelTypeService;
             _locationService = locationService;
             _carUploadService = carUploadService;
+            _transmisionTypeService = transmisionTypeService;
         }
 
         [HttpGet]
@@ -133,6 +135,8 @@ namespace CarRental.API.Areas.Admin
             if (car == null)
                 return BadRequest("Car not found");
 
+            var carUpload = await _carUploadService.GetCarUploadByCarIdAsync(id);
+            var transmisionType = await _transmisionTypeService.GetTransmisionTypeByIdAsync((int)car.TransmisionTypeId);
             model.Id = car.Id;
             model.CarNumber = car.CarNumber;
             model.BrandId = car.BrandId;
@@ -146,6 +150,13 @@ namespace CarRental.API.Areas.Admin
             model.PriceForDay = car.PriceForDay;
             model.CarLocationId = car.CarLocationId;
             model.Description = car.Description;
+            model.BrandName = await _brandService.GetBrandNameAsync((int)car.BrandId);
+            model.ModelName = await _modelService.GetModelNameAsync((int)car.ModelId);
+            model.FuelType = await _fuelTypeService.GetFuelTypeNameAsync((int)car.FuelTypeId);
+            model.TransmisionType = transmisionType.Name;
+            model.Path = carUpload != null ? Url.Content(carUpload.Path) : "";
+
+
 
             return Ok(model);
 
