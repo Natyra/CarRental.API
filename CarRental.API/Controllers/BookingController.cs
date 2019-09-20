@@ -27,8 +27,9 @@ namespace CarRental.API.Controllers
         private readonly IModelService _modelService;
         private readonly IPreBookingService _preBookingService;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IGenericRepository<Booking> _genericRepository;
 
-        public BookingController(IBookingService bookingService, IUserService userService, ILocationService locationService, ICarUploadService carUploadService, IBrandService brandService, IFuelTypeService fuelTypeService, ITransmisionTypeService transmisionTypeService, IModelService modelService, IPreBookingService preBookingService, UserManager<IdentityUser> userManager)
+        public BookingController(IBookingService bookingService, IUserService userService, ILocationService locationService, ICarUploadService carUploadService, IBrandService brandService, IFuelTypeService fuelTypeService, ITransmisionTypeService transmisionTypeService, IModelService modelService, IPreBookingService preBookingService, UserManager<IdentityUser> userManager, IGenericRepository<Booking> genericRepository)
         {
             _bookingService = bookingService;
             _userService = userService;
@@ -40,6 +41,7 @@ namespace CarRental.API.Controllers
             _modelService = modelService;
             _preBookingService = preBookingService;
             _userManager = userManager;
+            _genericRepository = genericRepository;
         }
         [HttpPost("userbooking")]
         public async Task<IActionResult> IsBookingOfUser([FromBody]BookingLoginDto model)
@@ -240,6 +242,34 @@ namespace CarRental.API.Controllers
             {
                 car = model.CarId,
                 pb = model.PreBookingId
+            });
+        }
+
+        [HttpPost("confirm")]
+        public async Task<IActionResult> ConfirmBooking(ConfirmBookingDto model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var booking = new Booking();
+            booking.PreBookingId = model.PreBookingId;
+            booking.CarId = model.CarId;
+            booking.UserId = model.UserId;
+            booking.IsDeleted = false;
+            booking.CreateByUserId = model.UserId;
+            booking.CreateOnDate = DateTime.Now;
+            booking.LastModifiedOnDate = DateTime.Now;
+            booking.LastModifiedByUserId = model.UserId;
+
+             await _genericRepository.Add(booking);
+            await _genericRepository.SaveChangesAsync();
+
+            return Ok(new
+            {
+                status = 200,
+                message = "Booking created successfully",
+                id = booking.Id,
+                user = booking.UserId
             });
         }
 

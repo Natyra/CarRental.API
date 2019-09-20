@@ -12,7 +12,7 @@ using CarRental.API.Helpers;
 
 namespace CarRental.API.Areas.Admin
 {
-    
+
     [Route("api/admin/[controller]")]
     [ApiController]
     //[Authorize(Roles = "Admin")]
@@ -28,7 +28,7 @@ namespace CarRental.API.Areas.Admin
         private ICarUploadService _carUploadService;
         private ITransmisionTypeService _transmisionTypeService;
 
-        public CarController(ICarService carService, UserManager<IdentityUser> userManager, 
+        public CarController(ICarService carService, UserManager<IdentityUser> userManager,
             IGenericRepository<Car> genericRepository, IBrandService brandService,
             IModelService modelService, IFuelTypeService fuelTypeService, ILocationService locationService, ICarUploadService carUploadService, ITransmisionTypeService transmisionTypeService)
         {
@@ -80,7 +80,7 @@ namespace CarRental.API.Areas.Admin
                 });
             }
 
-           
+
             return Ok(model);
         }
 
@@ -99,7 +99,7 @@ namespace CarRental.API.Areas.Admin
             if (cars == null || cars.Count() <= 0)
                 return BadRequest();
 
-            for (int i=0; i<cars.Count(); i++)
+            for (int i = 0; i < cars.Count(); i++)
             {
                 var carUpload = await _carUploadService.GetCarUploadByCarIdAsync(cars[i].Id);
                 model.Add(new CarForListDto
@@ -117,7 +117,7 @@ namespace CarRental.API.Areas.Admin
                     FuelType = await _fuelTypeService.GetFuelTypeNameAsync((int)cars[i].FuelTypeId),
                     TransmisionType = cars[i].TransmisionType.Name,
                     CarLocation = await _locationService.GetLocationAsync((int)cars[i].CarLocationId),
-                    Path = carUpload != null? Url.Content(carUpload.Path):""
+                    Path = carUpload != null ? Url.Content(carUpload.Path) : ""
                 });
             }
 
@@ -193,14 +193,14 @@ namespace CarRental.API.Areas.Admin
                 CarLocationId = model.CarLocationId,
                 Description = model.Description,
                 CreateByUserId = _userManager.GetUserId(User),
-               
+
             };
 
             await _carService.AddCarAsync(car);
 
             if (model.Image != null && model.Image.Length > 0)
             {
-               await _carService.UploadImage(model.Image, car.Id);
+                await _carService.UploadImage(model.Image, car.Id);
             }
 
             return Ok(new
@@ -235,9 +235,9 @@ namespace CarRental.API.Areas.Admin
             carToEdit.CarColor = model.CarColor;
             carToEdit.PriceForDay = model.PriceForDay;
             carToEdit.CarLocationId = model.CarLocationId;
-            carToEdit.Description = model.Description;        
+            carToEdit.Description = model.Description;
             carToEdit.LastModifiedByUserId = _userManager.GetUserId(User);
-           
+
 
             await _carService.UpdateCarAsync(carToEdit);
 
@@ -261,7 +261,7 @@ namespace CarRental.API.Areas.Admin
             carToDelete.LastModifiedOnDate = DateTime.Now;
             carToDelete.LastModifiedByUserId = _userManager.GetUserId(User);
 
-           await _carService.UpdateCarAsync(carToDelete);
+            await _carService.UpdateCarAsync(carToDelete);
 
             await _genericRepository.SaveChangesAsync();
 
@@ -274,67 +274,72 @@ namespace CarRental.API.Areas.Admin
         }
 
         //[HttpPost("SearchResult")]
-        //public async Task<IActionResult> SearchResult([FromBody]CarsFilterDto carsFilterDto)
-        //{
-        //    var location = new Location { Id = (int)carsFilterDto.PickUpLocationId };
-        //    var model = new List<CarForListDto>();
-        //    if (carsFilterDto.PickUpDate >= DateTime.UtcNow)
+        //    public async Task<IActionResult> SearchResult([FromBody]CarsFilterDto carsFilterDto)
         //    {
-        //        if (carsFilterDto.PickUpLocationId.HasValue)
+        //        var location = new Location { Id = (int)carsFilterDto.PickUpLocationId };
+        //        var model = new List<CarForListDto>();
+        //        if (carsFilterDto.PickUpDate >= DateTime.UtcNow)
         //        {
-        //            var carsInLocation = await _carService.CarsFilterLocationAsync(location);
-
-        //            foreach (var car in carsInLocation)
+        //            if (carsFilterDto.PickUpLocationId.HasValue)
         //            {
-        //                var carsBooking = await _carService.GetPreBookingsAsync(car.Id);
-        //                var bookingId = car.Booking.Select(x => x.Id).FirstOrDefault();
-        //                if (bookingId == carsBooking.Select(x => x.Id).FirstOrDefault())
+        //                var carsInLocation = await _carService.CarsFilterLocationAsync(location);
+
+        //                foreach (var car in carsInLocation)
         //                {
-        //                    var carUpload = await _carUploadService.GetCarUploadByCarIdAsync(car.Id);
-        //                    model.Add(new CarForListDto
+        //                    var carsBooking = await _carService.GetPreBookingsAsync(car.Id);
+        //                    var bookingId = car.Booking.Select(x => x.Id).FirstOrDefault();
+        //                    if (bookingId == carsBooking.Select(x => x.Id).FirstOrDefault())
         //                    {
-        //                        Id=car.Id,
-        //                        CarNumber=car.CarNumber,
-        //                        CarColor=car.CarColor,
-        //                        CarCapacity=car.CarCapacity,
-        //                        BrandName=car.Brand.Name,
-        //                        ModelName=car.Model.Name,
-        //                        NumberOfDoors=car.NumberOfDoors,
-        //                        PriceForDay=car.PriceForDay,
-        //                        FuelType=car.FuelType.Name,
-        //                        ModelYear=car.ModelYear,
-        //                        TransmisionType=car.TransmisionType.Name,
-        //                        Path = carUpload != null ? Url.Content(carUpload.Path) : ""
+        //                        var carUpload = await _carUploadService.GetCarUploadByCarIdAsync(car.Id);
+        //                        model.Add(new CarForListDto
+        //                        {
+        //                            Id = car.Id,
+        //                            CarNumber = car.CarNumber,
+        //                            CarColor = car.CarColor,
+        //                            CarCapacity = car.CarCapacity,
+        //                            BrandName = car.Brand.Name,
+        //                            ModelName = car.Model.Name,
+        //                            NumberOfDoors = car.NumberOfDoors,
+        //                            PriceForDay = car.PriceForDay,
+        //                            FuelType = car.FuelType.Name,
+        //                            ModelYear = car.ModelYear,
+        //                            TransmisionType = car.TransmisionType.Name,
+        //                            Path = carUpload != null ? Url.Content(carUpload.Path) : ""
+        //                        }
+        //                        }
+        //                }
+        //            }
+        //        }
+        //        //        foreach (var car in carsInLocation)
+        //        //        {
+        //        //            var carsBooking = await _carService.GetPreBookingsAsync(car.Id);
+        //        //            var bookingId = car.Booking.Select(x => x.Id).FirstOrDefault();
+        //        //            if (bookingId == carsBooking.Select(x => x.Id).FirstOrDefault())
+        //        //            {
+        //        //                var carUpload = await _carUploadService.GetCarUploadByCarIdAsync(car.Id);
+        //        //                model.Add(new CarForListDto
+        //        //                {
+        //        //                    Id=car.Id,
+        //        //                    CarNumber=car.CarNumber,
+        //        //                    CarColor=car.CarColor,
+        //        //                    CarCapacity=car.CarCapacity,
+        //        //                    BrandName=car.Brand.Name,
+        //        //                    ModelName=car.Model.Name,
+        //        //                    NumberOfDoors=car.NumberOfDoors,
+        //        //                    PriceForDay=car.PriceForDay,
+        //        //                    FuelType=car.FuelType.Name,
+        //        //                    ModelYear=car.ModelYear,
+        //        //                    TransmisionType=car.TransmisionType.Name,
+        //        //                    Path = carUpload != null ? Url.Content(carUpload.Path) : ""
 
-                    foreach (var car in carsInLocation)
-                    {
-                        var carsBooking = await _carService.GetPreBookingsAsync(car.Id);
-                        var bookingId = car.Booking.Select(x => x.Id).FirstOrDefault();
-                        if (bookingId == carsBooking.Select(x => x.Id).FirstOrDefault())
-                        {
-                            var carUpload = await _carUploadService.GetCarUploadByCarIdAsync(car.Id);
-                            model.Add(new CarForListDto
-                            {
-                                Id=car.Id,
-                                CarNumber=car.CarNumber,
-                                CarColor=car.CarColor,
-                                CarCapacity=car.CarCapacity,
-                                BrandName=car.Brand.Name,
-                                ModelName=car.Model.Name,
-                                NumberOfDoors=car.NumberOfDoors,
-                                PriceForDay=car.PriceForDay,
-                                FuelType=car.FuelType.Name,
-                                ModelYear=car.ModelYear,
-                                TransmisionType=car.TransmisionType.Name,
-                                Path = carUpload != null ? Url.Content(carUpload.Path) : ""
 
 
+        //                            //        }
+        //                            //    }
+        //                            //}
+        //                        return Ok(model);
 
-                    }
-                }
-            }
-            return Ok(model);
 
-
+        //}
     }
 }

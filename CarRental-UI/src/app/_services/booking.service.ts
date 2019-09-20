@@ -7,6 +7,7 @@ import { PaginatedResult } from '../_models/Pagination';
 import { map } from 'rxjs/operators';
 import { UserBooking } from '../_models/UserBooking';
 import { PreBooking } from '../_models/PreBooking';
+import { ConfirmBooking } from '../_models/ConfirmBooking';
 
 @Injectable({
   providedIn: 'root'
@@ -65,5 +66,8 @@ addPreBooking(model: PreBooking) {
 
 getPreBookingById(id: number): Observable<PreBooking> {
   return this.http.get<PreBooking>(this.baseUrl + 'booking/prebooking/' + id);
+}
+confirmBooking(model: ConfirmBooking) {
+  return this.http.post(this.baseUrl + 'booking/confirm', model);
 }
 }

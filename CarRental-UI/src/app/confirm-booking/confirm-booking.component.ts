@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PreBooking } from '../_models/PreBooking';
 import { BookingService } from '../_services/booking.service';
 import { AlertifyService } from '../_services/alertify.service';
@@ -8,6 +8,7 @@ import {Location} from '../_models/Location';
 import { CarService } from '../_services/car.service';
 import { UserService } from '../_services/user.service';
 import { User } from '../_models/User';
+import { ConfirmBooking } from '../_models/ConfirmBooking';
 
 @Component({
   selector: 'app-confirm-booking',
@@ -16,7 +17,7 @@ import { User } from '../_models/User';
 })
 export class ConfirmBookingComponent implements OnInit {
 
-
+  model: ConfirmBooking;
   pickUpLocation: string;
   returnLocation: string;
   datePickUp: string;
@@ -42,7 +43,7 @@ export class ConfirmBookingComponent implements OnInit {
   pbId = this.route.snapshot.queryParamMap.get('pb');
   carId = this.route.snapshot.queryParamMap.get('car');
   userId = this.route.snapshot.queryParamMap.get('user');
-  constructor(private route: ActivatedRoute, private bookingService: BookingService, private alertify: AlertifyService, private locationService: LocationService, private carService: CarService, private userService: UserService) { }
+  constructor(private route: ActivatedRoute, private bookingService: BookingService, private alertify: AlertifyService, private locationService: LocationService, private carService: CarService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.getPreBookingById();
@@ -86,7 +87,6 @@ export class ConfirmBookingComponent implements OnInit {
   }
   getCarById(id: number) {
     return this.carService.getCarById(id).subscribe((result: any) =>{
-      console.log(result);
       this.brandName = result.brandName;
       this.modelName = result.modelName;
       this.modelYear = result.modelYear;
@@ -100,7 +100,6 @@ export class ConfirmBookingComponent implements OnInit {
 
   getCustomerById(id: string) {
     this.userService.getUserById(id).subscribe((result: User) => {
-      console.log(result);
       this.firstName = result.firstName;
       this.lastName = result.lastName;
       this.phoneNumber = result.phoneNumber;
@@ -110,4 +109,20 @@ export class ConfirmBookingComponent implements OnInit {
     });
   }
   changeCustomerDetails() { }
+
+  confirmBooking() {
+    const body = {
+      preBookingId:  parseInt(this.pbId),
+      carId : parseInt(this.carId),
+      userId : this.userId
+    };
+    this.model = body;
+
+    return this.bookingService.confirmBooking(this.model).subscribe((result: any) => {
+      sessionStorage.setItem('bookingId', result.id.toString());
+      this.router.navigate(['/my-booking', result.id]);
+    }, error => {
+      this.alertify.error(error.error);
+    });
+  }
 }

@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
 import { CarService } from '../_services/car.service';
 import { EventEmitter } from 'events';
+import { BookingService } from '../_services/booking.service';
 
 
 @Component({
@@ -45,33 +46,63 @@ pickUpDate = this.route.snapshot.queryParamMap.get('pickUpDate');
 returnDate = this.route.snapshot.queryParamMap.get('returnDate');
 rLocationId = this.route.snapshot.queryParamMap.get('returnLocationId');
 age = this.route.snapshot.queryParamMap.get('age');
+pbId = this.route.snapshot.queryParamMap.get('pb');
 
-  constructor(private carService: CarService, private locationService: LocationService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private alertify: AlertifyService) { }
+  constructor(private carService: CarService, private locationService: LocationService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private alertify: AlertifyService, private bookingService: BookingService) { }
 
   ngOnInit() {
+    if (this.pbId !== undefined && this.pbId !== 'NaN' && this.pbId !== '' && this.pbId !== null){
+      this.getPreBookingById(parseInt(this.pbId));
+    } else {
+      this.getAddresses();
+      if(parseInt(this.age) === 0) {
+        this.isDriverAgeZero = true;
+        this.showInputOfAgeField = false;
+      } else {
+        this.isDriverAgeZero = false;
+        this.showInputOfAgeField = true;
+      }
+    }
     this.locationsList();
     this.datePickUp = this.pickUpDate;
     // this.datePickUp = this.datePickUp.toDateString();
     this.dateReturn = this.returnDate;
     this.createSearchCarsForm();
-    this.getPickUpLocationById();
-    this.getReturnLocationById();
+    
 
-    if (parseInt(this.rLocationId) !== 0) {
+    if (parseInt(this.rLocationId) !== 0 && parseInt(this.rLocationId) === parseInt(this.locationId)) {
       this.isCheckedField = true;
       this.showReturnLocationField = true;
     } else {
       this.isCheckedField = false;
     }
+   
+  }
+getAddresses() {
+    this.getPickUpLocationById();
+    this.getReturnLocationById();
+}
+  getPreBookingById(id: number){
+    return this.bookingService.getPreBookingById(id).subscribe((result: any) => {
+      this.locationId = result.pickUpLocationId;
+      this.pickUpDate = result.pickUpDate;
+      this.returnDate = result.returnDate;
+      this.rLocationId = result.returnLocationId;
+      this.age = result.driverAge;
 
-    if(parseInt(this.age) === 0) {
-      this.isDriverAgeZero = true;
-      this.showInputOfAgeField = false;
-    } else {
-      this.isDriverAgeZero = false;
-      this.showInputOfAgeField = true;
-    }
-
+    this.createSearchCarsForm();
+    this.getPickUpLocationById();
+      this.getReturnLocationById();
+      if(parseInt(this.age) === 0) {
+        this.isDriverAgeZero = true;
+        this.showInputOfAgeField = false;
+      } else {
+        this.isDriverAgeZero = false;
+        this.showInputOfAgeField = true;
+      }
+    }, error => {
+      this.alertify.error(error.error);
+    })
   }
 
   getPickUpLocationById() {
@@ -124,7 +155,12 @@ age = this.route.snapshot.queryParamMap.get('age');
     if (this.searchCarsForm.valid) {
       this.model = Object.assign({}, this.searchCarsForm.value);
       const locationId = this.model.pickUpLocationId;
-      const rLocationId = this.model.returnLocationId;
+      let rLocationId = 0;
+      if(this.model.returnLocationId != null) {
+      rLocationId = this.model.returnLocationId;
+      } else {
+        rLocationId = this.model.pickUpLocationId;
+      }
       const driverAge = this.model.driverAge;
       const pickDate2 = this.model.pickUpDate;
       const returnDate2 = this.model.returnDate;

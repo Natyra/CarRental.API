@@ -10,6 +10,8 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { SearchCars } from '../_models/SearchCars';
 import { PreBooking } from '../_models/PreBooking';
 import { BookingService } from '../_services/booking.service';
+import { PaginatedResult } from '../_models/Pagination';
+import { Car } from '../_models/Car';
 
 @Component({
   selector: 'app-car-result',
@@ -20,6 +22,11 @@ export class CarResultComponent implements OnInit {
 
 cars: any;
 //model: any;
+currentPage = 1;
+itemsPerPage = 10;
+totalItems;
+totalPages;
+
 model: SearchCars;
 preBooking: PreBooking;
 pickUpLocation;
@@ -93,9 +100,13 @@ noCarsFound: string;
         returnLocationId: this.rLocationId,
         driverAge: this.age
       }
-      this.carService.searchCars(this.model).subscribe((result: any) => {
-        
+      this.carService.searchCars(this.model, this.currentPage, this.itemsPerPage).subscribe((result: PaginatedResult<any>) => {
+        console.log(result);
         this.cars = result.result.cars;
+        this.currentPage = result.pagination.currentPage;
+        this.totalItems = result.pagination.totalItems;
+        this.totalPages = result.pagination.totalPages;
+        this.itemsPerPage = result.pagination.itemsPerPage;
 
         if (this.cars.length <= 0) {
           this.noCarsFound = 'No Car Founded';
@@ -110,6 +121,10 @@ noCarsFound: string;
 
 changeFilter() {
   this.changeFilterField = true;
+}
+pageChanged(event: any): void {
+  this.currentPage = event;
+  this.loadCars();
 }
 
 getPickUpLocationById() {

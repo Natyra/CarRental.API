@@ -83,8 +83,8 @@ searchCars(model: SearchCars, page?, itemsPerPage?) {
 
   }
   params = params.append('pickUpLocationId', model.pickUpLocationId);
-  params = params.append('returnLocationId', '0');
-  params = params.append('pickUpDate', model.pickUpDate.toString());
+  params = params.append('returnLocationId', model.returnLocationId);
+  params = params.append('pickUpDate', model.pickUpDate);
   params = params.append('returnDate', model.returnDate);
 
   return this.http.get<Car[]>(this.baseUrl + 'home/filtercars', { observe: 'response', params}) 

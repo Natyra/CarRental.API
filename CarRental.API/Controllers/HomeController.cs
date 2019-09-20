@@ -111,8 +111,8 @@ namespace CarRental.API.Controllers
                 filter.ReturnLocationId = filter.PickUpLocationId;
             }
 
-            
-            filter.paginationParams = new PaginationParams();
+
+            //filter.paginationParams = new PaginationParams();
             //filter.paginationParams.PageSize = 2;
 
             var dateTimePickUpArray = filter.PickUpDate.Split(" ");
@@ -133,7 +133,11 @@ namespace CarRental.API.Controllers
             filterO.ReturnLocationId = filter.ReturnLocationId;
             filterO.PickUpDate = dateTimePickUpFinal;
             filterO.DriverAge = filter.DriverAge;
-            filterO.paginationParams = filter.paginationParams;
+            filterO.paginationParams = new PaginationParams
+            {
+                PageSize = filter.PageSize,
+                PageNumber = filter.PageNumber
+            };
 
             var resultAsync = await _carService.GetCarsFromSearch(filterO);
 

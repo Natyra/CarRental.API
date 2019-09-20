@@ -49,9 +49,15 @@ export class BookingSummaryComponent implements OnInit {
   constructor(private route: ActivatedRoute, private bookingService: BookingService, private locationService: LocationService, private alertify: AlertifyService, private carService: CarService, private fb: FormBuilder, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+   
     this.getPreBookingById();
     this.addCustomerInfoForm();
     
+    if (this.userId !== undefined && this.userId !== 'NaN' && this.userId !== '' && this.userId !== null){
+      console.log(this.userId);
+      this.getCustomerById();
+    }
+
   }
 
   changeFilter() {
@@ -91,7 +97,6 @@ export class BookingSummaryComponent implements OnInit {
   }
   getCarById(id: number) {
     return this.carService.getCarById(id).subscribe((result: any) =>{
-      console.log(result);
       this.brandName = result.brandName;
       this.modelName = result.modelName;
       this.modelYear = result.modelYear;
@@ -104,17 +109,6 @@ export class BookingSummaryComponent implements OnInit {
   }
 
   addCustomerInfoForm() {
- 
-    if (this.userId !== undefined && this.userId !== 'NaN' && this.userId !== '' && this.userId !== null){
-    this.getCustomerById(this.userId);
-   
-    this.addCustomerForm = this.fb.group({
-      firstName: [this.firstName, Validators.required],
-      lastName: [this.lastName, Validators.required],
-      phoneNumber: [this.phoneNumber, Validators.required],
-      email: [this.email, Validators.required]
-    });
-  } else {
     this.addCustomerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -122,15 +116,20 @@ export class BookingSummaryComponent implements OnInit {
       email: ['', Validators.required]
     });
   }
-  }
 
-  getCustomerById(id: string) {
-    this.userService.getUserById(id).subscribe((result: User) => {
-      console.log(result);
+  getCustomerById() {
+    this.userService.getUserById(this.userId).subscribe((result: User) => {
       this.firstName = result.firstName;
       this.lastName = result.lastName;
       this.phoneNumber = result.phoneNumber;
       this.email = result.email;
+
+      this.addCustomerForm = this.fb.group({
+        firstName: [result.firstName, Validators.required],
+        lastName: [result.lastName, Validators.required],
+        phoneNumber: [result.phoneNumber, Validators.required],
+        email: [result.email, Validators.required]
+      });
     }, error => {
       this.alertify.error(error.error);
     });
