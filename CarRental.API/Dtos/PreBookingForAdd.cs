@@ -19,6 +19,8 @@ namespace CarRental.API.Dtos
 
         //Booking Info
         public string PickUpDate { get; set; }
+        public DateTime PickUpDateReal { get; set; }
         public string ReturnDate { get; set; }
+        public DateTime ReturnDateReal { get; set; }
     }
 }

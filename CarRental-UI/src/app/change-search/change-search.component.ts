@@ -85,8 +85,8 @@ getAddresses() {
   getPreBookingById(id: number){
     return this.bookingService.getPreBookingById(id).subscribe((result: any) => {
       this.locationId = result.pickUpLocationId;
-      this.pickUpDate = result.pickUpDate;
-      this.returnDate = result.returnDate;
+      this.pickUpDate = parseDate(result.pickUpDateReal).toString();
+      this.returnDate = parseDate(result.returnDateReal).toString();
       this.rLocationId = result.returnLocationId;
       this.age = result.driverAge;
 
@@ -164,7 +164,7 @@ getAddresses() {
       const driverAge = this.model.driverAge;
       const pickDate2 = this.model.pickUpDate;
       const returnDate2 = this.model.returnDate;
-
+      console.log(this.model.pickUpDate);
       this.router.navigate(['/car-result'], { queryParams: { pickUpDate: pickDate2, pickUpLocationId: locationId, returnDate: returnDate2, returnLocationId: rLocationId, age: driverAge }});
     }
     }

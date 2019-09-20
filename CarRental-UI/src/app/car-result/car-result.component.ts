@@ -64,13 +64,13 @@ noCarsFound: string;
         this.endUrl = this.navigationEnd;
         this.navigationStart = event.url;
     } else if (event instanceof NavigationEnd) {
-         this.navigationEnd = event.url;
+        this.navigationEnd = event.url;
         this.locationId = this.route.snapshot.queryParamMap.get('pickUpLocationId');
         this.pickUpDate = this.route.snapshot.queryParamMap.get('pickUpDate');
         this.returnDate = this.route.snapshot.queryParamMap.get('returnDate');
         this.rLocationId = this.route.snapshot.queryParamMap.get('returnLocationId');
         this.age = this.route.snapshot.queryParamMap.get('age');
-         if(this.navigationStart !== this.endUrl) {
+        if (this.navigationStart !== this.endUrl) {
           this.loadCars();
           this.changeFilterField = false;
         }

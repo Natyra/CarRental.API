@@ -178,9 +178,9 @@ namespace CarRental.API.Controllers
             {
                 Id = preBooking.Id,
                 DriverAge = (int)preBooking.AgeOfUser,
-                PickUpDate = preBooking.PickDate.ToString(),
+                PickUpDateReal = (DateTime)preBooking.PickDate,
                 PickUpLocationId = preBooking.PickLocationId,
-                ReturnDate = preBooking.ReturnDate.ToString(),
+                ReturnDateReal = (DateTime)preBooking.ReturnDate,
                 ReturnLocationId = preBooking.ReturnLocationId,
                 
             };

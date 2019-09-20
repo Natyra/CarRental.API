@@ -9,6 +9,7 @@ import { CarService } from '../_services/car.service';
 import { UserService } from '../_services/user.service';
 import { User } from '../_models/User';
 import { ConfirmBooking } from '../_models/ConfirmBooking';
+import { parseDate } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-confirm-booking',
@@ -56,8 +57,8 @@ export class ConfirmBookingComponent implements OnInit {
   getPreBookingById() {
     return this.bookingService.getPreBookingById(parseInt(this.pbId)).subscribe((result: PreBooking
       ) => {
-        this.datePickUp = result.pickUpDate;
-        this.dateReturn = result.returnDate;
+        this.datePickUp = parseDate(result.pickUpDateReal).toString();
+        this.dateReturn = parseDate(result.returnDateReal).toString();
         this.pickUpLocationId = result.pickUpLocationId;
         this.returnLocationId = result.returnLocationId;
 

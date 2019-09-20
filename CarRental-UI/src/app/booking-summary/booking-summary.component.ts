@@ -11,6 +11,7 @@ import { CarAdd } from '../_models/CarAdd';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../_models/User';
 import { UserService } from '../_services/user.service';
+import { parseDate } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-booking-summary',
@@ -67,8 +68,9 @@ export class BookingSummaryComponent implements OnInit {
   getPreBookingById() {
     return this.bookingService.getPreBookingById(parseInt(this.pbId)).subscribe((result: PreBooking
       ) => {
-        this.datePickUp = result.pickUpDate;
-        this.dateReturn = result.returnDate;
+        console.log(result);
+        this.datePickUp = parseDate(result.pickUpDateReal);
+        this.dateReturn = parseDate(result.returnDateReal);
         this.pickUpLocationId = result.pickUpLocationId;
         this.returnLocationId = result.returnLocationId;
 
