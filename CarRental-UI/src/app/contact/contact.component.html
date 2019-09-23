@@ -1,0 +1,73 @@
+<div id="wrapper" class="mb-4">
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <app-nav></app-nav>
+      <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+    
+          <div class="col-xl-6 col-lg-12 col-md-9">
+    
+            <div class="card o-hidden border-0 shadow-lg my-5">
+              <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="p-5">
+                      <div class="text-center">
+                        <h1 class="h4 text-gray-900 mb-4">Contact Us</h1>
+                      </div>
+                      
+                      <form [formGroup]="contactForm" (submit)="sendContactEmail()" class="user">
+                        <div class="form-group">
+                          <input type="text" [ngClass]="{'is-invalid':contactForm.get('fullName').errors && contactForm.get('fullName').touched}"
+                          formControlName="fullName"  
+                          class="form-control form-control-user"  placeholder="Enter Full Name...">
+                          <div class="invalid-feedback">Full Name is required</div>
+                        </div>
+                        <div class="form-group">
+                          <input type="text" 
+                          [ngClass]="{'is-invalid':contactForm.get('email').errors && contactForm.get('email').touched}"
+                          formControlName="email" 
+                          class="form-control form-control-user" placeholder="Email">
+                          <div class="invalid-feedback">Email is required</div>
+
+                        </div>
+                        <div class="form-group">
+                          <input type="text" 
+                          [ngClass]="{'is-invalid':contactForm.get('subject').errors && contactForm.get('subject').touched}"
+                          formControlName="subject" 
+                          class="form-control form-control-user" placeholder="Subject">
+                          <div class="invalid-feedback">Subject is required</div>
+
+                        </div>
+                        <div class="form-group">
+                          <input type="text" 
+                          [ngClass]="{'is-invalid':contactForm.get('contactMessage').errors && contactForm.get('contactMessage').touched}"
+                          formControlName="contactMessage" 
+                          class="form-control form-control-user" placeholder="Message">
+
+                        </div>
+                
+                        <button [disabled]="!contactForm.valid" class="btn btn-primary btn-user btn-block" type="submit">Message</button>
+                    </form>
+  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+          </div>
+    
+        </div>
+    
+      </div>
+    
+  <app-footer></app-footer>
+    <!-- End of Footer -->
+
+  </div>
+ </div>
+

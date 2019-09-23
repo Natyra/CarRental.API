@@ -23,6 +23,7 @@ import { CarResultComponent } from './car-result/car-result.component';
 import { BookingSummaryComponent } from './booking-summary/booking-summary.component';
 import { CarsResultGuard } from './_guards/carsresult.guard';
 import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 export const appRoutes: Routes = [
@@ -34,6 +35,7 @@ export const appRoutes: Routes = [
  {path: 'car-result', component: CarResultComponent},
  {path: 'booking-summary', component: BookingSummaryComponent},
  {path: 'confirm-booking', component: ConfirmBookingComponent},
+ {path: 'contact', component: ContactComponent},
 
  {
     path: 'admin',

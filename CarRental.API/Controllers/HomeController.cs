@@ -6,6 +6,7 @@ using CarRental.API.Dtos;
 using CarRental.API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using CarRental.API.Helpers;
+using System.Text;
 
 namespace CarRental.API.Controllers
 {
@@ -16,12 +17,14 @@ namespace CarRental.API.Controllers
         private ICarService _carService;
         private ILocationService _locationService;
         private ICarUploadService _carUploadService;
+        private IEmailService _emailService;
 
-        public HomeController(ICarService carService, ILocationService locationService, ICarUploadService carUploadService)
+        public HomeController(ICarService carService, ILocationService locationService, ICarUploadService carUploadService, IEmailService emailService)
         {
             _carService = carService;
             _locationService = locationService;
             _carUploadService = carUploadService;
+            _emailService = emailService;
         }
         public IActionResult Index()
         {
@@ -181,6 +184,26 @@ namespace CarRental.API.Controllers
             Response.AddPagination(resultAsync.CurrentPage, resultAsync.PageSize, resultAsync.TotalCount, resultAsync.TotalPages);
 
             return Ok(model);
+        }
+
+        [HttpPost("contact")]
+        public async Task<IActionResult> Contact(ContactDto model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Full Name" + ": " + model.FullName + "<br/> <br/>");
+            sb.AppendLine("Email: " + model.Email + "<br/> <br/>");
+            sb.AppendLine("Subject" + ": " + model.Subject + "<br/> <br/>");
+            sb.AppendLine("Message" + ": " + model.ContactMessage);
+
+            await _emailService.SendEmailAsync(model.Email, model.Subject, sb.ToString(), true);
+
+            return Ok(new
+            {
+                message = "Email send successfully"
+            });
         }
     }
 }

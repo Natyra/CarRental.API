@@ -28,8 +28,9 @@ namespace CarRental.API.Controllers
         private readonly IPreBookingService _preBookingService;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IGenericRepository<Booking> _genericRepository;
+        private readonly IEmailService _emailService;
 
-        public BookingController(IBookingService bookingService, IUserService userService, ILocationService locationService, ICarUploadService carUploadService, IBrandService brandService, IFuelTypeService fuelTypeService, ITransmisionTypeService transmisionTypeService, IModelService modelService, IPreBookingService preBookingService, UserManager<IdentityUser> userManager, IGenericRepository<Booking> genericRepository)
+        public BookingController(IBookingService bookingService, IUserService userService, ILocationService locationService, ICarUploadService carUploadService, IBrandService brandService, IFuelTypeService fuelTypeService, ITransmisionTypeService transmisionTypeService, IModelService modelService, IPreBookingService preBookingService, UserManager<IdentityUser> userManager, IGenericRepository<Booking> genericRepository, IEmailService emailService)
         {
             _bookingService = bookingService;
             _userService = userService;
@@ -42,6 +43,7 @@ namespace CarRental.API.Controllers
             _preBookingService = preBookingService;
             _userManager = userManager;
             _genericRepository = genericRepository;
+            _emailService = emailService;
         }
         [HttpPost("userbooking")]
         public async Task<IActionResult> IsBookingOfUser([FromBody]BookingLoginDto model)
@@ -263,6 +265,13 @@ namespace CarRental.API.Controllers
 
              await _genericRepository.Add(booking);
             await _genericRepository.SaveChangesAsync();
+
+            var user = await _userService.GetUserByIdAsync(booking.UserId);
+            var http = (HttpContext.Request.IsHttps == true ? "https://" : "http://");
+            string HostName = http + HttpContext.Request.Host;
+
+            await _emailService.SendEmailAsync(user.Email, "Booking Information",
+                 $" Hello " + user.FirstName + " " + user.LastName + ", thank you for your booking" + "<br/><br/>" + "Booking number:" + booking.Id + "<br/><br/>" + "Booking email:" + user.Email + "<br/><br/>" + "This is an automated email by the system. If you shouldn't be recieving this email, please ignore it." + " <br/><br/>Car Rental.", false);
 
             return Ok(new
             {

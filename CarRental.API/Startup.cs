@@ -81,6 +81,7 @@ namespace CarRental.API
             services.AddScoped<ICarUploadService, CarUploadService>();
             services.AddScoped<ITransmisionTypeService, TransmisionTypeService>();
             services.AddScoped<IPreBookingService, PreBookingService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             services.AddAuthorization(auth =>
             {

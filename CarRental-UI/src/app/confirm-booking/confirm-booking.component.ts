@@ -122,6 +122,7 @@ export class ConfirmBookingComponent implements OnInit {
     return this.bookingService.confirmBooking(this.model).subscribe((result: any) => {
       sessionStorage.setItem('bookingId', result.id.toString());
       this.router.navigate(['/my-booking', result.id]);
+      this.alertify.success('Booking added successfully');
     }, error => {
       this.alertify.error(error.error);
     });

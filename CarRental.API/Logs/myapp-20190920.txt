@@ -18975,3 +18975,914 @@ WHERE [x].[CarId] = @__carId_0" (0723d8ff)
 2019-09-20T14:55:10.5306638+02:00 0HLPTP5HKKGCH:00000006 [INF] Executing ObjectResult, writing value of type '"CarRental.API.Dtos.SearchCarDto"'. (8a1b66c8)
 2019-09-20T14:55:10.5308423+02:00 0HLPTP5HKKGCH:00000006 [INF] Executed action "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" in 75.6669ms (afa2e885)
 2019-09-20T14:55:10.5309166+02:00 0HLPTP5HKKGCH:00000006 [INF] Request finished in 76.3875ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T14:59:46.5142963+02:00 0HLPTP5HKKGCK:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/booking/bookingdetails/1022   (ca22a1cb)
+2019-09-20T14:59:46.5145396+02:00 0HLPTP5HKKGCK:00000001 [INF] Policy execution successful. (0204925d)
+2019-09-20T14:59:46.5181395+02:00 0HLPTP5HKKGCL:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/home/filtercars?pageNumber=1&pageSize=10&pickUpLocationId=3&returnLocationId=3&pickUpDate=Sat%20Sep%2021%202019%2014:52:51%20GMT+0200%20(Central%20European%20Summer%20Time)&returnDate=Mon%20Sep%2023%202019%2014:47:51%20GMT+0200%20(Central%20European%20Summer%20Time)   (ca22a1cb)
+2019-09-20T14:59:46.5182137+02:00 0HLPTP5HKKGCL:00000001 [INF] Policy execution successful. (0204925d)
+2019-09-20T14:59:46.5183825+02:00 0HLPTP5HKKGCL:00000001 [INF] Route matched with "{action = \"SearchCars\", controller = \"Home\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SearchCars(CarRental.API.Dtos.CarsFilterDto)" on controller "CarRental.API.Controllers.HomeController" ("CarRental.API"). (122b2fdf)
+2019-09-20T14:59:46.5187751+02:00 0HLPTP5HKKGCL:00000001 [INF] Executing action method "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T14:59:46.5192801+02:00 0HLPTP5HKKGCL:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T14:59:46.5222936+02:00 0HLPTP5HKKGCK:00000001 [INF] Route matched with "{action = \"GetBookingDetails\", controller = \"Booking\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookingDetails(Int32)" on controller "CarRental.API.Controllers.BookingController" ("CarRental.API"). (122b2fdf)
+2019-09-20T14:59:46.5227717+02:00 0HLPTP5HKKGCK:00000001 [INF] Executing action method "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T14:59:46.5318867+02:00 0HLPTP5HKKGCK:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T14:59:46.5436254+02:00 0HLPTP5HKKGCL:00000001 [INF] Executed DbCommand ("11"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[Id], [x].[BrandId], [x].[CarCapacity], [x].[CarColor], [x].[CarLocationId], [x].[CarNumber], [x].[CreateByUserId], [x].[CreateOnDate], [x].[Description], [x].[FuelTypeId], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[ModelId], [x].[ModelYear], [x].[NumberOfDoors], [x].[PriceForDay], [x].[TransmisionTypeId], [x.CarLocation].[Id], [x.CarLocation].[City], [x.CarLocation].[Country], [x.CarLocation].[StreetAddress], [x.CarLocation].[ZipCode], [x.Brand].[Id], [x.Brand].[Name], [x.Model].[Id], [x.Model].[BrandId], [x.Model].[Name], [x.FuelType].[Id], [x.FuelType].[Name], [x.TransmisionType].[Id], [x.TransmisionType].[Name]
+FROM [Car] AS [x]
+LEFT JOIN [Location] AS [x.CarLocation] ON [x].[CarLocationId] = [x.CarLocation].[Id]
+LEFT JOIN [Brand] AS [x.Brand] ON [x].[BrandId] = [x.Brand].[Id]
+LEFT JOIN [Model] AS [x.Model] ON [x].[ModelId] = [x.Model].[Id]
+LEFT JOIN [FuelType] AS [x.FuelType] ON [x].[FuelTypeId] = [x.FuelType].[Id]
+LEFT JOIN [TransmisionType] AS [x.TransmisionType] ON [x].[TransmisionTypeId] = [x.TransmisionType].[Id]
+WHERE [x].[IsDeleted] <> 1
+ORDER BY [x].[Id]" (0723d8ff)
+2019-09-20T14:59:46.5489264+02:00 0HLPTP5HKKGCL:00000001 [INF] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [x.Booking].[Id], [x.Booking].[CarId], [x.Booking].[CreateByUserId], [x.Booking].[CreateOnDate], [x.Booking].[IsDeleted], [x.Booking].[LastModifiedByUserId], [x.Booking].[LastModifiedOnDate], [x.Booking].[PreBookingId], [x.Booking].[UserId], [b.PreBooking].[Id], [b.PreBooking].[AgeOfUser], [b.PreBooking].[CreateByUserId], [b.PreBooking].[CreateOnDate], [b.PreBooking].[IsDeleted], [b.PreBooking].[LastModifiedByUserId], [b.PreBooking].[LastModifiedOnDate], [b.PreBooking].[PickDate], [b.PreBooking].[PickLocationId], [b.PreBooking].[ReturnDate], [b.PreBooking].[ReturnLocationId]
+FROM [Booking] AS [x.Booking]
+LEFT JOIN [PreBooking] AS [b.PreBooking] ON [x.Booking].[PreBookingId] = [b.PreBooking].[Id]
+INNER JOIN (
+    SELECT DISTINCT [x0].[Id]
+    FROM [Car] AS [x0]
+    LEFT JOIN [Location] AS [x.CarLocation0] ON [x0].[CarLocationId] = [x.CarLocation0].[Id]
+    LEFT JOIN [Brand] AS [x.Brand0] ON [x0].[BrandId] = [x.Brand0].[Id]
+    LEFT JOIN [Model] AS [x.Model0] ON [x0].[ModelId] = [x.Model0].[Id]
+    LEFT JOIN [FuelType] AS [x.FuelType0] ON [x0].[FuelTypeId] = [x.FuelType0].[Id]
+    LEFT JOIN [TransmisionType] AS [x.TransmisionType0] ON [x0].[TransmisionTypeId] = [x.TransmisionType0].[Id]
+    WHERE [x0].[IsDeleted] <> 1
+) AS [t] ON [x.Booking].[CarId] = [t].[Id]
+ORDER BY [t].[Id]" (0723d8ff)
+2019-09-20T14:59:46.5525118+02:00 0HLPTP5HKKGCL:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T14:59:46.5535264+02:00 0HLPTP5HKKGCL:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T14:59:46.5544206+02:00 0HLPTP5HKKGCL:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T14:59:46.5568244+02:00 0HLPTP5HKKGCL:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T14:59:46.5578350+02:00 0HLPTP5HKKGCL:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T14:59:46.5586150+02:00 0HLPTP5HKKGCL:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T14:59:46.5588858+02:00 0HLPTP5HKKGCL:00000001 [INF] Executed action method "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 40.0444ms. (50a9e262)
+2019-09-20T14:59:46.5589676+02:00 0HLPTP5HKKGCL:00000001 [INF] Executing ObjectResult, writing value of type '"CarRental.API.Dtos.SearchCarDto"'. (8a1b66c8)
+2019-09-20T14:59:46.5592027+02:00 0HLPTP5HKKGCL:00000001 [INF] Executed action "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" in 40.763ms (afa2e885)
+2019-09-20T14:59:46.5592969+02:00 0HLPTP5HKKGCL:00000001 [INF] Request finished in 41.1729ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T14:59:46.5830630+02:00 0HLPTP5HKKGCK:00000001 [INF] Executed DbCommand ("4"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[CreateByUserId], [x].[CreateOnDate], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[PreBookingId], [x].[UserId], [x.PreBooking].[Id], [x.PreBooking].[AgeOfUser], [x.PreBooking].[CreateByUserId], [x.PreBooking].[CreateOnDate], [x.PreBooking].[IsDeleted], [x.PreBooking].[LastModifiedByUserId], [x.PreBooking].[LastModifiedOnDate], [x.PreBooking].[PickDate], [x.PreBooking].[PickLocationId], [x.PreBooking].[ReturnDate], [x.PreBooking].[ReturnLocationId], [x.User].[Id], [x.User].[AccessFailedCount], [x.User].[ConcurrencyStamp], [x.User].[Email], [x.User].[EmailConfirmed], [x.User].[FirstName], [x.User].[LastName], [x.User].[LockoutEnabled], [x.User].[LockoutEnd], [x.User].[NormalizedEmail], [x.User].[NormalizedUserName], [x.User].[PasswordHash], [x.User].[PhoneNumber], [x.User].[PhoneNumberConfirmed], [x.User].[SecurityStamp], [x.User].[TwoFactorEnabled], [x.User].[UserName], [x.Car].[Id], [x.Car].[BrandId], [x.Car].[CarCapacity], [x.Car].[CarColor], [x.Car].[CarLocationId], [x.Car].[CarNumber], [x.Car].[CreateByUserId], [x.Car].[CreateOnDate], [x.Car].[Description], [x.Car].[FuelTypeId], [x.Car].[IsDeleted], [x.Car].[LastModifiedByUserId], [x.Car].[LastModifiedOnDate], [x.Car].[ModelId], [x.Car].[ModelYear], [x.Car].[NumberOfDoors], [x.Car].[PriceForDay], [x.Car].[TransmisionTypeId]
+FROM [Booking] AS [x]
+LEFT JOIN [PreBooking] AS [x.PreBooking] ON [x].[PreBookingId] = [x.PreBooking].[Id]
+LEFT JOIN [AspNetUsers] AS [x.User] ON [x].[UserId] = [x.User].[Id]
+LEFT JOIN [Car] AS [x.Car] ON [x].[CarId] = [x.Car].[Id]
+WHERE ([x].[IsDeleted] = 0) AND ([x].[Id] = @__id_0)" (0723d8ff)
+2019-09-20T14:59:46.6108973+02:00 0HLPTP5HKKGCK:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[Id], [e].[City], [e].[Country], [e].[StreetAddress], [e].[ZipCode]
+FROM [Location] AS [e]
+WHERE [e].[Id] = @__get_Item_0" (0723d8ff)
+2019-09-20T14:59:46.6122558+02:00 0HLPTP5HKKGCK:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T14:59:46.6139560+02:00 0HLPTP5HKKGCK:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[Id], [e].[Name]
+FROM [Brand] AS [e]
+WHERE [e].[Id] = @__get_Item_0" (0723d8ff)
+2019-09-20T14:59:46.6159389+02:00 0HLPTP5HKKGCK:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[Id], [e].[BrandId], [e].[Name]
+FROM [Model] AS [e]
+WHERE [e].[Id] = @__get_Item_0" (0723d8ff)
+2019-09-20T14:59:46.6184236+02:00 0HLPTP5HKKGCK:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[Id], [e].[Name]
+FROM [TransmisionType] AS [e]
+WHERE [e].[Id] = @__get_Item_0" (0723d8ff)
+2019-09-20T14:59:46.6201696+02:00 0HLPTP5HKKGCK:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[Id], [e].[Name]
+FROM [FuelType] AS [e]
+WHERE [e].[Id] = @__get_Item_0" (0723d8ff)
+2019-09-20T14:59:46.6206497+02:00 0HLPTP5HKKGCK:00000001 [INF] Executed action method "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 97.8218ms. (50a9e262)
+2019-09-20T14:59:46.6207251+02:00 0HLPTP5HKKGCK:00000001 [INF] Executing ObjectResult, writing value of type '"CarRental.API.Dtos.BookingForListDto"'. (8a1b66c8)
+2019-09-20T14:59:46.6250654+02:00 0HLPTP5HKKGCK:00000001 [INF] Executed action "CarRental.API.Controllers.BookingController.GetBookingDetails (CarRental.API)" in 102.646ms (afa2e885)
+2019-09-20T14:59:46.6252399+02:00 0HLPTP5HKKGCK:00000001 [INF] Request finished in 111.3642ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T14:59:54.4132447+02:00 0HLPTP5HKKGCL:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/home/filtercars?pageNumber=1&pageSize=10&pickUpLocationId=3&returnLocationId=3&pickUpDate=Sat%20Sep%2021%202019%2014:52:51%20GMT+0200%20(Central%20European%20Summer%20Time)&returnDate=Mon%20Sep%2023%202019%2014:47:51%20GMT+0200%20(Central%20European%20Summer%20Time)   (ca22a1cb)
+2019-09-20T14:59:54.4133643+02:00 0HLPTP5HKKGCL:00000002 [INF] Policy execution successful. (0204925d)
+2019-09-20T14:59:54.4137710+02:00 0HLPTP5HKKGCL:00000002 [INF] Route matched with "{action = \"SearchCars\", controller = \"Home\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SearchCars(CarRental.API.Dtos.CarsFilterDto)" on controller "CarRental.API.Controllers.HomeController" ("CarRental.API"). (122b2fdf)
+2019-09-20T14:59:54.4142006+02:00 0HLPTP5HKKGCL:00000002 [INF] Executing action method "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T14:59:54.4155754+02:00 0HLPTP5HKKGCL:00000002 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T14:59:54.4184822+02:00 0HLPTP5HKKGCL:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[Id], [x].[BrandId], [x].[CarCapacity], [x].[CarColor], [x].[CarLocationId], [x].[CarNumber], [x].[CreateByUserId], [x].[CreateOnDate], [x].[Description], [x].[FuelTypeId], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[ModelId], [x].[ModelYear], [x].[NumberOfDoors], [x].[PriceForDay], [x].[TransmisionTypeId], [x.CarLocation].[Id], [x.CarLocation].[City], [x.CarLocation].[Country], [x.CarLocation].[StreetAddress], [x.CarLocation].[ZipCode], [x.Brand].[Id], [x.Brand].[Name], [x.Model].[Id], [x.Model].[BrandId], [x.Model].[Name], [x.FuelType].[Id], [x.FuelType].[Name], [x.TransmisionType].[Id], [x.TransmisionType].[Name]
+FROM [Car] AS [x]
+LEFT JOIN [Location] AS [x.CarLocation] ON [x].[CarLocationId] = [x.CarLocation].[Id]
+LEFT JOIN [Brand] AS [x.Brand] ON [x].[BrandId] = [x.Brand].[Id]
+LEFT JOIN [Model] AS [x.Model] ON [x].[ModelId] = [x.Model].[Id]
+LEFT JOIN [FuelType] AS [x.FuelType] ON [x].[FuelTypeId] = [x.FuelType].[Id]
+LEFT JOIN [TransmisionType] AS [x.TransmisionType] ON [x].[TransmisionTypeId] = [x.TransmisionType].[Id]
+WHERE [x].[IsDeleted] <> 1
+ORDER BY [x].[Id]" (0723d8ff)
+2019-09-20T14:59:54.4220561+02:00 0HLPTP5HKKGCL:00000002 [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [x.Booking].[Id], [x.Booking].[CarId], [x.Booking].[CreateByUserId], [x.Booking].[CreateOnDate], [x.Booking].[IsDeleted], [x.Booking].[LastModifiedByUserId], [x.Booking].[LastModifiedOnDate], [x.Booking].[PreBookingId], [x.Booking].[UserId], [b.PreBooking].[Id], [b.PreBooking].[AgeOfUser], [b.PreBooking].[CreateByUserId], [b.PreBooking].[CreateOnDate], [b.PreBooking].[IsDeleted], [b.PreBooking].[LastModifiedByUserId], [b.PreBooking].[LastModifiedOnDate], [b.PreBooking].[PickDate], [b.PreBooking].[PickLocationId], [b.PreBooking].[ReturnDate], [b.PreBooking].[ReturnLocationId]
+FROM [Booking] AS [x.Booking]
+LEFT JOIN [PreBooking] AS [b.PreBooking] ON [x.Booking].[PreBookingId] = [b.PreBooking].[Id]
+INNER JOIN (
+    SELECT DISTINCT [x0].[Id]
+    FROM [Car] AS [x0]
+    LEFT JOIN [Location] AS [x.CarLocation0] ON [x0].[CarLocationId] = [x.CarLocation0].[Id]
+    LEFT JOIN [Brand] AS [x.Brand0] ON [x0].[BrandId] = [x.Brand0].[Id]
+    LEFT JOIN [Model] AS [x.Model0] ON [x0].[ModelId] = [x.Model0].[Id]
+    LEFT JOIN [FuelType] AS [x.FuelType0] ON [x0].[FuelTypeId] = [x.FuelType0].[Id]
+    LEFT JOIN [TransmisionType] AS [x.TransmisionType0] ON [x0].[TransmisionTypeId] = [x.TransmisionType0].[Id]
+    WHERE [x0].[IsDeleted] <> 1
+) AS [t] ON [x.Booking].[CarId] = [t].[Id]
+ORDER BY [t].[Id]" (0723d8ff)
+2019-09-20T14:59:54.4286227+02:00 0HLPTP5HKKGCL:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T14:59:54.4299656+02:00 0HLPTP5HKKGCL:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T14:59:54.4314495+02:00 0HLPTP5HKKGCL:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T14:59:54.4327360+02:00 0HLPTP5HKKGCL:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T14:59:54.4338469+02:00 0HLPTP5HKKGCL:00000002 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T14:59:54.4352722+02:00 0HLPTP5HKKGCL:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T14:59:54.4358465+02:00 0HLPTP5HKKGCL:00000002 [INF] Executed action method "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 21.4758ms. (50a9e262)
+2019-09-20T14:59:54.4360781+02:00 0HLPTP5HKKGCL:00000002 [INF] Executing ObjectResult, writing value of type '"CarRental.API.Dtos.SearchCarDto"'. (8a1b66c8)
+2019-09-20T14:59:54.4364368+02:00 0HLPTP5HKKGCL:00000002 [INF] Executed action "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" in 22.5989ms (afa2e885)
+2019-09-20T14:59:54.4365223+02:00 0HLPTP5HKKGCL:00000002 [INF] Request finished in 23.6581ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:07.2302971+02:00 0HLPTP5HKKGCK:00000002 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:59834/api/auth/login   (ca22a1cb)
+2019-09-20T15:00:07.2304538+02:00 0HLPTP5HKKGCK:00000002 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:07.2305252+02:00 0HLPTP5HKKGCK:00000002 [INF] Request finished in 0.2774ms 204  (791a596a)
+2019-09-20T15:00:07.2351009+02:00 0HLPTP5HKKGCL:00000003 [INF] Request starting HTTP/1.1 POST http://localhost:59834/api/auth/login application/json 55 (ca22a1cb)
+2019-09-20T15:00:07.2352278+02:00 0HLPTP5HKKGCL:00000003 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:07.2388504+02:00 0HLPTP5HKKGCL:00000003 [INF] Route matched with "{action = \"Login\", controller = \"Auth\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CarRental.API.Dtos.UserForLoginDto)" on controller "CarRental.API.Controllers.AuthController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:07.2421070+02:00 0HLPTP5HKKGCL:00000003 [INF] Executing action method "CarRental.API.Controllers.AuthController.Login (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:07.2511540+02:00 0HLPTP5HKKGCL:00000003 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:07.2589754+02:00 0HLPTP5HKKGCL:00000003 [INF] Executed DbCommand ("2"ms) [Parameters=["@__ToLower_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[AccessFailedCount], [x].[ConcurrencyStamp], [x].[Email], [x].[EmailConfirmed], [x].[FirstName], [x].[LastName], [x].[LockoutEnabled], [x].[LockoutEnd], [x].[NormalizedEmail], [x].[NormalizedUserName], [x].[PasswordHash], [x].[PhoneNumber], [x].[PhoneNumberConfirmed], [x].[SecurityStamp], [x].[TwoFactorEnabled], [x].[UserName]
+FROM [AspNetUsers] AS [x]
+WHERE LOWER([x].[UserName]) = @__ToLower_0" (0723d8ff)
+2019-09-20T15:00:07.2606340+02:00 0HLPTP5HKKGCL:00000003 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"ApplicationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:07.2629485+02:00 0HLPTP5HKKGCL:00000003 [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Email], [u].[EmailConfirmed], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName]
+FROM [AspNetUsers] AS [u]
+WHERE [u].[NormalizedUserName] = @__normalizedUserName_0" (0723d8ff)
+2019-09-20T15:00:07.3046640+02:00 0HLPTP5HKKGCL:00000003 [INF] Executed DbCommand ("2"ms) [Parameters=["@__user_Id_0='?' (Size = 450)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [uc].[Id], [uc].[ClaimType], [uc].[ClaimValue], [uc].[UserId]
+FROM [AspNetUserClaims] AS [uc]
+WHERE [uc].[UserId] = @__user_Id_0" (0723d8ff)
+2019-09-20T15:00:07.3306788+02:00 0HLPTP5HKKGCL:00000003 [INF] Executed DbCommand ("3"ms) [Parameters=["@__userId_0='?' (Size = 450)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [role].[Name]
+FROM [AspNetUserRoles] AS [userRole]
+INNER JOIN [AspNetRoles] AS [role] ON [userRole].[RoleId] = [role].[Id]
+WHERE [userRole].[UserId] = @__userId_0" (0723d8ff)
+2019-09-20T15:00:07.3429943+02:00 0HLPTP5HKKGCL:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[Id], [r].[ConcurrencyStamp], [r].[Name], [r].[NormalizedName]
+FROM [AspNetRoles] AS [r]
+WHERE [r].[NormalizedName] = @__normalizedName_0" (0723d8ff)
+2019-09-20T15:00:07.3597627+02:00 0HLPTP5HKKGCL:00000003 [INF] Executed DbCommand ("2"ms) [Parameters=["@__role_Id_0='?' (Size = 450)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [rc].[ClaimType], [rc].[ClaimValue]
+FROM [AspNetRoleClaims] AS [rc]
+WHERE [rc].[RoleId] = @__role_Id_0" (0723d8ff)
+2019-09-20T15:00:07.3702772+02:00 0HLPTP5HKKGCL:00000003 [INF] AuthenticationScheme: "Identity.Application" signed in. (c66dd7e7)
+2019-09-20T15:00:07.3793247+02:00 0HLPTP5HKKGCL:00000003 [INF] Executed action method "CarRental.API.Controllers.AuthController.Login (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 137.1133ms. (50a9e262)
+2019-09-20T15:00:07.3794640+02:00 0HLPTP5HKKGCL:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-09-20T15:00:07.3806345+02:00 0HLPTP5HKKGCL:00000003 [INF] Executed action "CarRental.API.Controllers.AuthController.Login (CarRental.API)" in 141.6177ms (afa2e885)
+2019-09-20T15:00:07.3807684+02:00 0HLPTP5HKKGCL:00000003 [INF] Request finished in 145.7009ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:07.4147341+02:00 0HLPTP5HKKGCK:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/home/filtercars?pageNumber=1&pageSize=10&pickUpLocationId=3&returnLocationId=3&pickUpDate=Sat%20Sep%2021%202019%2014:52:51%20GMT+0200%20(Central%20European%20Summer%20Time)&returnDate=Mon%20Sep%2023%202019%2014:47:51%20GMT+0200%20(Central%20European%20Summer%20Time)   (ca22a1cb)
+2019-09-20T15:00:07.4148391+02:00 0HLPTP5HKKGCK:00000003 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:07.4151210+02:00 0HLPTP5HKKGCK:00000003 [INF] Route matched with "{action = \"SearchCars\", controller = \"Home\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SearchCars(CarRental.API.Dtos.CarsFilterDto)" on controller "CarRental.API.Controllers.HomeController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:07.4151490+02:00 0HLPTP5HKKGCL:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/home/locations   (ca22a1cb)
+2019-09-20T15:00:07.4152009+02:00 0HLPTP5HKKGCL:00000004 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:07.4153299+02:00 0HLPTP5HKKGCL:00000004 [INF] Route matched with "{action = \"GetLocations\", controller = \"Home\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLocations()" on controller "CarRental.API.Controllers.HomeController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:07.4155111+02:00 0HLPTP5HKKGCL:00000004 [INF] Executing action method "CarRental.API.Controllers.HomeController.GetLocations (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:07.4156292+02:00 0HLPTP5HKKGCK:00000003 [INF] Executing action method "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:07.4157683+02:00 0HLPTP5HKKGCL:00000004 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:07.4161463+02:00 0HLPTP5HKKGCK:00000003 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:07.4188438+02:00 0HLPTP5HKKGCL:00000004 [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [l].[Id], [l].[City], [l].[Country], [l].[StreetAddress], [l].[ZipCode]
+FROM [Location] AS [l]" (0723d8ff)
+2019-09-20T15:00:07.4192358+02:00 0HLPTP5HKKGCL:00000004 [INF] Executed action method "CarRental.API.Controllers.HomeController.GetLocations (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 3.6533ms. (50a9e262)
+2019-09-20T15:00:07.4193267+02:00 0HLPTP5HKKGCL:00000004 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Dtos.LocationDto, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-09-20T15:00:07.4195636+02:00 0HLPTP5HKKGCL:00000004 [INF] Executed action "CarRental.API.Controllers.HomeController.GetLocations (CarRental.API)" in 4.1458ms (afa2e885)
+2019-09-20T15:00:07.4196373+02:00 0HLPTP5HKKGCL:00000004 [INF] Request finished in 4.4998ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:07.4218815+02:00 0HLPTP5HKKGCK:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[Id], [x].[BrandId], [x].[CarCapacity], [x].[CarColor], [x].[CarLocationId], [x].[CarNumber], [x].[CreateByUserId], [x].[CreateOnDate], [x].[Description], [x].[FuelTypeId], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[ModelId], [x].[ModelYear], [x].[NumberOfDoors], [x].[PriceForDay], [x].[TransmisionTypeId], [x.CarLocation].[Id], [x.CarLocation].[City], [x.CarLocation].[Country], [x.CarLocation].[StreetAddress], [x.CarLocation].[ZipCode], [x.Brand].[Id], [x.Brand].[Name], [x.Model].[Id], [x.Model].[BrandId], [x.Model].[Name], [x.FuelType].[Id], [x.FuelType].[Name], [x.TransmisionType].[Id], [x.TransmisionType].[Name]
+FROM [Car] AS [x]
+LEFT JOIN [Location] AS [x.CarLocation] ON [x].[CarLocationId] = [x.CarLocation].[Id]
+LEFT JOIN [Brand] AS [x.Brand] ON [x].[BrandId] = [x.Brand].[Id]
+LEFT JOIN [Model] AS [x.Model] ON [x].[ModelId] = [x.Model].[Id]
+LEFT JOIN [FuelType] AS [x.FuelType] ON [x].[FuelTypeId] = [x.FuelType].[Id]
+LEFT JOIN [TransmisionType] AS [x.TransmisionType] ON [x].[TransmisionTypeId] = [x.TransmisionType].[Id]
+WHERE [x].[IsDeleted] <> 1
+ORDER BY [x].[Id]" (0723d8ff)
+2019-09-20T15:00:07.4245632+02:00 0HLPTP5HKKGCK:00000003 [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [x.Booking].[Id], [x.Booking].[CarId], [x.Booking].[CreateByUserId], [x.Booking].[CreateOnDate], [x.Booking].[IsDeleted], [x.Booking].[LastModifiedByUserId], [x.Booking].[LastModifiedOnDate], [x.Booking].[PreBookingId], [x.Booking].[UserId], [b.PreBooking].[Id], [b.PreBooking].[AgeOfUser], [b.PreBooking].[CreateByUserId], [b.PreBooking].[CreateOnDate], [b.PreBooking].[IsDeleted], [b.PreBooking].[LastModifiedByUserId], [b.PreBooking].[LastModifiedOnDate], [b.PreBooking].[PickDate], [b.PreBooking].[PickLocationId], [b.PreBooking].[ReturnDate], [b.PreBooking].[ReturnLocationId]
+FROM [Booking] AS [x.Booking]
+LEFT JOIN [PreBooking] AS [b.PreBooking] ON [x.Booking].[PreBookingId] = [b.PreBooking].[Id]
+INNER JOIN (
+    SELECT DISTINCT [x0].[Id]
+    FROM [Car] AS [x0]
+    LEFT JOIN [Location] AS [x.CarLocation0] ON [x0].[CarLocationId] = [x.CarLocation0].[Id]
+    LEFT JOIN [Brand] AS [x.Brand0] ON [x0].[BrandId] = [x.Brand0].[Id]
+    LEFT JOIN [Model] AS [x.Model0] ON [x0].[ModelId] = [x.Model0].[Id]
+    LEFT JOIN [FuelType] AS [x.FuelType0] ON [x0].[FuelTypeId] = [x.FuelType0].[Id]
+    LEFT JOIN [TransmisionType] AS [x.TransmisionType0] ON [x0].[TransmisionTypeId] = [x.TransmisionType0].[Id]
+    WHERE [x0].[IsDeleted] <> 1
+) AS [t] ON [x.Booking].[CarId] = [t].[Id]
+ORDER BY [t].[Id]" (0723d8ff)
+2019-09-20T15:00:07.4294075+02:00 0HLPTP5HKKGCK:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:07.4307817+02:00 0HLPTP5HKKGCK:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:07.4316061+02:00 0HLPTP5HKKGCK:00000003 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:07.4331626+02:00 0HLPTP5HKKGCK:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:07.4344391+02:00 0HLPTP5HKKGCK:00000003 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:07.4365348+02:00 0HLPTP5HKKGCK:00000003 [INF] Executed DbCommand ("2"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:07.4369619+02:00 0HLPTP5HKKGCK:00000003 [INF] Executed action method "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 21.2549ms. (50a9e262)
+2019-09-20T15:00:07.4370373+02:00 0HLPTP5HKKGCK:00000003 [INF] Executing ObjectResult, writing value of type '"CarRental.API.Dtos.SearchCarDto"'. (8a1b66c8)
+2019-09-20T15:00:07.4388341+02:00 0HLPTP5HKKGCK:00000003 [INF] Executed action "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" in 23.644ms (afa2e885)
+2019-09-20T15:00:07.4392395+02:00 0HLPTP5HKKGCK:00000003 [INF] Request finished in 24.5857ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:12.6621619+02:00 0HLPTP5HKKGCL:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/home/filtercars?pageNumber=1&pageSize=10&pickUpLocationId=3&returnLocationId=3&pickUpDate=Sat%20Sep%2021%202019%2014:52:51%20GMT+0200%20(Central%20European%20Summer%20Time)&returnDate=Mon%20Sep%2023%202019%2014:47:51%20GMT+0200%20(Central%20European%20Summer%20Time)   (ca22a1cb)
+2019-09-20T15:00:12.6623202+02:00 0HLPTP5HKKGCL:00000005 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:12.6624901+02:00 0HLPTP5HKKGCL:00000005 [INF] Route matched with "{action = \"SearchCars\", controller = \"Home\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SearchCars(CarRental.API.Dtos.CarsFilterDto)" on controller "CarRental.API.Controllers.HomeController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:12.6627634+02:00 0HLPTP5HKKGCL:00000005 [INF] Executing action method "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:12.6631640+02:00 0HLPTP5HKKGCL:00000005 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:12.6645769+02:00 0HLPTP5HKKGCK:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/admin/car/cars?pageNumber=1&pageSize=10   (ca22a1cb)
+2019-09-20T15:00:12.6646503+02:00 0HLPTP5HKKGCK:00000004 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:12.6649320+02:00 0HLPTP5HKKGCL:00000005 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[Id], [x].[BrandId], [x].[CarCapacity], [x].[CarColor], [x].[CarLocationId], [x].[CarNumber], [x].[CreateByUserId], [x].[CreateOnDate], [x].[Description], [x].[FuelTypeId], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[ModelId], [x].[ModelYear], [x].[NumberOfDoors], [x].[PriceForDay], [x].[TransmisionTypeId], [x.CarLocation].[Id], [x.CarLocation].[City], [x.CarLocation].[Country], [x.CarLocation].[StreetAddress], [x.CarLocation].[ZipCode], [x.Brand].[Id], [x.Brand].[Name], [x.Model].[Id], [x.Model].[BrandId], [x.Model].[Name], [x.FuelType].[Id], [x.FuelType].[Name], [x.TransmisionType].[Id], [x.TransmisionType].[Name]
+FROM [Car] AS [x]
+LEFT JOIN [Location] AS [x.CarLocation] ON [x].[CarLocationId] = [x.CarLocation].[Id]
+LEFT JOIN [Brand] AS [x.Brand] ON [x].[BrandId] = [x.Brand].[Id]
+LEFT JOIN [Model] AS [x.Model] ON [x].[ModelId] = [x.Model].[Id]
+LEFT JOIN [FuelType] AS [x.FuelType] ON [x].[FuelTypeId] = [x.FuelType].[Id]
+LEFT JOIN [TransmisionType] AS [x.TransmisionType] ON [x].[TransmisionTypeId] = [x.TransmisionType].[Id]
+WHERE [x].[IsDeleted] <> 1
+ORDER BY [x].[Id]" (0723d8ff)
+2019-09-20T15:00:12.6665492+02:00 0HLPTP5HKKGCL:00000005 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [x.Booking].[Id], [x.Booking].[CarId], [x.Booking].[CreateByUserId], [x.Booking].[CreateOnDate], [x.Booking].[IsDeleted], [x.Booking].[LastModifiedByUserId], [x.Booking].[LastModifiedOnDate], [x.Booking].[PreBookingId], [x.Booking].[UserId], [b.PreBooking].[Id], [b.PreBooking].[AgeOfUser], [b.PreBooking].[CreateByUserId], [b.PreBooking].[CreateOnDate], [b.PreBooking].[IsDeleted], [b.PreBooking].[LastModifiedByUserId], [b.PreBooking].[LastModifiedOnDate], [b.PreBooking].[PickDate], [b.PreBooking].[PickLocationId], [b.PreBooking].[ReturnDate], [b.PreBooking].[ReturnLocationId]
+FROM [Booking] AS [x.Booking]
+LEFT JOIN [PreBooking] AS [b.PreBooking] ON [x.Booking].[PreBookingId] = [b.PreBooking].[Id]
+INNER JOIN (
+    SELECT DISTINCT [x0].[Id]
+    FROM [Car] AS [x0]
+    LEFT JOIN [Location] AS [x.CarLocation0] ON [x0].[CarLocationId] = [x.CarLocation0].[Id]
+    LEFT JOIN [Brand] AS [x.Brand0] ON [x0].[BrandId] = [x.Brand0].[Id]
+    LEFT JOIN [Model] AS [x.Model0] ON [x0].[ModelId] = [x.Model0].[Id]
+    LEFT JOIN [FuelType] AS [x.FuelType0] ON [x0].[FuelTypeId] = [x.FuelType0].[Id]
+    LEFT JOIN [TransmisionType] AS [x.TransmisionType0] ON [x0].[TransmisionTypeId] = [x.TransmisionType0].[Id]
+    WHERE [x0].[IsDeleted] <> 1
+) AS [t] ON [x.Booking].[CarId] = [t].[Id]
+ORDER BY [t].[Id]" (0723d8ff)
+2019-09-20T15:00:12.6706841+02:00 0HLPTP5HKKGCL:00000005 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.6730076+02:00 0HLPTP5HKKGCK:00000004 [INF] Route matched with "{action = \"GetFilteredCars\", controller = \"Car\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredCars(CarRental.API.Dtos.PaginationParams)" on controller "CarRental.API.Areas.Admin.CarController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:12.6742917+02:00 0HLPTP5HKKGCK:00000004 [INF] Executing action method "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:12.6748910+02:00 0HLPTP5HKKGCL:00000005 [INF] Executed DbCommand ("3"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.6763439+02:00 0HLPTP5HKKGCL:00000005 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.6779422+02:00 0HLPTP5HKKGCL:00000005 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.6797059+02:00 0HLPTP5HKKGCL:00000005 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.6798912+02:00 0HLPTP5HKKGCK:00000004 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:12.6809202+02:00 0HLPTP5HKKGCL:00000005 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.6811941+02:00 0HLPTP5HKKGCL:00000005 [INF] Executed action method "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 18.3771ms. (50a9e262)
+2019-09-20T15:00:12.6812585+02:00 0HLPTP5HKKGCL:00000005 [INF] Executing ObjectResult, writing value of type '"CarRental.API.Dtos.SearchCarDto"'. (8a1b66c8)
+2019-09-20T15:00:12.6814370+02:00 0HLPTP5HKKGCL:00000005 [INF] Executed action "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" in 18.9036ms (afa2e885)
+2019-09-20T15:00:12.6814926+02:00 0HLPTP5HKKGCL:00000005 [INF] Request finished in 19.421ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:12.6887244+02:00 0HLPTP5HKKGCK:00000004 [WRN] The Include operation for navigation '"[x].TransmisionType"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-09-20T15:00:12.6900159+02:00 0HLPTP5HKKGCK:00000004 [WRN] The Include operation for navigation '"[x].FuelType"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-09-20T15:00:12.6900664+02:00 0HLPTP5HKKGCK:00000004 [WRN] The Include operation for navigation '"[x].Model"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-09-20T15:00:12.6900889+02:00 0HLPTP5HKKGCK:00000004 [WRN] The Include operation for navigation '"[x].Brand"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-09-20T15:00:12.6901100+02:00 0HLPTP5HKKGCK:00000004 [WRN] The Include operation for navigation '"[x].CarLocation"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-09-20T15:00:12.7142196+02:00 0HLPTP5HKKGCK:00000004 [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [Car] AS [x]
+WHERE [x].[IsDeleted] <> 1" (0723d8ff)
+2019-09-20T15:00:12.7205390+02:00 0HLPTP5HKKGCK:00000004 [WRN] Query: '"(from Car x in DbSet<Car> where [x].IsDeleted != True select [x]).Skip(__p_0).Take(__p_1)"' uses a row limiting operation (Skip/Take) without OrderBy which may lead to unpredictable results. (32148ccc)
+2019-09-20T15:00:12.7566516+02:00 0HLPTP5HKKGCK:00000004 [INF] Executed DbCommand ("11"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[Id], [x].[BrandId], [x].[CarCapacity], [x].[CarColor], [x].[CarLocationId], [x].[CarNumber], [x].[CreateByUserId], [x].[CreateOnDate], [x].[Description], [x].[FuelTypeId], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[ModelId], [x].[ModelYear], [x].[NumberOfDoors], [x].[PriceForDay], [x].[TransmisionTypeId], [x.CarLocation].[Id], [x.CarLocation].[City], [x.CarLocation].[Country], [x.CarLocation].[StreetAddress], [x.CarLocation].[ZipCode], [x.Brand].[Id], [x.Brand].[Name], [x.Model].[Id], [x.Model].[BrandId], [x.Model].[Name], [x.FuelType].[Id], [x.FuelType].[Name], [x.TransmisionType].[Id], [x.TransmisionType].[Name]
+FROM [Car] AS [x]
+LEFT JOIN [Location] AS [x.CarLocation] ON [x].[CarLocationId] = [x.CarLocation].[Id]
+LEFT JOIN [Brand] AS [x.Brand] ON [x].[BrandId] = [x.Brand].[Id]
+LEFT JOIN [Model] AS [x.Model] ON [x].[ModelId] = [x.Model].[Id]
+LEFT JOIN [FuelType] AS [x.FuelType] ON [x].[FuelTypeId] = [x.FuelType].[Id]
+LEFT JOIN [TransmisionType] AS [x.TransmisionType] ON [x].[TransmisionTypeId] = [x.TransmisionType].[Id]
+WHERE [x].[IsDeleted] <> 1
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2019-09-20T15:00:12.7632782+02:00 0HLPTP5HKKGCK:00000004 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.7641690+02:00 0HLPTP5HKKGCK:00000004 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.7647260+02:00 0HLPTP5HKKGCK:00000004 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.7653745+02:00 0HLPTP5HKKGCK:00000004 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.7659824+02:00 0HLPTP5HKKGCK:00000004 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.7665492+02:00 0HLPTP5HKKGCK:00000004 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.7670722+02:00 0HLPTP5HKKGCK:00000004 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.7676438+02:00 0HLPTP5HKKGCK:00000004 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.7681669+02:00 0HLPTP5HKKGCK:00000004 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.7687251+02:00 0HLPTP5HKKGCK:00000004 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:12.7689080+02:00 0HLPTP5HKKGCK:00000004 [INF] Executed action method "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 94.5665ms. (50a9e262)
+2019-09-20T15:00:12.7689746+02:00 0HLPTP5HKKGCK:00000004 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Dtos.CarForListDto, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-09-20T15:00:12.7691507+02:00 0HLPTP5HKKGCK:00000004 [INF] Executed action "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)" in 96.0866ms (afa2e885)
+2019-09-20T15:00:12.7692298+02:00 0HLPTP5HKKGCK:00000004 [INF] Request finished in 104.6848ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:16.9532083+02:00 0HLPTP5HKKGCL:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/admin/car/cars?pageNumber=2&pageSize=10   (ca22a1cb)
+2019-09-20T15:00:16.9533080+02:00 0HLPTP5HKKGCL:00000006 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:16.9534761+02:00 0HLPTP5HKKGCL:00000006 [INF] Route matched with "{action = \"GetFilteredCars\", controller = \"Car\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredCars(CarRental.API.Dtos.PaginationParams)" on controller "CarRental.API.Areas.Admin.CarController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:16.9537754+02:00 0HLPTP5HKKGCL:00000006 [INF] Executing action method "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:16.9540177+02:00 0HLPTP5HKKGCL:00000006 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:16.9560746+02:00 0HLPTP5HKKGCL:00000006 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [Car] AS [x]
+WHERE [x].[IsDeleted] <> 1" (0723d8ff)
+2019-09-20T15:00:16.9616817+02:00 0HLPTP5HKKGCL:00000006 [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[Id], [x].[BrandId], [x].[CarCapacity], [x].[CarColor], [x].[CarLocationId], [x].[CarNumber], [x].[CreateByUserId], [x].[CreateOnDate], [x].[Description], [x].[FuelTypeId], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[ModelId], [x].[ModelYear], [x].[NumberOfDoors], [x].[PriceForDay], [x].[TransmisionTypeId], [x.CarLocation].[Id], [x.CarLocation].[City], [x.CarLocation].[Country], [x.CarLocation].[StreetAddress], [x.CarLocation].[ZipCode], [x.Brand].[Id], [x.Brand].[Name], [x.Model].[Id], [x.Model].[BrandId], [x.Model].[Name], [x.FuelType].[Id], [x.FuelType].[Name], [x.TransmisionType].[Id], [x.TransmisionType].[Name]
+FROM [Car] AS [x]
+LEFT JOIN [Location] AS [x.CarLocation] ON [x].[CarLocationId] = [x.CarLocation].[Id]
+LEFT JOIN [Brand] AS [x.Brand] ON [x].[BrandId] = [x.Brand].[Id]
+LEFT JOIN [Model] AS [x.Model] ON [x].[ModelId] = [x.Model].[Id]
+LEFT JOIN [FuelType] AS [x.FuelType] ON [x].[FuelTypeId] = [x.FuelType].[Id]
+LEFT JOIN [TransmisionType] AS [x.TransmisionType] ON [x].[TransmisionTypeId] = [x.TransmisionType].[Id]
+WHERE [x].[IsDeleted] <> 1
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2019-09-20T15:00:16.9630871+02:00 0HLPTP5HKKGCL:00000006 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:16.9637083+02:00 0HLPTP5HKKGCL:00000006 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:16.9643279+02:00 0HLPTP5HKKGCL:00000006 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:16.9649041+02:00 0HLPTP5HKKGCL:00000006 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:16.9654959+02:00 0HLPTP5HKKGCL:00000006 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:16.9660716+02:00 0HLPTP5HKKGCL:00000006 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:16.9665821+02:00 0HLPTP5HKKGCL:00000006 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:16.9667240+02:00 0HLPTP5HKKGCL:00000006 [INF] Executed action method "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 12.9105ms. (50a9e262)
+2019-09-20T15:00:16.9667853+02:00 0HLPTP5HKKGCL:00000006 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Dtos.CarForListDto, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-09-20T15:00:16.9669118+02:00 0HLPTP5HKKGCL:00000006 [INF] Executed action "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)" in 13.4039ms (afa2e885)
+2019-09-20T15:00:16.9669675+02:00 0HLPTP5HKKGCL:00000006 [INF] Request finished in 13.8721ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:17.7764000+02:00 0HLPTP5HKKGCK:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/admin/car/cars?pageNumber=1&pageSize=10   (ca22a1cb)
+2019-09-20T15:00:17.7765285+02:00 0HLPTP5HKKGCK:00000005 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:17.7767208+02:00 0HLPTP5HKKGCK:00000005 [INF] Route matched with "{action = \"GetFilteredCars\", controller = \"Car\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredCars(CarRental.API.Dtos.PaginationParams)" on controller "CarRental.API.Areas.Admin.CarController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:17.7770435+02:00 0HLPTP5HKKGCK:00000005 [INF] Executing action method "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:17.7772792+02:00 0HLPTP5HKKGCK:00000005 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:17.7781187+02:00 0HLPTP5HKKGCK:00000005 [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [Car] AS [x]
+WHERE [x].[IsDeleted] <> 1" (0723d8ff)
+2019-09-20T15:00:17.7792771+02:00 0HLPTP5HKKGCK:00000005 [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[Id], [x].[BrandId], [x].[CarCapacity], [x].[CarColor], [x].[CarLocationId], [x].[CarNumber], [x].[CreateByUserId], [x].[CreateOnDate], [x].[Description], [x].[FuelTypeId], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[ModelId], [x].[ModelYear], [x].[NumberOfDoors], [x].[PriceForDay], [x].[TransmisionTypeId], [x.CarLocation].[Id], [x.CarLocation].[City], [x.CarLocation].[Country], [x.CarLocation].[StreetAddress], [x.CarLocation].[ZipCode], [x.Brand].[Id], [x.Brand].[Name], [x.Model].[Id], [x.Model].[BrandId], [x.Model].[Name], [x.FuelType].[Id], [x.FuelType].[Name], [x.TransmisionType].[Id], [x.TransmisionType].[Name]
+FROM [Car] AS [x]
+LEFT JOIN [Location] AS [x.CarLocation] ON [x].[CarLocationId] = [x.CarLocation].[Id]
+LEFT JOIN [Brand] AS [x.Brand] ON [x].[BrandId] = [x.Brand].[Id]
+LEFT JOIN [Model] AS [x.Model] ON [x].[ModelId] = [x.Model].[Id]
+LEFT JOIN [FuelType] AS [x.FuelType] ON [x].[FuelTypeId] = [x.FuelType].[Id]
+LEFT JOIN [TransmisionType] AS [x.TransmisionType] ON [x].[TransmisionTypeId] = [x.TransmisionType].[Id]
+WHERE [x].[IsDeleted] <> 1
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2019-09-20T15:00:17.7808216+02:00 0HLPTP5HKKGCK:00000005 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:17.7814799+02:00 0HLPTP5HKKGCK:00000005 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:17.7820459+02:00 0HLPTP5HKKGCK:00000005 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:17.7826537+02:00 0HLPTP5HKKGCK:00000005 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:17.7832781+02:00 0HLPTP5HKKGCK:00000005 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:17.7838924+02:00 0HLPTP5HKKGCK:00000005 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:17.7845164+02:00 0HLPTP5HKKGCK:00000005 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:17.7850882+02:00 0HLPTP5HKKGCK:00000005 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:17.7857257+02:00 0HLPTP5HKKGCK:00000005 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:17.7863905+02:00 0HLPTP5HKKGCK:00000005 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:17.7866015+02:00 0HLPTP5HKKGCK:00000005 [INF] Executed action method "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 9.5103ms. (50a9e262)
+2019-09-20T15:00:17.7866698+02:00 0HLPTP5HKKGCK:00000005 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Dtos.CarForListDto, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-09-20T15:00:17.7869154+02:00 0HLPTP5HKKGCK:00000005 [INF] Executed action "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)" in 10.1565ms (afa2e885)
+2019-09-20T15:00:17.7869866+02:00 0HLPTP5HKKGCK:00000005 [INF] Request finished in 10.6199ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:19.7618995+02:00 0HLPTP5HKKGCL:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/home/filtercars?pageNumber=1&pageSize=10&pickUpLocationId=3&returnLocationId=3&pickUpDate=Sat%20Sep%2021%202019%2014:52:51%20GMT+0200%20(Central%20European%20Summer%20Time)&returnDate=Mon%20Sep%2023%202019%2014:47:51%20GMT+0200%20(Central%20European%20Summer%20Time)   (ca22a1cb)
+2019-09-20T15:00:19.7619970+02:00 0HLPTP5HKKGCL:00000007 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:19.7621628+02:00 0HLPTP5HKKGCL:00000007 [INF] Route matched with "{action = \"SearchCars\", controller = \"Home\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SearchCars(CarRental.API.Dtos.CarsFilterDto)" on controller "CarRental.API.Controllers.HomeController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:19.7624515+02:00 0HLPTP5HKKGCK:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/admin/user/users?pageNumber=1&pageSize=10   (ca22a1cb)
+2019-09-20T15:00:19.7625147+02:00 0HLPTP5HKKGCK:00000006 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:19.7627490+02:00 0HLPTP5HKKGCL:00000007 [INF] Executing action method "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:19.7631328+02:00 0HLPTP5HKKGCL:00000007 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:19.7673542+02:00 0HLPTP5HKKGCL:00000007 [INF] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[Id], [x].[BrandId], [x].[CarCapacity], [x].[CarColor], [x].[CarLocationId], [x].[CarNumber], [x].[CreateByUserId], [x].[CreateOnDate], [x].[Description], [x].[FuelTypeId], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[ModelId], [x].[ModelYear], [x].[NumberOfDoors], [x].[PriceForDay], [x].[TransmisionTypeId], [x.CarLocation].[Id], [x.CarLocation].[City], [x.CarLocation].[Country], [x.CarLocation].[StreetAddress], [x.CarLocation].[ZipCode], [x.Brand].[Id], [x.Brand].[Name], [x.Model].[Id], [x.Model].[BrandId], [x.Model].[Name], [x.FuelType].[Id], [x.FuelType].[Name], [x.TransmisionType].[Id], [x.TransmisionType].[Name]
+FROM [Car] AS [x]
+LEFT JOIN [Location] AS [x.CarLocation] ON [x].[CarLocationId] = [x.CarLocation].[Id]
+LEFT JOIN [Brand] AS [x.Brand] ON [x].[BrandId] = [x.Brand].[Id]
+LEFT JOIN [Model] AS [x.Model] ON [x].[ModelId] = [x.Model].[Id]
+LEFT JOIN [FuelType] AS [x.FuelType] ON [x].[FuelTypeId] = [x.FuelType].[Id]
+LEFT JOIN [TransmisionType] AS [x.TransmisionType] ON [x].[TransmisionTypeId] = [x.TransmisionType].[Id]
+WHERE [x].[IsDeleted] <> 1
+ORDER BY [x].[Id]" (0723d8ff)
+2019-09-20T15:00:19.7684141+02:00 0HLPTP5HKKGCK:00000006 [INF] Route matched with "{action = \"GetFilteredUsers\", controller = \"User\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredUsers(CarRental.API.Dtos.PaginationParams)" on controller "CarRental.API.Areas.Admin.Controllers.UserController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:19.7692076+02:00 0HLPTP5HKKGCK:00000006 [INF] Executing action method "CarRental.API.Areas.Admin.Controllers.UserController.GetFilteredUsers (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:19.7695939+02:00 0HLPTP5HKKGCL:00000007 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [x.Booking].[Id], [x.Booking].[CarId], [x.Booking].[CreateByUserId], [x.Booking].[CreateOnDate], [x.Booking].[IsDeleted], [x.Booking].[LastModifiedByUserId], [x.Booking].[LastModifiedOnDate], [x.Booking].[PreBookingId], [x.Booking].[UserId], [b.PreBooking].[Id], [b.PreBooking].[AgeOfUser], [b.PreBooking].[CreateByUserId], [b.PreBooking].[CreateOnDate], [b.PreBooking].[IsDeleted], [b.PreBooking].[LastModifiedByUserId], [b.PreBooking].[LastModifiedOnDate], [b.PreBooking].[PickDate], [b.PreBooking].[PickLocationId], [b.PreBooking].[ReturnDate], [b.PreBooking].[ReturnLocationId]
+FROM [Booking] AS [x.Booking]
+LEFT JOIN [PreBooking] AS [b.PreBooking] ON [x.Booking].[PreBookingId] = [b.PreBooking].[Id]
+INNER JOIN (
+    SELECT DISTINCT [x0].[Id]
+    FROM [Car] AS [x0]
+    LEFT JOIN [Location] AS [x.CarLocation0] ON [x0].[CarLocationId] = [x.CarLocation0].[Id]
+    LEFT JOIN [Brand] AS [x.Brand0] ON [x0].[BrandId] = [x.Brand0].[Id]
+    LEFT JOIN [Model] AS [x.Model0] ON [x0].[ModelId] = [x.Model0].[Id]
+    LEFT JOIN [FuelType] AS [x.FuelType0] ON [x0].[FuelTypeId] = [x.FuelType0].[Id]
+    LEFT JOIN [TransmisionType] AS [x.TransmisionType0] ON [x0].[TransmisionTypeId] = [x.TransmisionType0].[Id]
+    WHERE [x0].[IsDeleted] <> 1
+) AS [t] ON [x.Booking].[CarId] = [t].[Id]
+ORDER BY [t].[Id]" (0723d8ff)
+2019-09-20T15:00:19.7736374+02:00 0HLPTP5HKKGCK:00000006 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:19.7746218+02:00 0HLPTP5HKKGCL:00000007 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:19.7760707+02:00 0HLPTP5HKKGCL:00000007 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:19.7769522+02:00 0HLPTP5HKKGCL:00000007 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:19.7781022+02:00 0HLPTP5HKKGCL:00000007 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:19.7790154+02:00 0HLPTP5HKKGCL:00000007 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:19.7798500+02:00 0HLPTP5HKKGCL:00000007 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:19.7801305+02:00 0HLPTP5HKKGCL:00000007 [INF] Executed action method "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 17.3233ms. (50a9e262)
+2019-09-20T15:00:19.7802304+02:00 0HLPTP5HKKGCL:00000007 [INF] Executing ObjectResult, writing value of type '"CarRental.API.Dtos.SearchCarDto"'. (8a1b66c8)
+2019-09-20T15:00:19.7803931+02:00 0HLPTP5HKKGCL:00000007 [INF] Executed action "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" in 18.1598ms (afa2e885)
+2019-09-20T15:00:19.7805000+02:00 0HLPTP5HKKGCL:00000007 [INF] Request finished in 18.9848ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:19.7822409+02:00 0HLPTP5HKKGCK:00000006 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2019-09-20T15:00:19.7841167+02:00 0HLPTP5HKKGCK:00000006 [WRN] Query: '"(from AspNetUsers <generated>_2 in DbSet<AspNetUsers> select [<generated>_2]).Skip(__p_0).Take(__p_1..."' uses a row limiting operation (Skip/Take) without OrderBy which may lead to unpredictable results. (32148ccc)
+2019-09-20T15:00:19.7901172+02:00 0HLPTP5HKKGCK:00000006 [INF] Executed DbCommand ("2"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FirstName], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2019-09-20T15:00:19.7909069+02:00 0HLPTP5HKKGCK:00000006 [INF] Executed action method "CarRental.API.Areas.Admin.Controllers.UserController.GetFilteredUsers (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 21.5357ms. (50a9e262)
+2019-09-20T15:00:19.7910240+02:00 0HLPTP5HKKGCK:00000006 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Dtos.UserDto, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-09-20T15:00:19.7919023+02:00 0HLPTP5HKKGCK:00000006 [INF] Executed action "CarRental.API.Areas.Admin.Controllers.UserController.GetFilteredUsers (CarRental.API)" in 23.366ms (afa2e885)
+2019-09-20T15:00:19.7919862+02:00 0HLPTP5HKKGCK:00000006 [INF] Request finished in 29.5432ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:20.5592149+02:00 0HLPTP5HKKGCL:00000008 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/admin/booking/bookings?pageNumber=1&pageSize=10   (ca22a1cb)
+2019-09-20T15:00:20.5594718+02:00 0HLPTP5HKKGCL:00000008 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:20.5627680+02:00 0HLPTP5HKKGCK:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/home/filtercars?pageNumber=1&pageSize=10&pickUpLocationId=3&returnLocationId=3&pickUpDate=Sat%20Sep%2021%202019%2014:52:51%20GMT+0200%20(Central%20European%20Summer%20Time)&returnDate=Mon%20Sep%2023%202019%2014:47:51%20GMT+0200%20(Central%20European%20Summer%20Time)   (ca22a1cb)
+2019-09-20T15:00:20.5628451+02:00 0HLPTP5HKKGCK:00000007 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:20.5630234+02:00 0HLPTP5HKKGCK:00000007 [INF] Route matched with "{action = \"SearchCars\", controller = \"Home\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SearchCars(CarRental.API.Dtos.CarsFilterDto)" on controller "CarRental.API.Controllers.HomeController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:20.5632876+02:00 0HLPTP5HKKGCK:00000007 [INF] Executing action method "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:20.5635936+02:00 0HLPTP5HKKGCK:00000007 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:20.5655429+02:00 0HLPTP5HKKGCL:00000008 [INF] Route matched with "{action = \"GetFilteredBookings\", controller = \"Booking\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredBookings(CarRental.API.Dtos.PaginationParams)" on controller "CarRental.API.Areas.Admin.Controllers.BookingController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:20.5660280+02:00 0HLPTP5HKKGCK:00000007 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[Id], [x].[BrandId], [x].[CarCapacity], [x].[CarColor], [x].[CarLocationId], [x].[CarNumber], [x].[CreateByUserId], [x].[CreateOnDate], [x].[Description], [x].[FuelTypeId], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[ModelId], [x].[ModelYear], [x].[NumberOfDoors], [x].[PriceForDay], [x].[TransmisionTypeId], [x.CarLocation].[Id], [x.CarLocation].[City], [x.CarLocation].[Country], [x.CarLocation].[StreetAddress], [x.CarLocation].[ZipCode], [x.Brand].[Id], [x.Brand].[Name], [x.Model].[Id], [x.Model].[BrandId], [x.Model].[Name], [x.FuelType].[Id], [x.FuelType].[Name], [x.TransmisionType].[Id], [x.TransmisionType].[Name]
+FROM [Car] AS [x]
+LEFT JOIN [Location] AS [x.CarLocation] ON [x].[CarLocationId] = [x.CarLocation].[Id]
+LEFT JOIN [Brand] AS [x.Brand] ON [x].[BrandId] = [x.Brand].[Id]
+LEFT JOIN [Model] AS [x.Model] ON [x].[ModelId] = [x.Model].[Id]
+LEFT JOIN [FuelType] AS [x.FuelType] ON [x].[FuelTypeId] = [x.FuelType].[Id]
+LEFT JOIN [TransmisionType] AS [x.TransmisionType] ON [x].[TransmisionTypeId] = [x.TransmisionType].[Id]
+WHERE [x].[IsDeleted] <> 1
+ORDER BY [x].[Id]" (0723d8ff)
+2019-09-20T15:00:20.5661721+02:00 0HLPTP5HKKGCL:00000008 [INF] Executing action method "CarRental.API.Areas.Admin.Controllers.BookingController.GetFilteredBookings (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:20.5679287+02:00 0HLPTP5HKKGCK:00000007 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [x.Booking].[Id], [x.Booking].[CarId], [x.Booking].[CreateByUserId], [x.Booking].[CreateOnDate], [x.Booking].[IsDeleted], [x.Booking].[LastModifiedByUserId], [x.Booking].[LastModifiedOnDate], [x.Booking].[PreBookingId], [x.Booking].[UserId], [b.PreBooking].[Id], [b.PreBooking].[AgeOfUser], [b.PreBooking].[CreateByUserId], [b.PreBooking].[CreateOnDate], [b.PreBooking].[IsDeleted], [b.PreBooking].[LastModifiedByUserId], [b.PreBooking].[LastModifiedOnDate], [b.PreBooking].[PickDate], [b.PreBooking].[PickLocationId], [b.PreBooking].[ReturnDate], [b.PreBooking].[ReturnLocationId]
+FROM [Booking] AS [x.Booking]
+LEFT JOIN [PreBooking] AS [b.PreBooking] ON [x.Booking].[PreBookingId] = [b.PreBooking].[Id]
+INNER JOIN (
+    SELECT DISTINCT [x0].[Id]
+    FROM [Car] AS [x0]
+    LEFT JOIN [Location] AS [x.CarLocation0] ON [x0].[CarLocationId] = [x.CarLocation0].[Id]
+    LEFT JOIN [Brand] AS [x.Brand0] ON [x0].[BrandId] = [x.Brand0].[Id]
+    LEFT JOIN [Model] AS [x.Model0] ON [x0].[ModelId] = [x.Model0].[Id]
+    LEFT JOIN [FuelType] AS [x.FuelType0] ON [x0].[FuelTypeId] = [x.FuelType0].[Id]
+    LEFT JOIN [TransmisionType] AS [x.TransmisionType0] ON [x0].[TransmisionTypeId] = [x.TransmisionType0].[Id]
+    WHERE [x0].[IsDeleted] <> 1
+) AS [t] ON [x.Booking].[CarId] = [t].[Id]
+ORDER BY [t].[Id]" (0723d8ff)
+2019-09-20T15:00:20.5703192+02:00 0HLPTP5HKKGCL:00000008 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:20.5712735+02:00 0HLPTP5HKKGCL:00000008 [WRN] The Include operation for navigation '"[x].PreBooking"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-09-20T15:00:20.5713179+02:00 0HLPTP5HKKGCL:00000008 [WRN] The Include operation for navigation '"[x].User"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-09-20T15:00:20.5713413+02:00 0HLPTP5HKKGCL:00000008 [WRN] The Include operation for navigation '"[x].Car"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-09-20T15:00:20.5743250+02:00 0HLPTP5HKKGCK:00000007 [INF] Executed DbCommand ("3"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:20.5758849+02:00 0HLPTP5HKKGCK:00000007 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:20.5785047+02:00 0HLPTP5HKKGCL:00000008 [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [Booking] AS [x]
+WHERE [x].[IsDeleted] <> 1" (0723d8ff)
+2019-09-20T15:00:20.5785720+02:00 0HLPTP5HKKGCK:00000007 [INF] Executed DbCommand ("2"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:20.5796365+02:00 0HLPTP5HKKGCK:00000007 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:20.5799515+02:00 0HLPTP5HKKGCL:00000008 [WRN] Query: '"(from Booking x in DbSet<Booking> where [x].IsDeleted != True select [x]).Skip(__p_0).Take(__p_1)"' uses a row limiting operation (Skip/Take) without OrderBy which may lead to unpredictable results. (32148ccc)
+2019-09-20T15:00:20.5803470+02:00 0HLPTP5HKKGCK:00000007 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:20.5809468+02:00 0HLPTP5HKKGCK:00000007 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:20.5811673+02:00 0HLPTP5HKKGCK:00000007 [INF] Executed action method "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 17.8164ms. (50a9e262)
+2019-09-20T15:00:20.5812397+02:00 0HLPTP5HKKGCK:00000007 [INF] Executing ObjectResult, writing value of type '"CarRental.API.Dtos.SearchCarDto"'. (8a1b66c8)
+2019-09-20T15:00:20.5814431+02:00 0HLPTP5HKKGCK:00000007 [INF] Executed action "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" in 18.3817ms (afa2e885)
+2019-09-20T15:00:20.5815429+02:00 0HLPTP5HKKGCK:00000007 [INF] Request finished in 18.7948ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:20.6084177+02:00 0HLPTP5HKKGCL:00000008 [INF] Executed DbCommand ("6"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[Id], [x].[CarId], [x].[CreateByUserId], [x].[CreateOnDate], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[PreBookingId], [x].[UserId], [x.Car].[Id], [x.Car].[BrandId], [x.Car].[CarCapacity], [x.Car].[CarColor], [x.Car].[CarLocationId], [x.Car].[CarNumber], [x.Car].[CreateByUserId], [x.Car].[CreateOnDate], [x.Car].[Description], [x.Car].[FuelTypeId], [x.Car].[IsDeleted], [x.Car].[LastModifiedByUserId], [x.Car].[LastModifiedOnDate], [x.Car].[ModelId], [x.Car].[ModelYear], [x.Car].[NumberOfDoors], [x.Car].[PriceForDay], [x.Car].[TransmisionTypeId], [x.User].[Id], [x.User].[AccessFailedCount], [x.User].[ConcurrencyStamp], [x.User].[Email], [x.User].[EmailConfirmed], [x.User].[FirstName], [x.User].[LastName], [x.User].[LockoutEnabled], [x.User].[LockoutEnd], [x.User].[NormalizedEmail], [x.User].[NormalizedUserName], [x.User].[PasswordHash], [x.User].[PhoneNumber], [x.User].[PhoneNumberConfirmed], [x.User].[SecurityStamp], [x.User].[TwoFactorEnabled], [x.User].[UserName], [x.PreBooking].[Id], [x.PreBooking].[AgeOfUser], [x.PreBooking].[CreateByUserId], [x.PreBooking].[CreateOnDate], [x.PreBooking].[IsDeleted], [x.PreBooking].[LastModifiedByUserId], [x.PreBooking].[LastModifiedOnDate], [x.PreBooking].[PickDate], [x.PreBooking].[PickLocationId], [x.PreBooking].[ReturnDate], [x.PreBooking].[ReturnLocationId]
+FROM [Booking] AS [x]
+LEFT JOIN [Car] AS [x.Car] ON [x].[CarId] = [x.Car].[Id]
+LEFT JOIN [AspNetUsers] AS [x.User] ON [x].[UserId] = [x.User].[Id]
+LEFT JOIN [PreBooking] AS [x.PreBooking] ON [x].[PreBookingId] = [x.PreBooking].[Id]
+WHERE [x].[IsDeleted] <> 1
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2019-09-20T15:00:20.6288004+02:00 0HLPTP5HKKGCL:00000008 [INF] Executed DbCommand ("0"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[Id], [e].[City], [e].[Country], [e].[StreetAddress], [e].[ZipCode]
+FROM [Location] AS [e]
+WHERE [e].[Id] = @__get_Item_0" (0723d8ff)
+2019-09-20T15:00:20.6291872+02:00 0HLPTP5HKKGCL:00000008 [INF] Executed action method "CarRental.API.Areas.Admin.Controllers.BookingController.GetFilteredBookings (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 62.968ms. (50a9e262)
+2019-09-20T15:00:20.6292858+02:00 0HLPTP5HKKGCL:00000008 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Dtos.BookingForListDto, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-09-20T15:00:20.6303486+02:00 0HLPTP5HKKGCL:00000008 [INF] Executed action "CarRental.API.Areas.Admin.Controllers.BookingController.GetFilteredBookings (CarRental.API)" in 64.7413ms (afa2e885)
+2019-09-20T15:00:20.6304167+02:00 0HLPTP5HKKGCL:00000008 [INF] Request finished in 71.3356ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:23.6938898+02:00 0HLPTP5HKKGCK:00000008 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/home/filtercars?pageNumber=1&pageSize=10&pickUpLocationId=3&returnLocationId=3&pickUpDate=Sat%20Sep%2021%202019%2014:52:51%20GMT+0200%20(Central%20European%20Summer%20Time)&returnDate=Mon%20Sep%2023%202019%2014:47:51%20GMT+0200%20(Central%20European%20Summer%20Time)   (ca22a1cb)
+2019-09-20T15:00:23.6940192+02:00 0HLPTP5HKKGCK:00000008 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:23.6942744+02:00 0HLPTP5HKKGCK:00000008 [INF] Route matched with "{action = \"SearchCars\", controller = \"Home\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SearchCars(CarRental.API.Dtos.CarsFilterDto)" on controller "CarRental.API.Controllers.HomeController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:23.6946374+02:00 0HLPTP5HKKGCK:00000008 [INF] Executing action method "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:23.6960726+02:00 0HLPTP5HKKGCK:00000008 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:23.6976577+02:00 0HLPTP5HKKGCL:00000009 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/admin/car/cars?pageNumber=1&pageSize=10   (ca22a1cb)
+2019-09-20T15:00:23.6977322+02:00 0HLPTP5HKKGCL:00000009 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:23.6980804+02:00 0HLPTP5HKKGCL:00000009 [INF] Route matched with "{action = \"GetFilteredCars\", controller = \"Car\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredCars(CarRental.API.Dtos.PaginationParams)" on controller "CarRental.API.Areas.Admin.CarController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:23.6984383+02:00 0HLPTP5HKKGCL:00000009 [INF] Executing action method "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:23.6987142+02:00 0HLPTP5HKKGCL:00000009 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:23.6989913+02:00 0HLPTP5HKKGCK:00000008 [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[Id], [x].[BrandId], [x].[CarCapacity], [x].[CarColor], [x].[CarLocationId], [x].[CarNumber], [x].[CreateByUserId], [x].[CreateOnDate], [x].[Description], [x].[FuelTypeId], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[ModelId], [x].[ModelYear], [x].[NumberOfDoors], [x].[PriceForDay], [x].[TransmisionTypeId], [x.CarLocation].[Id], [x.CarLocation].[City], [x.CarLocation].[Country], [x.CarLocation].[StreetAddress], [x.CarLocation].[ZipCode], [x.Brand].[Id], [x.Brand].[Name], [x.Model].[Id], [x.Model].[BrandId], [x.Model].[Name], [x.FuelType].[Id], [x.FuelType].[Name], [x.TransmisionType].[Id], [x.TransmisionType].[Name]
+FROM [Car] AS [x]
+LEFT JOIN [Location] AS [x.CarLocation] ON [x].[CarLocationId] = [x.CarLocation].[Id]
+LEFT JOIN [Brand] AS [x.Brand] ON [x].[BrandId] = [x.Brand].[Id]
+LEFT JOIN [Model] AS [x.Model] ON [x].[ModelId] = [x.Model].[Id]
+LEFT JOIN [FuelType] AS [x.FuelType] ON [x].[FuelTypeId] = [x.FuelType].[Id]
+LEFT JOIN [TransmisionType] AS [x.TransmisionType] ON [x].[TransmisionTypeId] = [x.TransmisionType].[Id]
+WHERE [x].[IsDeleted] <> 1
+ORDER BY [x].[Id]" (0723d8ff)
+2019-09-20T15:00:23.7001231+02:00 0HLPTP5HKKGCL:00000009 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [Car] AS [x]
+WHERE [x].[IsDeleted] <> 1" (0723d8ff)
+2019-09-20T15:00:23.7010665+02:00 0HLPTP5HKKGCK:00000008 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [x.Booking].[Id], [x.Booking].[CarId], [x.Booking].[CreateByUserId], [x.Booking].[CreateOnDate], [x.Booking].[IsDeleted], [x.Booking].[LastModifiedByUserId], [x.Booking].[LastModifiedOnDate], [x.Booking].[PreBookingId], [x.Booking].[UserId], [b.PreBooking].[Id], [b.PreBooking].[AgeOfUser], [b.PreBooking].[CreateByUserId], [b.PreBooking].[CreateOnDate], [b.PreBooking].[IsDeleted], [b.PreBooking].[LastModifiedByUserId], [b.PreBooking].[LastModifiedOnDate], [b.PreBooking].[PickDate], [b.PreBooking].[PickLocationId], [b.PreBooking].[ReturnDate], [b.PreBooking].[ReturnLocationId]
+FROM [Booking] AS [x.Booking]
+LEFT JOIN [PreBooking] AS [b.PreBooking] ON [x.Booking].[PreBookingId] = [b.PreBooking].[Id]
+INNER JOIN (
+    SELECT DISTINCT [x0].[Id]
+    FROM [Car] AS [x0]
+    LEFT JOIN [Location] AS [x.CarLocation0] ON [x0].[CarLocationId] = [x.CarLocation0].[Id]
+    LEFT JOIN [Brand] AS [x.Brand0] ON [x0].[BrandId] = [x.Brand0].[Id]
+    LEFT JOIN [Model] AS [x.Model0] ON [x0].[ModelId] = [x.Model0].[Id]
+    LEFT JOIN [FuelType] AS [x.FuelType0] ON [x0].[FuelTypeId] = [x.FuelType0].[Id]
+    LEFT JOIN [TransmisionType] AS [x.TransmisionType0] ON [x0].[TransmisionTypeId] = [x.TransmisionType0].[Id]
+    WHERE [x0].[IsDeleted] <> 1
+) AS [t] ON [x.Booking].[CarId] = [t].[Id]
+ORDER BY [t].[Id]" (0723d8ff)
+2019-09-20T15:00:23.7028572+02:00 0HLPTP5HKKGCL:00000009 [INF] Executed DbCommand ("2"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[Id], [x].[BrandId], [x].[CarCapacity], [x].[CarColor], [x].[CarLocationId], [x].[CarNumber], [x].[CreateByUserId], [x].[CreateOnDate], [x].[Description], [x].[FuelTypeId], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[ModelId], [x].[ModelYear], [x].[NumberOfDoors], [x].[PriceForDay], [x].[TransmisionTypeId], [x.CarLocation].[Id], [x.CarLocation].[City], [x.CarLocation].[Country], [x.CarLocation].[StreetAddress], [x.CarLocation].[ZipCode], [x.Brand].[Id], [x.Brand].[Name], [x.Model].[Id], [x.Model].[BrandId], [x.Model].[Name], [x.FuelType].[Id], [x.FuelType].[Name], [x.TransmisionType].[Id], [x.TransmisionType].[Name]
+FROM [Car] AS [x]
+LEFT JOIN [Location] AS [x.CarLocation] ON [x].[CarLocationId] = [x.CarLocation].[Id]
+LEFT JOIN [Brand] AS [x.Brand] ON [x].[BrandId] = [x.Brand].[Id]
+LEFT JOIN [Model] AS [x.Model] ON [x].[ModelId] = [x.Model].[Id]
+LEFT JOIN [FuelType] AS [x.FuelType] ON [x].[FuelTypeId] = [x.FuelType].[Id]
+LEFT JOIN [TransmisionType] AS [x.TransmisionType] ON [x].[TransmisionTypeId] = [x.TransmisionType].[Id]
+WHERE [x].[IsDeleted] <> 1
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2019-09-20T15:00:23.7058664+02:00 0HLPTP5HKKGCL:00000009 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7063921+02:00 0HLPTP5HKKGCK:00000008 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7071375+02:00 0HLPTP5HKKGCL:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7072271+02:00 0HLPTP5HKKGCK:00000008 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7078216+02:00 0HLPTP5HKKGCL:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7079710+02:00 0HLPTP5HKKGCK:00000008 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7084912+02:00 0HLPTP5HKKGCL:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7085755+02:00 0HLPTP5HKKGCK:00000008 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7091010+02:00 0HLPTP5HKKGCL:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7092188+02:00 0HLPTP5HKKGCK:00000008 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7096956+02:00 0HLPTP5HKKGCL:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7097650+02:00 0HLPTP5HKKGCK:00000008 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7099388+02:00 0HLPTP5HKKGCK:00000008 [INF] Executed action method "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 15.1927ms. (50a9e262)
+2019-09-20T15:00:23.7100036+02:00 0HLPTP5HKKGCK:00000008 [INF] Executing ObjectResult, writing value of type '"CarRental.API.Dtos.SearchCarDto"'. (8a1b66c8)
+2019-09-20T15:00:23.7101761+02:00 0HLPTP5HKKGCK:00000008 [INF] Executed action "CarRental.API.Controllers.HomeController.SearchCars (CarRental.API)" in 15.8544ms (afa2e885)
+2019-09-20T15:00:23.7102318+02:00 0HLPTP5HKKGCK:00000008 [INF] Request finished in 17.338ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:23.7103867+02:00 0HLPTP5HKKGCL:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7111495+02:00 0HLPTP5HKKGCL:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7125483+02:00 0HLPTP5HKKGCL:00000009 [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7136780+02:00 0HLPTP5HKKGCL:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:23.7139213+02:00 0HLPTP5HKKGCL:00000009 [INF] Executed action method "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 15.434ms. (50a9e262)
+2019-09-20T15:00:23.7139899+02:00 0HLPTP5HKKGCL:00000009 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Dtos.CarForListDto, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-09-20T15:00:23.7141399+02:00 0HLPTP5HKKGCL:00000009 [INF] Executed action "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)" in 16.0158ms (afa2e885)
+2019-09-20T15:00:23.7142022+02:00 0HLPTP5HKKGCL:00000009 [INF] Request finished in 16.5807ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:25.6961653+02:00 0HLPTP5HKKGCK:00000009 [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/admin/car/cars?pageNumber=2&pageSize=10   (ca22a1cb)
+2019-09-20T15:00:25.6962972+02:00 0HLPTP5HKKGCK:00000009 [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:25.6964689+02:00 0HLPTP5HKKGCK:00000009 [INF] Route matched with "{action = \"GetFilteredCars\", controller = \"Car\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredCars(CarRental.API.Dtos.PaginationParams)" on controller "CarRental.API.Areas.Admin.CarController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:25.6967982+02:00 0HLPTP5HKKGCK:00000009 [INF] Executing action method "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:25.6970718+02:00 0HLPTP5HKKGCK:00000009 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:25.6978301+02:00 0HLPTP5HKKGCK:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [Car] AS [x]
+WHERE [x].[IsDeleted] <> 1" (0723d8ff)
+2019-09-20T15:00:25.6990389+02:00 0HLPTP5HKKGCK:00000009 [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[Id], [x].[BrandId], [x].[CarCapacity], [x].[CarColor], [x].[CarLocationId], [x].[CarNumber], [x].[CreateByUserId], [x].[CreateOnDate], [x].[Description], [x].[FuelTypeId], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[ModelId], [x].[ModelYear], [x].[NumberOfDoors], [x].[PriceForDay], [x].[TransmisionTypeId], [x.CarLocation].[Id], [x.CarLocation].[City], [x.CarLocation].[Country], [x.CarLocation].[StreetAddress], [x.CarLocation].[ZipCode], [x.Brand].[Id], [x.Brand].[Name], [x.Model].[Id], [x.Model].[BrandId], [x.Model].[Name], [x.FuelType].[Id], [x.FuelType].[Name], [x.TransmisionType].[Id], [x.TransmisionType].[Name]
+FROM [Car] AS [x]
+LEFT JOIN [Location] AS [x.CarLocation] ON [x].[CarLocationId] = [x.CarLocation].[Id]
+LEFT JOIN [Brand] AS [x.Brand] ON [x].[BrandId] = [x.Brand].[Id]
+LEFT JOIN [Model] AS [x.Model] ON [x].[ModelId] = [x.Model].[Id]
+LEFT JOIN [FuelType] AS [x.FuelType] ON [x].[FuelTypeId] = [x.FuelType].[Id]
+LEFT JOIN [TransmisionType] AS [x.TransmisionType] ON [x].[TransmisionTypeId] = [x.TransmisionType].[Id]
+WHERE [x].[IsDeleted] <> 1
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2019-09-20T15:00:25.7004584+02:00 0HLPTP5HKKGCK:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:25.7012030+02:00 0HLPTP5HKKGCK:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:25.7018588+02:00 0HLPTP5HKKGCK:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:25.7024887+02:00 0HLPTP5HKKGCK:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:25.7030997+02:00 0HLPTP5HKKGCK:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:25.7036867+02:00 0HLPTP5HKKGCK:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:25.7044275+02:00 0HLPTP5HKKGCK:00000009 [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:25.7046202+02:00 0HLPTP5HKKGCK:00000009 [INF] Executed action method "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 7.7745ms. (50a9e262)
+2019-09-20T15:00:25.7046972+02:00 0HLPTP5HKKGCK:00000009 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Dtos.CarForListDto, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-09-20T15:00:25.7048949+02:00 0HLPTP5HKKGCK:00000009 [INF] Executed action "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)" in 8.3682ms (afa2e885)
+2019-09-20T15:00:25.7051361+02:00 0HLPTP5HKKGCK:00000009 [INF] Request finished in 8.9936ms 200 application/json; charset=utf-8 (791a596a)
+2019-09-20T15:00:26.6800762+02:00 0HLPTP5HKKGCL:0000000A [INF] Request starting HTTP/1.1 GET http://localhost:59834/api/admin/car/cars?pageNumber=1&pageSize=10   (ca22a1cb)
+2019-09-20T15:00:26.6802009+02:00 0HLPTP5HKKGCL:0000000A [INF] Policy execution successful. (0204925d)
+2019-09-20T15:00:26.6803993+02:00 0HLPTP5HKKGCL:0000000A [INF] Route matched with "{action = \"GetFilteredCars\", controller = \"Car\", page = \"\", area = \"\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredCars(CarRental.API.Dtos.PaginationParams)" on controller "CarRental.API.Areas.Admin.CarController" ("CarRental.API"). (122b2fdf)
+2019-09-20T15:00:26.6807410+02:00 0HLPTP5HKKGCL:0000000A [INF] Executing action method "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)" - Validation state: Valid (dad538d7)
+2019-09-20T15:00:26.6809847+02:00 0HLPTP5HKKGCL:0000000A [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"dbCarRentalContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-09-20T15:00:26.6818193+02:00 0HLPTP5HKKGCL:0000000A [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [Car] AS [x]
+WHERE [x].[IsDeleted] <> 1" (0723d8ff)
+2019-09-20T15:00:26.6828933+02:00 0HLPTP5HKKGCL:0000000A [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[Id], [x].[BrandId], [x].[CarCapacity], [x].[CarColor], [x].[CarLocationId], [x].[CarNumber], [x].[CreateByUserId], [x].[CreateOnDate], [x].[Description], [x].[FuelTypeId], [x].[IsDeleted], [x].[LastModifiedByUserId], [x].[LastModifiedOnDate], [x].[ModelId], [x].[ModelYear], [x].[NumberOfDoors], [x].[PriceForDay], [x].[TransmisionTypeId], [x.CarLocation].[Id], [x.CarLocation].[City], [x.CarLocation].[Country], [x.CarLocation].[StreetAddress], [x.CarLocation].[ZipCode], [x.Brand].[Id], [x.Brand].[Name], [x.Model].[Id], [x.Model].[BrandId], [x.Model].[Name], [x.FuelType].[Id], [x.FuelType].[Name], [x.TransmisionType].[Id], [x.TransmisionType].[Name]
+FROM [Car] AS [x]
+LEFT JOIN [Location] AS [x.CarLocation] ON [x].[CarLocationId] = [x.CarLocation].[Id]
+LEFT JOIN [Brand] AS [x.Brand] ON [x].[BrandId] = [x.Brand].[Id]
+LEFT JOIN [Model] AS [x.Model] ON [x].[ModelId] = [x.Model].[Id]
+LEFT JOIN [FuelType] AS [x.FuelType] ON [x].[FuelTypeId] = [x.FuelType].[Id]
+LEFT JOIN [TransmisionType] AS [x.TransmisionType] ON [x].[TransmisionTypeId] = [x.TransmisionType].[Id]
+WHERE [x].[IsDeleted] <> 1
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2019-09-20T15:00:26.6844003+02:00 0HLPTP5HKKGCL:0000000A [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:26.6850801+02:00 0HLPTP5HKKGCL:0000000A [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:26.6857267+02:00 0HLPTP5HKKGCL:0000000A [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:26.6863619+02:00 0HLPTP5HKKGCL:0000000A [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:26.6869982+02:00 0HLPTP5HKKGCL:0000000A [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:26.6876214+02:00 0HLPTP5HKKGCL:0000000A [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:26.6884606+02:00 0HLPTP5HKKGCL:0000000A [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:26.6903930+02:00 0HLPTP5HKKGCL:0000000A [INF] Executed DbCommand ("1"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:26.6911209+02:00 0HLPTP5HKKGCL:0000000A [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:26.6917936+02:00 0HLPTP5HKKGCL:0000000A [INF] Executed DbCommand ("0"ms) [Parameters=["@__carId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[Id], [x].[CarId], [x].[Name], [x].[Path]
+FROM [CarUpload] AS [x]
+WHERE [x].[CarId] = @__carId_0" (0723d8ff)
+2019-09-20T15:00:26.6919916+02:00 0HLPTP5HKKGCL:0000000A [INF] Executed action method "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 11.2085ms. (50a9e262)
+2019-09-20T15:00:26.6920577+02:00 0HLPTP5HKKGCL:0000000A [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[CarRental.API.Dtos.CarForListDto, CarRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-09-20T15:00:26.6922029+02:00 0HLPTP5HKKGCL:0000000A [INF] Executed action "CarRental.API.Areas.Admin.CarController.GetFilteredCars (CarRental.API)" in 11.766ms (afa2e885)
+2019-09-20T15:00:26.6922736+02:00 0HLPTP5HKKGCL:0000000A [INF] Request finished in 12.2256ms 200 application/json; charset=utf-8 (791a596a)
